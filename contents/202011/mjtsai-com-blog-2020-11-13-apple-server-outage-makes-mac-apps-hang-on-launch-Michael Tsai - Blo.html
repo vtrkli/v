@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="connect-src 'none';"><meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' data:;">
+<title>Michael Tsai - Blog  -  Apple Server Outage Makes Mac Apps Hang on Launch</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="author" content="Michael J. Tsai">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">		
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://mjtsai.com/blog/feed/">
+<link rel="alternate" type="application/rss+xml" title="RSS Comments" href="https://mjtsai.com/blog/comments/feed/">
+<style type="text/css">body {
+	font-family: Verdana, Helvetica, sans-serif;
+	padding: 0;
+	font-size: medium;
+	line-height: 130%;
+    text-rendering: optimizeLegibility;
+    color: black;
+    background-color: white;
+    margin: 0 auto;
+    max-width: 105ex;
+}
+
+a:link	{color: #000099;}
+dt	{margin-top: 1em; font-weight: bold;}
+h1, h2, h3, h4 { 
+    font-family: Cochin, Optima, Georgia, Serif;
+    color: #000000;
+	line-height: 110%;
+    }
+h2	{background-color: #ffffff; margin-bottom: 0em; font-size: 200%;}
+h3	{background-color: #ffffff; font-size: 150%;}
+blockquote {
+    margin-right: 0; /* Use more of iPhone space. */
+}
+q {quotes: '\201C' '\201D' '\2018' '\2019';}
+q:before {content: open-quote;}
+q:after {content: close-quote;} 
+
+#aux {
+	position: absolute;
+	top: 5px;
+	width: 22ex;
+	color: #000;
+	background: #cccc99;
+	border: 1px solid #999955;
+	overflow: hidden;
+}
+
+#searchresults dl dt {font-weight: normal} 
+#searchresults dl dt tt {background-color: #fff}
+
+#navbar {
+	padding: 1em;
+ 	width: 18ex; 
+}
+
+#adsense {
+	padding: 1em;
+}
+
+#navbar p {   
+	font-size: small;
+	margin-top: 12pt;
+}
+
+#navbar ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	font-size: small;
+}
+
+#navbar li {
+	margin: 0px 0px 0px 0px;
+}
+
+#search {
+}
+
+#links {
+	font-size: small;
+}
+
+#links img {
+    padding-right: 6px;
+}
+
+#main { 
+ 	margin-left: 24ex;
+ 	max-width: 80ex;
+}
+
+.alternating tr:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.alternating {
+    border-spacing:0;
+}
+
+.day {
+	background: #eeeeee;
+	border:1px solid #cccccc;
+	clear: both;
+	text-align: right;
+	padding: 0.5em;
+	font-size: 10pt; 
+	font-family: Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+}
+
+.day a {
+    color: black;
+}
+
+.copyright {
+	font-size: small;
+	text-align: center;
+	margin-top: 4ex;
+}
+
+.comment {
+	background: #eeeeee;
+	margin-bottom: 1em; 
+	border:1px solid #cccccc;
+}
+
+.comment-header {
+	background: #dddddd;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 1em;
+	padding-bottom: 2em;
+}
+
+.comment-author {
+	font-weight: bold;
+	float: left;
+	vertical-align: top;
+}
+
+.comment-date {
+	text-align: right;
+	float: right;
+	vertical-align: top;
+}
+
+.comment-body {
+	padding: 1em;
+}
+
+.comment-form-body {
+    width: 100%;
+}
+
+.post {
+	margin-bottom: 4ex;
+}
+
+pre, code {
+	font-family: Monaco, Menlo, monospace;
+}
+
+ul.loose li {
+	margin-top: 12pt;
+}
+
+pre {
+	margin-left: 3ex;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: #000;
+	color: #000;
+	background: #ffe;
+	padding: 1ex;
+	overflow: scroll;
+/*  Could use instead: white-space: pre-wrap; */
+}
+
+code {
+	border:1px solid #cccccc;
+	background-color: #ffe;
+}
+
+tt {
+	background-color: #ffe;
+    word-wrap:break-word;
+}
+ 
+.archivedate {
+	margin-left: 6pt;
+	color: #999;
+	font-size: x-small;
+}
+
+.archivedate a {
+	color: #999;
+}
+
+.tags {
+    text-align: left;
+}
+
+.tags a {
+    background-color: #999;
+    border-radius: 0 2px 2px 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2727272727;
+    margin: 2px 4px 2px 10px;
+    padding: 3px 7px;
+    position: relative;
+    
+    text-decoration: none;
+}
+
+.tags a:hover {
+    background-color: #000099;
+    color: #fff;
+}
+
+.tags a:before {
+    border-top: 10px solid transparent;
+    border-right: 8px solid #999;
+    border-bottom: 10px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0;
+}
+
+.tags a:hover:before {
+    border-right-color: #000099;
+}
+
+.tags a:after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 4px;
+    position: absolute;
+    top: 8px;
+    left: -2px;
+    width: 4px;
+}
+
+.figure {
+    float: left;
+    padding: 6pt;
+}
+.caption {
+ 	font-weight: bold;
+ 	text-align: center;
+}
+.figures {
+    display: table;
+    margin: 0 auto;
+}
+.figures:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+td {
+    padding-left: 6pt;
+    padding-right: 6pt;
+}
+
+.meta-nav a {
+    text-decoration: none;
+}
+
+.meta-nav {
+    float: right;
+}
+
+.feedback {
+    text-align: right;
+}
+
+.retina {
+    display: none;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .nonretina {
+        display: none;
+    }
+    .retina {
+        display: inline;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    #aux {
+        position: relative;
+    }
+    #main { 
+     	margin-left: 0;
+     	padding-left: 2px;
+     	padding-right: 2px;
+    }
+    code, h1, h2, h3, h4 {
+        word-wrap: break-word;
+    }
+    .comment-form-body {
+        width: 60%; /* Allow extra space because iOS zooms in when editing. */
+    }
+}
+
+.carbon-text { 
+    display: block;
+    width: 130px; 
+    font-size: smaller;
+}
+.carbon-poweredby { 
+    display: block;
+    margin-top: 1em;
+    text-transform: uppercase;
+    font-size: 7pt;
+}
+.carbon-text {
+}
+#carbonads { 
+    margin-top: 18pt;
+    line-height: 100%;
+}
+#carbonads a {
+    text-decoration: none;
+    color: black;
+}
+#carbonads a:hover {
+    color: #009;
+}
+
+.link-ad {
+    background-color: #eee;
+    padding: 6pt;
+    border: 1pt #ccc solid;
+}
+</style>
+<link rel="pingback" href="https://mjtsai.com/blog/xmlrpc.php">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Michael Tsai » Apple Server Outage Makes Mac Apps Hang on Launch Comments Feed" href="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/feed/">
+<link rel="https://api.w.org/" href="https://mjtsai.com/blog/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://mjtsai.com/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://mjtsai.com/blog/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Waiting to Update to Big Sur" href="https://mjtsai.com/blog/2020/11/13/waiting-to-update-to-big-sur/">
+<meta name="generator" content="WordPress 5.3.2">
+<link rel="canonical" href="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/">
+<link rel="shortlink" href="https://mjtsai.com/blog/?p=30682">
+<link rel="alternate" type="application/json+oembed" href="https://mjtsai.com/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmjtsai.com%2Fblog%2F2020%2F11%2F13%2Fapple-server-outage-makes-mac-apps-hang-on-launch%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://mjtsai.com/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmjtsai.com%2Fblog%2F2020%2F11%2F13%2Fapple-server-outage-makes-mac-apps-hang-on-launch%2F&format=xml">
+<meta property="wayback:source:url" content="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/"></head>
+<body>
+
+<div id="main">
+
+    <p class="day">Friday, <a href="https://mjtsai.com/blog/2020/11/">November</a> <a href="https://mjtsai.com/blog/2020/11/13/">13</a>, <a href="https://mjtsai.com/blog/2020/">2020</a> [<a href="https://mjtsai.com/tweetnest/2020/11/13">Tweets</a>] [<a href="https://pinboard.in/search/u:mjtsai?query="November+13%2C+2020"">Favorites</a>]</p>
+	
+<div class="post">
+<h1 id="post-30682"><a href="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/" rel="bookmark" title="Permanent Link: Apple Server Outage Makes Mac Apps Hang on Launch">Apple Server Outage Makes Mac Apps Hang on Launch</a></h1>
+<p><a href="https://twitter.com/lapcatsoftware/status/1326985021413011456">Jeff Johnson</a>:</p>
+<blockquote cite="https://twitter.com/lapcatsoftware/status/1326985021413011456"><p>WTF somehow my TCC seems fucked up on Mojave suddenly, for no apparent reason, no software updates. But only when my internet is connected?</p><p>Apps are hanging on launch! Reboot didn’t help.</p></blockquote>
+
+<p><a href="https://twitter.com/jmfd/status/1326989381366935553">Jonathan Deutsch</a>:</p>
+<blockquote cite="https://twitter.com/jmfd/status/1326989381366935553"><p>I’m hitting the exact same thing on 10.15.7 starting ~30 min ago… lots of random hangs only when connected to wifi.</p></blockquote>
+
+<p><a href="https://twitter.com/skylarlewis90/status/1326990714706726914">Skylar Lewis</a>:</p>
+<blockquote cite="https://twitter.com/skylarlewis90/status/1326990714706726914">
+<p>All of my non-Apple apps became really slow to open as well.</p>
+</blockquote>
+
+<p><a href="https://twitter.com/panic/status/1326991320519335936">Panic</a>:</p>
+<blockquote cite="https://twitter.com/panic/status/1326991320519335936"><p>😅 Looks like, when apps are launched, Gatekeeper is unable to check their validity over the internet, due to overwhelmed Apple servers.</p></blockquote>
+
+<p><a href="https://twitter.com/lapcatsoftware/status/1326990296412991489">Jeff Johnson</a>:</p>
+<blockquote cite="https://twitter.com/lapcatsoftware/status/1326990296412991489"><p> I figured out the problem using Little Snitch.</p><p>It’s <code>trustd</code> connecting to ocsp.apple.com</p><p>Denying that connection fixes it, because OCSP is a soft failure.</p><p>(Disconnect internet also fixes.)</p>
+<p>Make sure you deny it for both system and user. I ended up having to make 2 rules.</p></blockquote>
+
+<p><a href="https://twitter.com/patrickwardle/status/1327034191523975168">Patrick Wardle</a>:</p>
+<blockquote cite="https://twitter.com/patrickwardle/status/1327034191523975168"><p>On Big Sur, trustd is in Apple’s “ContentFilterExclusionList”….meaning firewalls can’t block it! 😭</p><p>Welcome to the future? 😱</p></blockquote>
+
+<p><a href="https://twitter.com/lapcatsoftware/status/1326993822056902659">Jeff Johnson</a>:</p>
+<blockquote cite="https://twitter.com/lapcatsoftware/status/1326993822056902659"><p>If you don’t have 
+@littlesnitch
+ then try <tt>/etc/hosts</tt> to fix Mac app launching</p>
+<p>ocsp.apple.com port 80 is the problem</p></blockquote>
+
+<p><a href="https://twitter.com/nathanhleung/status/1327000950989496320">Nathan H. Leung</a> shows how to do this with <code>vi</code>.</p>
+
+<p><a href="https://twitter.com/lapcatsoftware/status/1327092560268054529">Jeff Johnson</a>:</p>
+<blockquote cite="https://twitter.com/lapcatsoftware/status/1327092560268054529"><p>Don’t confuse Developer ID certificate status (<tt>/usr/libexec/trustd</tt> to ocsp.apple.com) with notarization (<tt>/usr/libexec/syspolicyd</tt> to api.apple-cloudkit.com).</p>
+<p>Notarization check only occurs on first launch. Online Certificate Status Protocol can occur on any launch.</p></blockquote>
+
+<p><a href="https://twitter.com/nut_bunnies/status/1326995762002202625">nut_bunnies</a>:</p>
+<blockquote cite="https://twitter.com/nut_bunnies/status/1326995762002202625"><p>I thought it was just Catalina being Catalina. I woke my computer from sleep and it couldn’t detect the fucking keyboard or trackpad.</p></blockquote>
+
+<p><a href="https://twitter.com/adamengst/status/1326992558791159809">Adam Engst</a>:</p>
+<blockquote cite="https://twitter.com/adamengst/status/1326992558791159809"><p>It’s quite troubling that an Apple server being down could cause this. My iMac is sludge right now.</p></blockquote>
+
+<p><a href="https://twitter.com/_inside/status/1327016471977979906">Guilherme Rambo</a>, on the System Status page:</p>
+<blockquote cite="https://twitter.com/_inside/status/1327016471977979906"><p>🔥 This is fine 🔥</p></blockquote>
+
+<p><a href="https://twitter.com/jcenters/status/1327074670940729344">Josh Centers</a>:</p>
+<blockquote cite="https://twitter.com/jcenters/status/1327074670940729344">
+<p>It’s very simple: a screwed up server on the other end of the country shouldn’t render your computer unusable.</p>
+</blockquote>
+
+<p><a href="https://twitter.com/llanga/status/1326989724704268289">Łukasz Langa</a>:</p>
+<blockquote cite="https://twitter.com/llanga/status/1326989724704268289"><p>I am currently unable to work because macOS sends hashes of every opened executable to some server of theirs and when <code>trustd</code> and <code>syspolicyd</code> are unable to do so, the entire operating system grinds to a halt.</p>
+<p>I’m typing this from my phone since the Mac is effectively frozen.</p></blockquote>
+
+<p><a href="https://twitter.com/reckless/status/1327033544988913668">Nilay Patel</a>:</p>
+<blockquote cite="https://twitter.com/reckless/status/1327033544988913668">
+<p>I had three different Macs go sideways today because of a server issue I had no idea was happening. Many thoughts about how much we actually own our computers :(</p>
+</blockquote>
+
+<p><a href="https://twitter.com/lapcatsoftware/status/1327023246001238018">Jeff Johnson</a>:</p>
+<blockquote cite="https://twitter.com/lapcatsoftware/status/1327023246001238018"><p>Good news, Mac users! Our long international nightmare is over.</p>
+<p>People are saying that ocsp.apple.com is back online, and that seems to be true.</p></blockquote>
+
+<p><a href="https://twitter.com/bcrypt/status/1327009730066169857">Yan Zhu</a>:</p>
+<blockquote cite="https://twitter.com/bcrypt/status/1327009730066169857"><p>don’t block ocsp.apple.com forever because apple uses it to check for revoked notarizations</p></blockquote>
+
+<p><a href="https://sneak.berlin/20201112/your-computer-isnt-yours/">Jeffrey Paul</a> (via <a href="https://twitter.com/dhh/status/1327254193296601088">David Heinemeier Hansson</a>):</p>
+<blockquote cite="https://sneak.berlin/20201112/your-computer-isnt-yours/"><p>It’s here. It happened. Did you notice?</p> <p>I’m speaking, of course, of <a href="https://www.gnu.org/philosophy/right-to-read.en.html">the world that Richard Stallman predicted in 1997</a>. The one <a href="https://craphound.com/pc/download/">Cory Doctorow also warned us about</a>.</p> <p>On modern versions of macOS, you simply can’t power on your computer, launch a text editor or eBook reader, and write or read, without a log of your activity being transmitted and stored.</p></blockquote>
+
+<p>See also: <a href="https://news.ycombinator.com/item?id=25074959">Hacker News</a>, <a href="https://9to5mac.com/2020/11/12/apple-widespread-outages-big-sur-downloads-catalina-imessage/">9to5Mac</a> (<a href="https://news.ycombinator.com/item?id=25080084">Hacker News</a>), <a href="https://arstechnica.com/gadgets/2020/11/macos-big-sur-launch-appears-to-cause-temporary-slowdown-in-even-non-big-sur-macs/">ArsTechnica</a>, <a href="https://www.macrumors.com/2020/11/12/mac-apps-not-opening/">MacRumors</a>, <a href="https://www.theverge.com/2020/11/12/21563092/apple-mac-apps-load-slow-big-sur-downloads-outage-down-issues">The Verge</a>, <a href="https://annoying.technology/posts/0f0325b37e2292f8/">Philipp Defner</a>, <a href="https://pxlnv.com/linklog/big-surver-issues/">Nick Heer</a>.</p>
+
+<p>Previously:</p>
+<ul>
+<li><a href="https://mjtsai.com/blog/2020/10/22/unresponsive-keyboard-after-waking-mac/">Unresponsive Keyboard After Waking Mac</a></li>
+<li><a href="https://mjtsai.com/blog/2020/10/22/apple-apps-exempt-from-network-filters-and-vpns/">Apple Apps Exempt From Network Filters and VPNs</a></li>
+<li><a href="https://mjtsai.com/blog/2020/05/22/macos-10-15-slow-by-design/">macOS 10.15: Slow by Design</a></li>
+<li><a href="https://mjtsai.com/blog/2018/12/06/mac-app-notarization-and-customer-privacy/">Mac App Notarization and Customer Privacy</a></li>
+</ul><p class="tags"><a rel="tag" href="https://mjtsai.com/blog/tag/gatekeeper/">Gatekeeper</a> <a rel="tag" href="https://mjtsai.com/blog/tag/littlesnitch/">Little Snitch</a> <a rel="tag" href="https://mjtsai.com/blog/tag/mac/">Mac</a> <a rel="tag" href="https://mjtsai.com/blog/tag/macos-10-14/">macOS 10.14 Mojave</a> <a rel="tag" href="https://mjtsai.com/blog/tag/macos-10-15/">macOS 10.15 Catalina</a> <a rel="tag" href="https://mjtsai.com/blog/tag/macos-11-0/">macOS 11.0 Big Sur</a> <a rel="tag" href="https://mjtsai.com/blog/tag/networking/">Networking</a> <a rel="tag" href="https://mjtsai.com/blog/tag/notarization/">Notarization</a> <a rel="tag" href="https://mjtsai.com/blog/tag/privacy/">Privacy</a> <a rel="tag" href="https://mjtsai.com/blog/tag/transparency-consent-and-control-tcc/">Transparency Consent and Control (TCC)</a></p>
+<div class="feedback"><p><a href="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/#comments">10 Comments</a></p>
+</div>
+
+
+<h2 id="comments"><a id="respond"></a>
+10 Comments 
+</h2>
+
+<div class="comment" id="comment-3355150">
+<div class="comment-header">
+	<div class="comment-author">remmah </div>
+	<div class="comment-date"><a href="#comment-3355150">November 13, 2020 2:00 PM</a> </div>
+</div>
+<div class="comment-body"><p>It's worth pointing out that Microsoft also released a feature update this month. It took all of two minutes from start to finish. All my apps continued to launch just fine.</p>
+</div>
+</div>
+<div class="comment" id="comment-3355157">
+<div class="comment-header">
+	<div class="comment-author"><a href="https://pen.so/" rel="external nofollow ugc" class="url">Fabien</a> </div>
+	<div class="comment-date"><a href="#comment-3355157">November 13, 2020 2:12 PM</a> </div>
+</div>
+<div class="comment-body"><p>The whole thing is such a dispointment.</p>
+<p>I doubt it, but the amount of online bad buzz might have Apple change that...</p>
+</div>
+</div>
+<div class="comment" id="comment-3355206">
+<div class="comment-header">
+	<div class="comment-author">Kentzo </div>
+	<div class="comment-date"><a href="#comment-3355206">November 13, 2020 3:51 PM</a> </div>
+</div>
+<div class="comment-body"><p>That explains why there was no "Mac" at the end of the commercial.</p>
+</div>
+</div>
+<div class="comment" id="comment-3355222">
+<div class="comment-header">
+	<div class="comment-author">Biff </div>
+	<div class="comment-date"><a href="#comment-3355222">November 13, 2020 4:24 PM</a> </div>
+</div>
+<div class="comment-body"><p>I don't really want to use OpenBSD as a desktop operating system, but...</p>
+</div>
+</div>
+<div class="comment" id="comment-3355271">
+<div class="comment-header">
+	<div class="comment-author">Adrian B </div>
+	<div class="comment-date"><a href="#comment-3355271">November 13, 2020 6:30 PM</a> </div>
+</div>
+<div class="comment-body"><p>It used to be Apple Computer, but now it's Apple's computer.</p>
+</div>
+</div>
+<div class="comment" id="comment-3355313">
+<div class="comment-header">
+	<div class="comment-author">Ben G </div>
+	<div class="comment-date"><a href="#comment-3355313">November 13, 2020 8:07 PM</a> </div>
+</div>
+<div class="comment-body"><p>This is yet another example of Apple thinks everything is fine as long as it works ok for their employees in Apple Park who are all using super fast devices, on 10 gigabit connections, connected to only the newest and most expensive gear, with 100% server uptime, etc. They are terrible about engineering their software to account for flaky network connections, old hardware, and any kind of failure where the user might want to know WTF is actually happening. Millions of users sat down at their Mac to do some work today only to find out that it wasn't working right, they had zero idea why, and it wasn't their fault. That is inexcusable.</p>
+</div>
+</div>
+<div class="comment" id="comment-3355386">
+<div class="comment-header">
+	<div class="comment-author">remmah </div>
+	<div class="comment-date"><a href="#comment-3355386">November 13, 2020 11:45 PM</a> </div>
+</div>
+<div class="comment-body"><p>Another thing that irks me: By yesterday evening, record of the Apple Pay, Apple Card, and some other outages was removed from the Apple's status page. The day wasn't even over and Apple already removed a log of what happened.</p>
+</div>
+</div>
+<div class="comment" id="comment-3355451">
+<div class="comment-header">
+	<div class="comment-author">Greg Hodge </div>
+	<div class="comment-date"><a href="#comment-3355451">November 14, 2020 2:59 AM</a> </div>
+</div>
+<div class="comment-body"><p>I recreated this behavior Nov 2018, first with an Apple Support rep, then made a video to prove, then actually went to a to the local Apple Store so a Genius to see it, and document.  They seem to have no intention of changing their course.<br>
+   Primarily focusing on audio and video, my workstations need to be on a “network” for sharing media etc, but there is no “internet” available unless I specifically permit.  Once Mojave hit, this type of behavior started, and failures were actually easy to spot in the console log.<br>
+   I need to omit the router address from the TCP stack settings, as well as avoid entering a DNS server address.  These have their own impact, but at least apps launch.</p>
+</div>
+</div>
+<div class="comment" id="comment-3355958">
+<div class="comment-header">
+	<div class="comment-author">TeX </div>
+	<div class="comment-date"><a href="#comment-3355958">November 15, 2020 3:50 AM</a> </div>
+</div>
+<div class="comment-body"><p>Explanation:</p>
+<p>Last Week on My Mac: Making essential services fail-safe<br>
+<a href="https://eclecticlight.co/2020/11/15/last-week-on-my-mac-making-essential-services-fail-safe" rel="nofollow ugc">https://eclecticlight.co/2020/11/15/last-week-on-my-mac-making-essential-services-fail-safe</a></p>
+</div>
+</div>
+<div class="comment" id="comment-3356378">
+<div class="comment-header">
+	<div class="comment-author">someone </div>
+	<div class="comment-date"><a href="#comment-3356378">November 16, 2020 3:13 AM</a> </div>
+</div>
+<div class="comment-body"><p><a href="https://support.apple.com/en-us/HT202491" rel="nofollow ugc">https://support.apple.com/en-us/HT202491</a></p>
+<p>This looks like an unsigned apology letter. It should be rejected by Gatekeeper.</p>
+</div>
+</div>
+
+
+<p>Stay up-to-date by subscribing to the <a href="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/feed/">Comments RSS Feed</a> for this post.</p>
+<h3 id="postcomment">Leave a Comment</h3>
+
+
+<form action="https://mjtsai.com/blog/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value size="22" tabindex="1">
+<label for="author"><small>Name </small></label></p>
+
+<p><input type="email" name="email" id="email" value size="22" tabindex="2">
+<label for="email"><small>E-mail (will not be published) </small></label></p>
+
+<p><input type="url" name="url" id="url" value size="22" tabindex="3">
+<label for="url"><small>Web site</small></label></p>
+
+
+<p><textarea class="comment-form-body" name="comment" id="comment" cols="80" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment">
+<input type="hidden" name="comment_post_ID" value="30682">
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="f464f9c40a"></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="233"></p>
+</form>
+
+
+
+</div>
+
+</div>
+
+<div id="aux">
+<div id="navbar">
+<p class="meta-nav"><a href="https://mjtsai.com/blog/2020/11/13/waiting-to-update-to-big-sur/" rel="prev">←</a>  </p>
+<div>
+  <p><a href="https://mjtsai.com/blog/">Blog</a>
+    <br><a href="https://mjtsai.com/blog/archives/">Archives</a>
+    <br><a href="https://mjtsai.com/blog/tag-cloud/">Tag Cloud</a>
+    <br><a href="https://mjtsai.com/blog/tag/top-posts/">Top Posts</a></p>
+  <p><a href="https://twitter.com/mjtsai" title="Follow updates via Twitter">@mjtsai</a>
+    <br><a href="https://mjtsai.com/blog/recently-updated/">Recently Updated</a>
+    <br><a href="https://mjtsai.com/blog/feed/" title="Syndicate this site using RSS">RSS</a> / <a href="https://mjtsai.com/blog/comments/feed/" title="The latest comments to all posts in RSS">Comments</a>
+    <br><a href="https://apple.news/TOe8IoEHXTDKknwyO8gNRTQ">Apple News</a>
+    <br><a href="https://mjtsai.com/blog/2020/11/13/apple-server-outage-makes-mac-apps-hang-on-launch/trackback/" rel="trackback">Trackback</a>
+</p></div>
+<div id="search"><form action="https://duckduckgo.com" id="search-box" method="get" enctype="application/x-www-form-urlencoded" class="form">
+  <div>
+    <input maxlength="200" value size="16" type="search" name="q">
+    <input type="hidden" name="sites" value="mjtsai.com">
+    <input value="Search" type="submit">
+  </div>
+</form>
+</div>
+<p>Support this site via <a href="https://www.patreon.com/mjtsai">Patreon</a>.</p>
+<p>Try my apps:</p>
+
+<div id="links"><a href="https://c-command.com/dropdmg/" title="The easy way to create and convert Mac disk images (.dmg files)."><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="nonretina" alt="DropDMG" border="0"><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="retina" alt="DropDMG" border="0"></a><a href="https://c-command.com/dropdmg/" title="The easy way to create and convert Mac disk images (.dmg files).">DropDMG</a>
+  <br><a href="https://c-command.com/eaglefiler/" title="Organize files, archive e-mails, save Web pages and notes, search everything."><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="nonretina" alt="EagleFiler" border="0"><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="retina" alt="EagleFiler" border="0"></a><a href="https://c-command.com/eaglefiler/" title="Organize files, archive e-mails, save Web pages and notes, search everything.">EagleFiler</a>
+  <br><a href="https://c-command.com/spamsieve/" title="Easy-to-use Mac spam filter for Apple Mail, Airmail, Outlook, GyazMail, MailMate, Postbox, and more."><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="nonretina" alt="SpamSieve" border="0"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAKRGlDQ1BJQ0MgUHJvZmlsZQAASA2dlndUFNcXx9/MbC+0XZYiZem9twWkLr1IlSYKy+4CS1nWZRewN0QFIoqICFYkKGLAaCgSK6JYCAgW7AEJIkoMRhEVlczGHPX3Oyf5/U7eH3c+8333nnfn3vvOGQAoASECYQ6sAEC2UCKO9PdmxsUnMPG9AAZEgAM2AHC4uaLQKL9ogK5AXzYzF3WS8V8LAuD1LYBaAK5bBIQzmX/p/+9DkSsSSwCAwtEAOx4/l4tyIcpZ+RKRTJ9EmZ6SKWMYI2MxmiDKqjJO+8Tmf/p8Yk8Z87KFPNRHlrOIl82TcRfKG/OkfJSREJSL8gT8fJRvoKyfJc0WoPwGZXo2n5MLAIYi0yV8bjrK1ihTxNGRbJTnAkCgpH3FKV+xhF+A5gkAO0e0RCxIS5cwjbkmTBtnZxYzgJ+fxZdILMI53EyOmMdk52SLOMIlAHz6ZlkUUJLVlokW2dHG2dHRwtYSLf/n9Y+bn73+GWS9/eTxMuLPnkGMni/al9gvWk4tAKwptDZbvmgpOwFoWw+A6t0vmv4+AOQLAWjt++p7GLJ5SZdIRC5WVvn5+ZYCPtdSVtDP6386fPb8e/jqPEvZeZ9rx/Thp3KkWRKmrKjcnKwcqZiZK+Jw+UyL/x7ifx34VVpf5WEeyU/li/lC9KgYdMoEwjS03UKeQCLIETIFwr/r8L8M+yoHGX6aaxRodR8BPckSKPTRAfJrD8DQyABJ3IPuQJ/7FkKMAbKbF6s99mnuUUb3/7T/YeAy9BXOFaQxZTI7MprJlYrzZIzeCZnBAhKQB3SgBrSAHjAGFsAWOAFX4Al8QRAIA9EgHiwCXJAOsoEY5IPlYA0oAiVgC9gOqsFeUAcaQBM4BtrASXAOXARXwTVwE9wDQ2AUPAOT4DWYgSAID1EhGqQGaUMGkBlkC7Egd8gXCoEioXgoGUqDhJAUWg6tg0qgcqga2g81QN9DJ6Bz0GWoH7oDDUPj0O/QOxiBKTAd1oQNYSuYBXvBwXA0vBBOgxfDS+FCeDNcBdfCR+BW+Bx8Fb4JD8HP4CkEIGSEgeggFggLYSNhSAKSioiRlUgxUonUIk1IB9KNXEeGkAnkLQaHoWGYGAuMKyYAMx/DxSzGrMSUYqoxhzCtmC7MdcwwZhLzEUvFamDNsC7YQGwcNg2bjy3CVmLrsS3YC9ib2FHsaxwOx8AZ4ZxwAbh4XAZuGa4UtxvXjDuL68eN4KbweLwa3gzvhg/Dc/ASfBF+J/4I/gx+AD+Kf0MgE7QJtgQ/QgJBSFhLqCQcJpwmDBDGCDNEBaIB0YUYRuQRlxDLiHXEDmIfcZQ4Q1IkGZHcSNGkDNIaUhWpiXSBdJ/0kkwm65KdyRFkAXk1uYp8lHyJPEx+S1GimFLYlESKlLKZcpBylnKH8pJKpRpSPakJVAl1M7WBep76kPpGjiZnKRcox5NbJVcj1yo3IPdcnihvIO8lv0h+qXyl/HH5PvkJBaKCoQJbgaOwUqFG4YTCoMKUIk3RRjFMMVuxVPGw4mXFJ0p4JUMlXyWeUqHSAaXzSiM0hKZHY9O4tHW0OtoF2igdRzeiB9Iz6CX07+i99EllJWV75RjlAuUa5VPKQwyEYcgIZGQxyhjHGLcY71Q0VbxU+CqbVJpUBlSmVeeoeqryVYtVm1Vvqr5TY6r5qmWqbVVrU3ugjlE3VY9Qz1ffo35BfWIOfY7rHO6c4jnH5tzVgDVMNSI1lmkc0OjRmNLU0vTXFGnu1DyvOaHF0PLUytCq0DqtNa5N03bXFmhXaJ/RfspUZnoxs5hVzC7mpI6GToCOVGe/Tq/OjK6R7nzdtbrNug/0SHosvVS9Cr1OvUl9bf1Q/eX6jfp3DYgGLIN0gx0G3QbThkaGsYYbDNsMnxipGgUaLTVqNLpvTDX2MF5sXGt8wwRnwjLJNNltcs0UNnUwTTetMe0zg80czQRmu836zbHmzuZC81rzQQuKhZdFnkWjxbAlwzLEcq1lm+VzK32rBKutVt1WH60drLOs66zv2SjZBNmstemw+d3W1JZrW2N7w45q52e3yq7d7oW9mT3ffo/9bQeaQ6jDBodOhw+OTo5ixybHcSd9p2SnXU6DLDornFXKuuSMdfZ2XuV80vmti6OLxOWYy2+uFq6Zroddn8w1msufWzd3xE3XjeO2323Ineme7L7PfchDx4PjUevxyFPPk+dZ7znmZeKV4XXE67m3tbfYu8V7mu3CXsE+64P4+PsU+/T6KvnO9632fein65fm1+g36e/gv8z/bAA2IDhga8BgoGYgN7AhcDLIKWhFUFcwJTgquDr4UYhpiDikIxQODQrdFnp/nsE84by2MBAWGLYt7EG4Ufji8B8jcBHhETURjyNtIpdHdkfRopKiDke9jvaOLou+N994vnR+Z4x8TGJMQ8x0rE9seexQnFXcirir8erxgvj2BHxCTEJ9wtQC3wXbF4wmOiQWJd5aaLSwYOHlReqLshadSpJP4iQdT8YmxyYfTn7PCePUcqZSAlN2pUxy2dwd3Gc8T14Fb5zvxi/nj6W6pZanPklzS9uWNp7ukV6ZPiFgC6oFLzICMvZmTGeGZR7MnM2KzWrOJmQnZ58QKgkzhV05WjkFOf0iM1GRaGixy+LtiyfFweL6XCh3YW67hI7+TPVIjaXrpcN57nk1eW/yY/KPFygWCAt6lpgu2bRkbKnf0m+XYZZxl3Uu11m+ZvnwCq8V+1dCK1NWdq7SW1W4anS1/+pDa0hrMtf8tNZ6bfnaV+ti13UUahauLhxZ77++sUiuSFw0uMF1w96NmI2Cjb2b7Dbt3PSxmFd8pcS6pLLkfSm39Mo3Nt9UfTO7OXVzb5lj2Z4tuC3CLbe2emw9VK5YvrR8ZFvottYKZkVxxavtSdsvV9pX7t1B2iHdMVQVUtW+U3/nlp3vq9Orb9Z41zTv0ti1adf0bt7ugT2ee5r2au4t2ftun2Df7f3++1trDWsrD+AO5B14XBdT1/0t69uGevX6kvoPB4UHhw5FHupqcGpoOKxxuKwRbpQ2jh9JPHLtO5/v2pssmvY3M5pLjoKj0qNPv0/+/tax4GOdx1nHm34w+GFXC62luBVqXdI62ZbeNtQe395/IuhEZ4drR8uPlj8ePKlzsuaU8qmy06TThadnzyw9M3VWdHbiXNq5kc6kznvn487f6Iro6r0QfOHSRb+L57u9us9ccrt08rLL5RNXWFfarjpebe1x6Gn5yeGnll7H3tY+p772a87XOvrn9p8e8Bg4d93n+sUbgTeu3px3s//W/Fu3BxMHh27zbj+5k3Xnxd28uzP3Vt/H3i9+oPCg8qHGw9qfTX5uHnIcOjXsM9zzKOrRvRHuyLNfcn95P1r4mPq4ckx7rOGJ7ZOT437j154ueDr6TPRsZqLoV8Vfdz03fv7Db56/9UzGTY6+EL+Y/b30pdrLg6/sX3VOhU89fJ39ema6+I3am0NvWW+738W+G5vJf49/X/XB5EPHx+CP92ezZ2f/AAOY8/wRDtFgAAAWkklEQVR42tVbB1hUZ9OVqqKIDSv23jvYu2JFEATpTaSDYgUsYENQQbEjKjZU7L3rZ481MRprLEmMRmOLse/unW/OuPs9+/ub/wcBk2+fZ57dvXvLO2fOnJn3vXcLEFGBvDB+GbAZwT7Z7st2i62i9rux1gw/Y0Z6v8MM8mp8fznuXDr9vxzWbi/F5sd2ysjICBvusBX8UmD/sQB8MtBybE5sy0xNTR8OGjSI/Pz88AMZGxsf1ttvGFsEmw1bTbYqbNXZmrD1YPNgizQ0NBzF75baY0zyC4hcHczR9eaBLWU7WKJEiWddunSh+Ph4Onv2LD148EDdtGnT956enlSkSJHdegBc6tChA9nY2KgrVqz4lu1VlSpV3jZo0EDdvn17Gjx4MHXt2hU7vgSon4BsmNep8cXU174vb9OmDW3fvp0uXrxIT58+1bx8+VKl0WiUnj17kqurq3r//v3YcZfesavS0tJIURT1b7/9Rvfu3aObN2/Szz//DNB4F/oQEhKCHQMZ1Pb8foTN6/8AwzA3gOQWgObNmjVT/fHHH5pHjx5pbt26Rc+fP6cFCxZQyZIlAYh6x44d2HG/3rGhQUFBxPurAgMDlYSEBIWPVxgI5ZdfflFu3LhBzApFm1JDWrVqRU5OTlS0aNEn/H09mytbmc+MyfBrAmCgfS/Idn3fvn1wSPPrr7/SlStXqHjx4rR27VpiJmjWrVuHHS+yNWLrxLbYzMyMmPJwklxcXIhZQwAPDNqzZw/2v6I9//Dw8HCw4v0333xDM2fOpO7du5O5ufnv/NtGAMRW56szQB9xfq2eNWsW/fnnn6pnz56RtbU1hYaG0ubNm6lSpUpUrVo1sEGpWbPmh9atWxPEMSYmhk6cOEHe3t7k6+tLr1+/ljTgd1VSUhJOukZ77lljxoyRc9+/f1959eqVmq+hOX/+PM2ePZvs7e1xjTcmJiZXed9RX1I1cgOAsfZ9hLu7O6KkDg4OpurVq2PAhEiy+NGKFSvo1KlTdObMGfrhhx+UH3/8UXP9+nV6+PAhOTs7Cwg6AOCgj4+P5L/23JnJycnEKaJCavCxdPfuXWLtUPgaamaOGqnDaYidJ+inZ54CoG1yDD5pVky0v9lA8ObPn0/ly5dXIIacyxg09ejRg0aPHk0//fQTnTt3TmETIE6ePEl37twhVAgWSgEAzv3+++9Kp06dcNIkNgu2A0gvgMvpQTrR1Annixcv1KtWrcL+F760b8iLRsizatWqCoSqVq1a4hicf/fuHU2dOpVAe0QPpRHUhQEE7BcQEECOjo7CGDgFEHCO5s2bU+nSpZ/xuV937txZgOrVqxctXLgQOiHHAlQGRNOkSRMMxEmflXkKgDbaRaG8bPXZemubmRVsNzBYjjx99913NHDgQKG9l5cXHTt2jCBcVlZW8hm/gwH6AAwfPpz69+8vgKEEIlWgG3ycgmNQLrEPdAKCuWTJEqkyiD5SAN95+yG9cRrlGQP0ctzbwMDgDTv5CEKmi0hiYqJQGS9bW1txlBsfcQiDnTJlirCAj6GMjAy6du3af1gAABDtiRMnSpo8efIE9KctW7agOtCFCxfo+++/V1gzUF1EUBs2bCiphX4BbOFj0GjhWuP/gpmGuQVAkGTHSqIsxcbGIucUlDqubmr+TcX5roGqlytXTnIZEVyzZo0AUK9ePRm8g4MDjRgxgm7fvk2nT58W58EMRBECh+4P5wQI8+bNIzRWOrBwPpRHOzs7YZVOLMGClStXkqWlpcIM1PD1zrKN1pZao5zoQXYbngbciLxFxFl5NYhUnz59xHEMbu/evRJRGNrhxo0bCwhgCwaO1ADlL1++LPt8++238hkUb9GiBaF84jV58mTJdewLoMAEMAaldOPGjbIfjkffgHOPHTtWQFm9erVchyuQiq/7rTY922WnQcpJuYtFj47IQ/Hh4LZt20SMkN+wTZs2SRmEWIGe6Oux34ABA4QBUGx0gWAJIr57925xDrkM53EMKgrKJFiCd/xWo0YNKX8AhvsBYQZ0B5qCyoDeACUU10DVwP7oOLMjjNnu+oYOHYoZ2eVly5YBBA0mNKA2KIqmBgNETe/du7dQmCsDHT9+XCgNEFCrK1euLJ/HjRsnICH6hQsXlt902gEtQfSRAnAYnSJfWxiClMILEy40QZyKAiz207bhGlyzYMGCN/lcZtlJg5w2PfZ169aFAkuLW6FCBYkCKA26wmmwA1ECW0qVKiXp0K9fP6E7fuNprmxv1KgRDRs2jHbt2iUsQhOF39AHID0AAAsh1alThyIiIoRtYEN6eroIK4DieYQ0VBBFgMAsUGlZNz67ZfFL+v+DM2bMkOakfv36ouSPHz8mbEMNRyOEwSBqiCzA0XV+ffv2lSgjd5HL6A8AFnoI1HMwCJ+h9gABWlOsWDGpAAAMKYL90EGiXHbr1k1KKFiA7hB6wfv/wdeonN0JUrb7ft2KDhYtQGVmgZKSkiK9PwCAmiO/4RjK1+LFiyX6ly5dEn1AKUO+165dmzB3QJoAGEx2MHm6evWqOAanDh48KABERUWJqAKoAwcOSD8BpuEd5RPzBIggfn/z5o0K33l86Tlpib9oSQoTIExaeKqr5pmZlCQ4h6kvaAsWHD16FNNaUW80OaAm8hnvYWFhIoKY0GBmiONQ36HsXNpExBBpCwsLoToaIcwtIHCoEog+KtCGDRukM+QUUsCCKlWqYHCt8wwAvRkf1vfS2aLYxqL7wlofU16Di4KeGDxqNNQbuoDo2tjYSEOE6CLKO3fulNkg0gPM4NJKc+bMEQqDvmDM0qVLJcJgBvqCwMBAMjU1lXcA2rZtWwEO10V6IV0wKZo7dy4GuienE6JsAWBsbGzLn1+hzfXw8KBRo0ahE1SOHDkiNEXEIICgPVJAVxXc3Nyka8SECANHtwcWINdRtyGO2A+AocdAZEF/VAhUD8wMARZYBuGMjo6W1IiLixNwkXo4nt8VpCKP8dcyZcrUyOsUEBBKlCiB2dkWqDQ7ruJSpRw6dEhUGWKIOT4oiygj4tABRBcrOlBtOIJJD5QfeoF+ARTGAgo0Aj1B2bJlJarYt127djKRArOQDmi2wAz0ACi1AAcNEUDF4gsHQe3v748Bn2OAjPNaBI31Pici/9Dfc83VYM0P6g8dQEVATqO0ITJYK4SjKH9IAXRsixYtEqcgeFjdQf1GVDMzMwUoAIc8RzqgagAIRByptXXrVoAvVQElEZ0h2mLMRaAtLKyqjh07YpBLstsO53gFSPs5Eg6BqjxgDbo35DZKEgQOuY2uEPUd4GRlZYnjPMUliCdYgWaH6SrOgcqpqalSNsEeRBKOY6EFx6CVRlpBBAEU+g/0CXAe28EcdJdgJIulWtuKR+dJK/y5uz+6WSKiDfrxvF+DGg1hQ0RR5yGSGCzm+yiPiBYcwzFQduT98uXLqVChQhJdlEbkPcQTgoi0QAoBJIAAfcF26AlSA30FNz5ybkQdQDAbFdaSD9p+4xqP0/D/Y8GX3gLT5ZgP0Ec/UK16dVycfmRFf/78BTuXQQ2YqpW4Z/AfMoSeMgAPeNDIXzRD0Aq0tqAuHEd7ix4ANR15DvYgzwHgED4eUQU46Avg9Nu3b2Vf9CRowhgwNVIM02k+/1YW7LJ5mgKfAUK3JDakIZfBmjVrKKNGRtGMxAQaGuBHkRGhZN1S1uqoerXKFBEWQhMnjKPx42JkW1JSIl3Rzg4RMXPzYuTGlEcXCSCRCphvIKUQXaQchBb5D9bhNX36dEkx7j1UKLfoGnXUz5PpcDba4mpscWzvipoXJ6tq9ZR6TdtTE5se1LxdP+rcx4P6OgdS595u1Lxtb2rUsivVb9qOqtSoT6Usy4lAdunSmTp36iCgdOvahZuoC9Il3mYgGjZsxOyaLXoBhoA96DkAGhogaAlPrFRYNeLjH7J11WOpYb6sCeruyGg/H2vR1paCx6YqE+dsoxnL/kXz1p2ntC1XKG3zFVq86XtK23qVlm6/wXad0rdfo4UbL9HczLOUmH6YxiSuJa+wadTD3p9ad+pHVlVrU0WrSlwm25KbqzNZFCtKi1k8T5zAIupdmScgZTALREXg9FMjJXgc37BZ6S2NGeTLougnqy3FzIqYv5g0bydNXbhHiU5aT9MW7aPJ/D12ZhZv20sJaQdowuzNFD93ByUtPSJOp7Lz89ZfoNS1Z2kRg7Fsx3VasftHSt92jebzdgDpHjKZbDo7ULVajbnlLU821q3I18eTSpcqKSUWLxZUubHCto7LqnG+LYp+pi3Gre8g3O/DAOzdI8ht6HiytfcT52JmrCewIj51O83P+pb6u4SQi3+0RD555UkaOSVDLIU/z1n9jWyblXH8P8wAKBm7btHKvXdp8ebLDN5OcgkYT42tu3PaVOBS2ZSCAwM0AIOvP/tzwcmP+wI653uxPWhi3ZWcfEaRd9g0JXJCGkd5C03hiPcfHEr+w5M4FY4SGNG+uyPFcURnLj9GA9zCadTUleQXmUCDh0TT3LXnaFjcEgEKTOntGCAsAYjJK05QyqpTss/CDd99BGTPHf7tDAWOSaVWneypTHmZ+Jxnc8nNcwQ5cb6OsYnpW0TTxS9aqduotUSka18Pdi6C+nGkI8YvZgen05CoGZwGGyhwZDKFj1vIrMiioSNnceRXSBogPeCsnWsYhcUukG0+4VMpcckhiuV9Z686Lfvj92U7btDs1afFkCLLGYxV++4ibVQAEzdPvpT+OV0TjLfpZEcBI5IVreLaYTXWxT8GDmo8QyYx3UPZ4UWi+mMS1rAe7KLu/b3YmWRyDYgl16HjKDR6HnXo4URTWS8ABFKh76BA8gqdxA5e5GNdafS0VZIWk5j+AHFCyiZy8BxGoTHzmB3HaXraQUrOOK5uYt3lPzPAL02DnACQ2qnXYAoeM1ddrHjp1/w9i+0mWNClj5sSMT6NUyCMouKX0SR2vMcAH45guDgxdnomD36+RHsMf45m9UfFADiDh8QwGPtp3KwNNI5ZE5e6jaYs2C0pAVF1Y9CiJi3j7dtpzpozFMDssuNUg7C26zZQqV67CVaCD7E1/JLb5Dl5FsCxVJmKFDR6jiY8dpFmgFskdbfzoTZd7TVO3qN4wEMFgOFxS7ned6IQjjTEEdT+KIo7CAAGRM0k96CJ5MEGugMQ79DJNDphNR8fQk7eIyUFsM/4lM2iCdhvyoI9nFpJkhpz156neo1bK3UathJmOfuNIWNjEwTFJqcg5LTxmWNRwpI69nRm5yawM7M4sgvY2fmKZ8hkZZDvGHILnEBDhs/gaC9iEXTiHmEuhbCNmJQhqeA3LImjHkuewfEAU7TC0Wsk+UZMY+qvpvHJm7h5ChLABrHQYrs9g+3FII2YtFwYw0KrBI5KxoDuYo2SK43iHTYZ34/n9CZpjp/U0laClXjWx9ik4OMi5sVfsjgSU5H6OAYqPbkc9hzgR72dAjn608TZfs4hnCbuFMEVo3VnO06JdezoFrLu0JejOlP2Gz1tDX3UmJnCprDYheQZEi+MQrq4B02gwFEpoitWVesoZkWk7cXy9wFUpYTFB6iwWdGnKNN5DoD+LfJPbppasuHW2XCLEmXIf1iSJixmoeLgEcWRm04OHsPI1sGfBz6bozaDvFgovcOmspOzqD0L4eiETGGGTcd+6CZpKDto7x7JlB4rLOo7KFjSCOIK6oM1YAZXDQ2zSY3zewTHISXeofziFp5eyhrkVyv82RuP/JpXsXItpnWqqlX7PtTHKUichrPo/4eOnM2iGMHi6CvUt3cfJvqAXiE6cR0FMUhNbbqxGG7klBjBxwey+m8RzYiKXy4pAHBYXzRIQVSKuDnbZX8X/7FkXkwaI5c8XRPM5kMT+u1xVuUaDcg3crrKLTBOqVmvBUconvuGGKG6rcMQjm60RBefwRLuKSRNoBdRzAav0CksbOMk2kiNDj0HyTkcPKMUCHCFyjVxobMmpgVvm1uUeluocBE8PHUYqfnVH5D4i9WiteWtanBUYjQBI1KUtl0cuFw5on+gjrYuNMh3LFJFtkE0u9t5y29d+3oSeonmbWwZmARq2b63pA4YxCKncQ+coG7YXGaNa7XXKap9wNIyN0+K5eWTovogJJtblGQ1D0HEFUS9Weue8r3XwKEfBZH7BoCBlIickC7gQCwhfmik3IPiBCT/yEQVgChvVf1/rPX91UrV3wbAZ0BwZvuzJeuBe2C80ssxkN/jWNhCaIBrJFeAfgIGzyfkM+het3EbKa8dejpzmZut4tRQWrbrTSYmBT9AaD+Zkhvk9iHJPAfgk54hzMS00Ks2nR0UJ58xSmluokqWLveRCQyCrUMAOXID5eg1ihskVwZguuIdPk3lG5mo8QiexOVyAJUqU4G0s85Gn6tE/6iHpfWdb9GiBW6lH2OR4to+QBwe6BlFbdgpruHErTQVKWpBteq3JGffaKZ+qNLRdjBXge5UsUod4r4C9TxTt8KTm+nu38YAXfvMttu0kNkHC8tq1LBlL+phH8iiFs70D+CePpyBGanWNjXo6hK1qVP+k/w2zA/n8wWATwfNr9plS5u/nxY7mPr0aKqUL1eSinPTVLpcDapUozH389bMCEv5T4FuGVsvz43yy/F8BeCTSdTmhPEe/PGEmp5tpSfXltPxXVMoa1mUpl0reZRlN5tbARMTa+3/AozyM+JfiwG6KbRd3VoV6c399Qo93UIAgN7uJnq+TQDZkRmLnTZ9LWe/lgZI9KpXl5upd7evieGvRzVrFg6jlMm+lDzJh57fyCB6tEl5emslWZUvpeb9Gufmkfd/VBXQy/0VQT62HPE9Knq1k5wHtCOnvjbUrGE1en5zBSkPsog+7FMND5aHoxJzs6z1TwJAd7covFH9KvT+4QY1PdpIHx5uINuuzSgh2o369WzJ37NIc389UkG5enouFS5oguf/y/4dLMgP5/sUL2ZGN87MI3qxXSF2/un15WTTvBYtTwmhFk1rkOq3jQLAu3trhAUBXj1w4PS/gwV5RXud6HU0MjR8e3jbZIid5v29TBG+22fnUznL4vTDsRTKZC1Qg/5/bP8oigzS7fMLybxIobd8fN38bHry43F5/abHwdjY6N2erAlE7/eqP/y8ljRwlFPgBYvdmHB7enWXI/6Gq8BvG+jojql06mASvQIL6JB6aqw7TrLza6dBrp2vUKGCGW6Q1qxWno6xU+ygOA+R0xkcpj93CiCaX9fT658yqUqFUmTJgbbi952ZMWCMulnj6vr/FjH5pwNgpP3vYB/cIktPDeOvp9/Tky2K+pd1pPplrTirAwHb1BC+J1vop+/TqLKFOf3LsBnZFTAjT5/ufOwZ5fzBGWRsZPRGb4nb6L8iBUB/zv17gwd2oO+OzZZo0rs9avp9s6K5v47AiA8MwAeOPJqgk0x9S2Z5RoFaNLJAOTItaEzbVkcTKQfVi2YFydoemPU10iEvqwAan4msAw/sud5vzBhNT9DwvNqpIdV+FfcDapQ9flcun5xDjepUoib1qyrtresprVvV1aSnBKuJDjNwe1WO/VrrlrgN8vv/w3na92s/Y5U4AH+WLFem+Eu73tY0eawrbVo5ls4dnkl3WPEfX11GD66k0+2Li+gS9wFH9iXSqrQoCvXrJWWymHnh21hVYiv0XwHAXy1L8asqVmrZZuIenqGBwTWzwgUflyxe5FXZ0hZvSlgUeVHI1ORn/u0MHr/FX/DYOugedf8a/x7/NxRoE9QVwjS5AAAAAElFTkSuQmCC" hspace="2" align="middle" height="32" width="32" vspace="2" class="retina" alt="SpamSieve" border="0"></a><a href="https://c-command.com/spamsieve/" title="Easy-to-use Mac spam filter for Apple Mail, Airmail, Outlook, GyazMail, MailMate, Postbox, and more.">SpamSieve</a>
+  <br><a href="https://c-command.com/toothfairy/" title="Connect AirPods (or other Bluetooth headphones) to your Mac with a single click or keypress."><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="nonretina" alt="ToothFairy" border="0"><img src="data:image/png;base64,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" hspace="2" align="middle" height="32" width="32" vspace="2" class="retina" alt="ToothFairy" border="0"></a><a href="https://c-command.com/toothfairy/" title="Connect AirPods (or other Bluetooth headphones) to your Mac with a single click or keypress.">ToothFairy</a></div>
+<script async type="text/javascript" id="_carbonads_js">var _carbonads={init:function(where,force_serve){_carbon_where=null;if(where)_carbon_where=where;var placement=this.getUrlVar('placement'),baseurl=this.getUrlVar('cd')?this.getUrlVar('cd'):'srv.carbonads.net',protocol=this.getUrlVar('protocol')?this.getUrlVar('protocol')+':':'https:',serve=this.getServe(force_serve?force_serve:this.getUrlVar('serve'),placement);var forceUrlPreview=this.getUrlVar('_bsa_url_preview',window.location.href);if(forceUrlPreview){var previewData=JSON.parse(decodeURIComponent(forceUrlPreview));setTimeout(function(){_carbonads_go({ads:[Object.assign({},previewData,{zonekey:serve,statlink:previewData.link.replace(/^(http:|https:)/gm,'')}),{}]})},0)}else{var pro=document.createElement('script');pro.id='_carbonads_projs';pro.type='text/javascript';pro.src=this._buildSrvUrl(protocol+'//'+baseurl+'/ads/'+serve+'.json?segment=placement:'+placement+'&callback=_carbonads_go');document.getElementsByTagName('head')[0].appendChild(pro)}},_buildSrvUrl:function(base){var forcebanner=this.getUrlVar('bsaforcebanner',window.location.href),ignore=this.getUrlVar('bsaignore',window.location.href),forwardedip=this.getUrlVar('bsaforwardedip',window.location.href);ignoretargeting=this.getUrlVar('bsaignoretargeting',window.location.href);if(forcebanner)base+='&forcebanner='+forcebanner;if(ignore)base+='&ignore='+ignore;if(ignoretargeting)base+='&ignoretargeting='+ignore;if(forwardedip)base+='&forwardedip='+forwardedip;var ck='';try{ck=decodeURIComponent(document.cookie)}catch(e){};var day=ck.indexOf('_bsap_daycap='),life=ck.indexOf('_bsap_lifecap=');day=day>=0?ck.substring(day+12+1).split(';')[0].split(','):[];life=life>=0?ck.substring(life+13+1).split(';')[0].split(','):[];if(day.length||life.length){var freqcap=[];for(var i=0;i<day.length;i++){var adspot=day[i];for(var found=-1,find=0;find<freqcap.length&&found==-1;find++)if(freqcap[find][0]==adspot)found=find;if(found==-1)freqcap.push([adspot,1,0]);else freqcap[found][1]++}for(var i=0;i<life.length;i++){var adspot=day[i];for(var found=-1,find=0;find<freqcap.length&&found==-1;find++)if(freqcap[find][0]==adspot)found=find;if(found==-1)freqcap.push([adspot,0,1]);else freqcap[found][2]++}for(var i=0;i<freqcap.length;i++)freqcap[i]=freqcap[i][0]+':'+freqcap[i][1]+','+freqcap[i][2];if(freqcap.length)base+='&freqcap='+encodeURIComponent(freqcap.join(';'))}return base},getServe:function(serve,placement){var r=new Array();r['getbootstrapcom']='CKYIKKJL';r['fontawesome']='CKYIV5QM';r['vuetifyjscom']='CKYI5KQY';r['abuseipdbcomjw']='CKYIE53Y';r['stocksnapio']='CKYIV23Y';r['uplabscom']='CKYIP5QW';r['mongoosejscom']='CKYIL27I';r['semanticuicom']='CKYIKK7M';r['thekidshouldseethiscom']='CKYIVK3M';r['rubydocorg']='CKYIKKQN';r['kuulaco']='CKYIPKJI';r['uimovementcom']='CKYIPK7W';r['snakifyorg']='CKYI523L';r['joomlaorg']='CKYI553E';r['kkorgcooltools']='CKYICKJN';r['framework7io']='CKYIE5QJ';r['bestfolioscom']='CKYIV23I';r['tobiasahlincom']='CKYIEKQN';r['codecrafttv']='CK7DT23Y';r['mindsparklemagcom']='CKYIV2JM';r['simpledesktopscom']='CKYIV53I';r['thinksterio']='CKYILK37';r['colormindio']='CKYIV27W';r['adonisjscom']='CKYIL23I';r['openprocessingorg']='CKYIP5QL';r['passportjsorg']='CKYI523M';r['pugjsorg']='CKYILKQ7';r['gormio']='CK7DTKJY';r['materialpalettecom']='CK7DTKJM';r['murzebe']='CKYIK27U';r['learnshayhowecom']='CKYILKJL';r['landbookcom']='CKYIP2QM';r['nightwatchjsorg']='CKYILK3M';r['logobookcom']='CKYIV2QE';r['html2canvashertzencom']='CKYIL2JL';r['colorzillacomgradienteditor']='CK7DT23W';r['rvmio']='CKYI55QN';r['wedistillio']='CKYIP2JM';r['silviomoretogithubiobootstrapsel']='CKYIKK7I';r['cssreferenceio']='CKYIK2JU';r['searchcodecom']='CKYIEKQE';r['garronme']='CKYIEK3M';r['recalllco']='CKYIL2QM';r['tachyonsio']='CKYIE2QU';r['w3bincom']='CKYIEK3W';r['mjtsaicom']='CKYIC53E';r['hookrio']='CKYILKQI';r['bradfrostwebcom']='CKYIV5QE';r['thecodebarbariancom']='CKYI5K3Y';r['toolsandtoysnet']='CKYICK7Y';r['gitignoreio']='CKYIK2QY';r['echolabstackcom']='CKYILKQM';r['coolx10com']='CKYIK2JM';r['csswizardrycom']='CKYIK5QI';r['bitsofcode']='CKYIL23L';r['hexoio']='CKYIL2QU';r['fontpairco']='CKYIV2QI';r['gitguide']='CKYI5K3W';r['zealdocsforwindowsorg']='CKYIE53M';r['instantlogosearchcom']='CKYIP23I';r['devhubio']='CKYIK27L';r['callmenickcom']='CKYI52J7';r['compfightcom']='CKYIV2Q7';r['marksheetio']='CKYIE53J';r['saedsayadcom']='CKYIL5QI';r['alertifyjs']='CKYI55QJ';r['sourcemakingcom']='CK7DTKJJ';r['colorzillacom']='CKYIK53N';r['jonrohancodes']='CKYIL23E';r['muicsscom']='CKYIL5QW';r['glebbahmutovcom']='CKYI5K7U';r['devdojocom']='CKYIL23U';r['bloggetbootstrapcom']='CKYIKKJJ';r['baconipsumcom']='CKYIPKJU';r['uijarcom']='CKYIP27Y';r['signature']='CKYIC5QU';r['drushcommandscom']='CKYIE27N';r['freeiconshopcom']='CKYIP23E';r['expogetbootstrapcom']='CKYIKKQ7';r['cubicbeziercom']='CKYIPKJ7';r['syntaxdbcom']='CKYILK3I';r['listjscom']='CKYIKK7W';r['learninglaravel']='CKYI527J';r['blivesta']='CKYI5K7I';r['daverupertcombiz']='CKYIC27Y';r['ui-cloudcom']='CKYIPK3E';r['ohshitgitcom']='CK7DTKQE';r['contrastratiocom']='CK7DT2QJ';r['frontendfrontcom']='CKYIEKJU';r['nicelydoneclub']='CKYIP2QN';r['hiliosgithubiojQuerycountdown']='CKYIEKJM';r['sassmeister']='CKYIK2JN';r['mockitoorg']='CKYIL5QY';r['ponyfoocom']='CKYI553L';r['pxlnv']='CKYICKJW';r['tutorialzinecom']='CKYIK5QM';r['flexboxgridcom']='CKYILK3N';r['milligramgithubio']='CKYIE23J';r['uispacenet']='CKYIVK7E';r['wildlyinaccuratecom']='CKYIKK3U';r['htmlreferenceio']='CKYI553U';r['startupstockphotoscom']='CKYIPK3U';r['realisticshots']='CKYIPK37';r['wowwebcouk']='CKYIP237';r['compassstyleorg']='CKYI52QY';r['astronautwebco']='CKYIK23W';r['botmanio']='CKYI52QL';r['deanattalicom']='CKYIL5Q7';r['numeraljscom']='CKYIKK7Y';r['leaveroume']='CKYIK5QN';r['glotio']='CKYIE2JM';r['davepaquettecom']='CK7DTKJN';r['thesasswaycom']='CKYI52QN';r['cssmenumakercom']='CKYI5KQ7';r['zealdocsorg']='CKYIE53W';r['catalinred']='CKYIE2QY';r['graineditcom']='CKYIPK3M';r['formvalidatornet']='CKYIVKQL';r['materialthemecom']='CK7DT23I';r['worktimercouk']='CKYIC2JM';r['clrscc']='CKYIV2QL';r['osvaldasinfo']='CKYI5K77';r['codrops']='CKYIK53I';r['bootflat']='CKYI5KJY';r['littlesnippetsnet']='CKYIEK7W';r['iconbroscom']='CKYIPK3I';r['kodhuscom']='CKYIE27E';r['dpilv']='CKYIPK7N';r['jaysalvatcom']='CKYI5K7M';r['typezebracom']='CKYIVK7L';r['jsperfcom']='CKYIEKJN';r['instafeedjscom']='CKYIEK7I';r['pushjsorg']='CKYI553I';r['jscoach']='CKYIE23L';r['logospirecom']='CKYIP23J';r['wwwsiiimplecom']='CKYIPK3J';r['ivomynttinencom']='CKYIV5QJ';r['hugogiraudelcom']='CKYIKKQY';r['css3generatorcom']='CKYIK5QU';r['basscsscom']='CKYIPKQN';r['museresourcescom']='CKYIV2JN';r['jquerycardscom']='CKYIE23I';r['sketchshortcutscom']='CKYIPKJY';r['js2coffee']='CKYI553W';r['danielmallcom']='CKYIVKQW';r['aisleonenet']='CKYIV53W';r['discordserverscom']='CK7DTKQJ';r['coolphptoolscom']='CKYIE27Y';r['perfectionkillscom']='CKYIKK3L';r['degoesnet']='CKYIC53J';r['sketchapprocks']='CKYIP2JE';r['jxnblkcom']='CKYIPKQM';r['patternifycom']='CK7DT5QE';r['githubcombevacqua']='CKYI5KJW';r['ifontyoucom']='CKYIPKJL';r['cssflowcom']='CKYIKKQW';r['1000hzgithubio']='CKYIE5QM';r['pastiebincom']='CKYI5277';r['colintohcom']='CKYIEKQY';r['thecssninjacom']='CKYIK537';r['cssguidelines']='CKYIK53L';r['simonholywellcom']='CKYIK23E';r['gedblogcom']='CKYIV5QL';r['lavaliteorg']='CKYI55QY';r['hypershootcom']='CKYIP2QU';r['zerosixthree']='CKYI527L';r['browserhackscom']='CKYIKKJY';r['clusterizejsorg']='CKYIE53N';r['devblogavdiorg']='CKYIK23U';r['resourcecardscom']='CKYIP2QI';r['designerlynxco']='CKYIPK3L';r['bootplycom']='CKYIKKJW';r['imagehoverio']='CKYIL2JM';r['unmatchedstylecom']='CKYIVKQM';r['goratchetcom']='CKYIK2QJ';r['javascriptreportcom']='CK7DTKQN';r['polrprojectorg']='CK7DTK7W';r['fillerama']='CKYIPKQY';r['fittextjscom']='CKYIK27M';r['thezinxcom']='CKYIV237';r['visualizingeconomicscom']='CKYIC237';r['css3testcom']='CKYIEK7U';r['wankencom']='CKYIV53M';r['trentwaltoncom']='CKYI52QM';r['codetimeio']='CK7DTK37';r['thenewsprint']='CKYICKJJ';r['gumbyframeworkcom']='CKYI55QU';r['meanthemescom']='CKYIK23Y';r['mclearcouk']='CKYIVK37';r['bestaboutpagescom']='CKYIVKJJ';r['minimalstuffcom']='CKYIPKQW';r['markgoodyearcom']='CKYIKKJU';r['wwwwireframeshowcasecom']='CKYIV27U';r['scoopthemes']='CKYIK2JE';r['mrmrsio']='CKYIPKQI';r['anchorcms']='CKYIK2JI';r['lostechiescom']='CKYIE53U';r['bitshadowgithubio']='CKYILK7E';r['reactparts']='CKYIL5QU';r['letteringjscom']='CKYIKK3W';r['wwwcomicsanscriminalcom']='CKYIV2JU';r['inspirationmobiletumblrcom']='CKYIPKJJ';r['wtfforms']='CKYI527E';r['jsternet']='CKYI5KQM';r['hakaselogsme']='CK7DTK7L';r['thinkandbuildit']='CKYIKK77';r['anthonyterrien']='CKYI5KJN';r['hildebertocom']='CK7DTK3U';r['benrmatthews']='CKYICKJL';r['verynicesitescom']='CKYIV23J';r['usabilitycountscom']='CKYIC27L';r['wwwhereio']='CKYIPK7E';r['blogeppzeu']='CKYIEKQI';r['responsivebp']='CKYIK2QM';r['philgrcom']='CKYIK237';r['iconfindercom']='CKYIP5QI';r['cdnjscom']='CKYIK53E';r['fontscom']='CKYIP5QJ';r['listennotescom']='CKYIC5QY';r['emmetreview']='CKYIE23Y';r['davidwalshname']='CKYI5KQL';r['codedailyio']='CKYIEK7J';r['grapesjscom']='CKYI5KJU';r['krasimirtsonevcom']='CKYIE2QI';r['saeedalipoorgithubioicono']='CKYIK53W';r['sequencejscom']='CKYIE2QM';r['ignorethecodenet']='CKYIC23J';r['rocketinknet']='CKYIC2QJ';r['jmarbachcom']='CKYICKQM';r['wwwtech-thoughtsnet']='CKYIC2JU';r['blogtdwrightcouk']='CK7DT2QL';r['fonoapifreshpixlcom']='CK7DTK7N';r['typeplatecom']='CKYIK27W';r['aspectratio']='CK7DTKQI';r['www6ixpassionscom']='CKYIC2JN';r['chriswhartonme']='CKYILKJM';r['lukyvjgithubiofamilyscss']='CKYIE2J7';if(this.isset(r[placement])&&(serve=='CVYD42T'||serve=='CVYD42E'||serve=='C6AILKT'))return r[placement];else if(serve=='CVYD42T'||serve=='CVYD42E'||serve=='C6AILKT')return'CKYICKQI';else return serve},getUrlVar:function(name,target){target=typeof target!=='undefined'?target:document.getElementById('_carbonads_js').src,name=name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");var regexS="[\\?&]"+name+"=([^&#]*)";var regex=new RegExp(regexS);var results=regex.exec(target);if(results==null)return'';else return results[1]},isset:function(v){return typeof v!=='undefined'&&v!=null},nonempty:function(v){return this.isset(v)&&v!=""},refresh:function(){_carbonads.gotback=false;this.remove(document.getElementById('_carbonads_projs'));this.remove(document.getElementById('carbonads'));this.init()},reload:function(where,force_serve){_carbonads.gotback=false;this.remove(document.getElementById('_carbonads_projs'));this.init(where,force_serve)},remove:function(el){if(typeof el!=='undefined'&&el!=null)el.parentNode.removeChild(el)},htmlEncode:function(v){return v.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&apos;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\//g,'&#x2F;')}};function _carbonads_go(b){var ad=b['ads'][0],link,fulllink,image,description,time=Math.round(Date.now()/10000)|0;var placement=_carbonads.getUrlVar('placement');var serve=_carbonads.getUrlVar('serve');if(ad.html!=null){var ad_html=JSON.parse(ad.html);ad.image=ad_html.image,ad.statlink=ad_html.statlink,ad.description=ad_html.description,ad.pixel=ad_html.pixel;ad.fetch=ad_html.fetch;ad.click_redir=ad_html.click_redir}if(ad.fetch!=null){var fetch=document.createElement('script');fetch.type='text/javascript';fetch.id='_carbonads_fetchjs';fetch.src=ad.fetch;if(ad.fetch.match('fallbacks.carbonads.com'))fetch.src+='/'+placement+'/8/';if(ad.click_redir!=null)fetch.src+='?click_redir='+encodeURIComponent(ad.click_redir.replace(/srv.buysellads.com/g,'srv.carbonads.net'));document.getElementsByTagName('head')[0].appendChild(fetch);_carbonads.remove(document.getElementById('_carbonads_fetchjs'));return}if(!_carbonads.nonempty(ad.statlink)&&(!(_carbonads.nonempty(ad.fallbackImage)&&_carbonads.nonempty(ad.fallbackLink)&&_carbonads.nonempty(ad.fallbackTitle))||!(_carbonads.nonempty(ad.fallbackZoneKey)))&&(!(_carbonads.nonempty(ad.fallbackImage)&&_carbonads.nonempty(ad.fallbackLink)&&_carbonads.nonempty(ad.fallbackTitle)))){var fallbackKey=_carbonads.nonempty(ad.fallbackZoneKey)?ad.fallbackZoneKey:'CK7DT53I';if(_carbonads.gotback===fallbackKey)return;_carbonads.gotback=fallbackKey;var fallback=document.createElement('script');fallback.type='text/javascript';fallback.id='_carbonads_fallbackjs';fallback.src=_carbonads._buildSrvUrl('https://srv.carbonads.net/ads/'+fallbackKey+'.json?segment=placement:'+placement+'&callback=_carbonads_go');if(ad.fallbackTitle!=='hide'){document.getElementsByTagName('head')[0].appendChild(fallback);_carbonads.remove(document.getElementById('_carbonads_fallbackjs'))}return}image=_carbonads.isset(ad.logo)?ad.logo:_carbonads.isset(ad.smallImage)?ad.smallImage:_carbonads.isset(ad.image)?ad.image:ad.fallbackImage;link=_carbonads.isset(ad.statlink)?ad.statlink.split('?encredirect='):ad.fallbackLink.replace(/^(http:|https:)/gm,'');description=_carbonads.isset(ad.description)?ad.description:_carbonads.isset(ad.title)?ad.title:ad.fallbackTitle;bgcolor=_carbonads.isset(ad.backgroundHoverColor)?ad.backgroundHoverColor:null;if(typeof link[1]!='undefined'&&_carbonads.isset(ad.statlink))fulllink=link[0]+'?segment=placement:'+placement+';&encredirect='+encodeURIComponent(link[1]);else if(link[0].search('srv.buysellads.com')>0&&_carbonads.isset(ad.statlink))fulllink=link[0]+'?segment=placement:'+placement+';';else if(Array.isArray(link))fulllink=link[0];else fulllink=link;fulllink=fulllink.replace(/srv.buysellads.com/g,'srv.carbonads.net');var el=document.createElement('span');el.innerHTML='<span class="carbon-wrap"><a href="https:'+fulllink.replace('[timestamp]',time)+'" class="carbon-img" target="_blank" rel="noopener sponsored"><img src="'+image+'" alt="ads via Carbon" border="0" '+(_carbonads.isset(bgcolor)?'style="background:'+bgcolor+';width:100px;padding: 30px 15px;box-sizing: content-box;"':'')+' /></a><a href="https:'+fulllink.replace('[timestamp]',time)+'" class="carbon-text" target="_blank" rel="noopener sponsored">'+_carbonads.htmlEncode(description)+'</a></span>';if(!_carbonads.isset(ad.removecarbon))el.innerHTML+='<a href="http://carbonads.net/?utm_source='+placement+'&utm_medium=ad_via_link&utm_campaign=in_unit&utm_term=carbon" class="carbon-poweredby" target="_blank" rel="noopener sponsored">ads via Carbon</a>';if(typeof ad.pixel!='undefined'){var pixels=ad.pixel.split('||');for(var j=0;j<pixels.length;j++){var pix=document.createElement('img');pix.src=pixels[j].replace('[timestamp]',time);pix.border='0';pix.height='1';pix.width='1';pix.style.display='none';pix.alt='ads via Carbon';el.appendChild(pix)}}var n=document.getElementsByClassName('carbon-wrap');var fdiv=document.createElement('div');fdiv.id=n.length>0?'carbonads_'+n.length:'carbonads';fdiv.appendChild(el);var carbonjs=document.getElementById('_carbonads_js');if(carbonjs!=null)if(_carbonads.isset(_carbon_where))_carbon_where.appendChild(fdiv);else carbonjs.parentNode.insertBefore(fdiv,carbonjs.nextSibling);var mw=document.querySelectorAll('.carbon-img > img');for(var i=0;i<mw.length;i++)mw[i].style.maxWidth='130px';_bsap_serving_callback(ad.bannerid,ad.zonekey,ad.freqcap);if(_carbonads.nonempty(ad.fallbackTitle)&&!_carbonads.nonempty(ad.statlink)){if(ad.fallbackTitle==='hide')_carbonads.remove(document.getElementById('carbonads'))}}_carbonads.init();window['_bsap_serving_callback']=function(banner,zone,freqcap){var append=function(w,data,days){var c=document.cookie,i=c.indexOf(w+'='),existing=i>=0?c.substring(i+w.length+1).split(';')[0]+'%2C':'',d=new Date();d.setTime(days*3600000+d);data=existing+data;data=data.substring(0,2048);document.cookie=w+'='+data+'; expires='+d.toGMTString()+'; SameSite=Lax; path=\/'};if(freqcap){append('_bsap_daycap',banner,1);append('_bsap_lifecap',banner,365)}};</script>
+</div>
+</div>
+
+<div class="copyright">Copyright © 2000–2020 <a href="mailto:mjt@mjtsai.com">Michael Tsai</a>.</div>
+
+
+
+
+
+
+
+</body></html><!-- Dynamic page generated in 0.039 seconds. --><!-- Cached page generated by WP-Super-Cache on 2020-11-16 03:13:07 --><!-- Compression = gzip --><!-- super cache -->
