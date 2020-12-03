@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="connect-src 'none';"><meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' data:;"><title>The future of ZFS in FreeBSD</title><link rel="Index" href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/index.html"><link rel="made" href="mailto:freebsd-current%40freebsd.org?Subject=Re%3A The future of ZFS in FreeBSD&In-Reply-To=<CAPrugNriggEMMnLTZtf6xNQNYajBYNMnGdN96-ejDYQonoOhgw%40mail.gmail.com>"><meta name="robots" content="index,nofollow"><style type="text/css">pre{white-space:pre-wrap}</style><meta http-equiv="Content-Type" content="text/html; charset=us-ascii"><link rel="Previous" href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072426.html"><link rel="Next" href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072423.html"><meta property="wayback:source:url" content="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072422.html"></head><body bgcolor="#ffffff"><h1>The future of ZFS in FreeBSD</h1><b>Matthew Macy</b> <a href="mailto:freebsd-current%40freebsd.org?Subject=Re%3A The future of ZFS in FreeBSD&In-Reply-To=<CAPrugNriggEMMnLTZtf6xNQNYajBYNMnGdN96-ejDYQonoOhgw%40mail.gmail.com>" title="The future of ZFS in FreeBSD">mmacy at freebsd.org</a><br><i>Wed Dec 19 06:50:02 UTC 2018</i><p></p><ul><li>Previous message (by thread): <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072426.html">possible POLA violation for NFS server to make it Linux compatible</a></li><li>Next message (by thread): <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072423.html">The future of ZFS in FreeBSD</a></li><li><b>Messages sorted by:</b> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/date.html#72422">[ date ]</a> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/thread.html#72422">[ thread ]</a> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/subject.html#72422">[ subject ]</a> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/author.html#72422">[ author ]</a></li></ul><hr><pre>The sources for FreeBSD's ZFS support are currently taken directly
+from Illumos with local ifdefs to support the peculiarities of FreeBSD
+where the Solaris Portability Layer (SPL) shims fall short. FreeBSD
+has regularly pulled changes from Illumos and tried to push back any
+bug fixes and new features done in the context of FreeBSD. In the past
+few years the vast majority of new development in ZFS has taken place
+in DelphixOS and zfsonlinux (ZoL). Earlier this year Delphix announced
+that they will be moving to ZoL
+<a href="https://www.delphix.com/blog/kickoff-future-eko-2018">https://www.delphix.com/blog/kickoff-future-eko-2018</a> This shift means
+that there will be little to no net new development of Illumos. While
+working through the git history of ZoL I have also discovered that
+many races and locking bugs have been fixed in ZoL and never made it
+back to Illumos and thus FreeBSD. This state of affairs has led to a
+general agreement among the stakeholders that I have spoken to that it
+makes sense to rebase FreeBSD's ZFS on ZoL. Brian Behlendorf
+has graciously encouraged me to add FreeBSD support directly to ZoL
+<a href="https://github.com/zfsonfreebsd/ZoF">https://github.com/zfsonfreebsd/ZoF</a> so that we might all have a single
+shared code base.
+
+A port for ZoF can be found at <a href="https://github.com/miwi-fbsd/zof-port">https://github.com/miwi-fbsd/zof-port</a>
+Before it can be committed some additional functionality needs to be
+added to the FreeBSD opencrypto framework. These can be found at
+<a href="https://reviews.freebsd.org/D18520">https://reviews.freebsd.org/D18520</a>
+
+This port will provide FreeBSD users with multi modifier protection,
+project quotas, encrypted datasets, allocation classes, vectorized
+raidz, vectorized checksums, and various command line improvements.
+
+Before ZoF can be merged back in to ZoL several steps need to be taken:
+- Integrate FreeBSD support into ZoL CI
+- Have most of the ZFS test suite passing
+- Complete additional QA testing at iX
+
+We at iX Systems need to port ZoL's EC2 CI scripts to work with
+FreeBSD and make sure that most of the ZFS Test Suite (ZTS) passes.
+Being integrated in to their CI will mean that, among other things,
+most integration issues will be caught before a PR is merged upstream
+rather than many months later when it is MFVed into FreeBSD. I’m
+hoping to submit the PR to ZoL some time in January.
+
+This port will make it easy for end users on a range of releases to
+run the latest version of ZFS. Nonetheless, transitioning away from an
+Illumos based ZFS is not likely to be entirely seamless. The
+stakeholders I’ve spoken to all agree that this is the best path
+forward but some degree of effort needs to be made to accommodate
+downstream consumers. The current plan is to import ZoF and unhook the
+older Illumos based sources from the build on April 15th or two months
+after iX systems QA deems ZoF stable - which ever comes later. The
+Illumos based sources will be removed some time later - but well
+before 13. This will give users a 3 month period during which both the
+port and legacy Illumos based ZFS will be available to users. Pools
+should interoperate between ZoF and legacy provided the user does not
+enable any features available only in ZoF. We will try to accommodate
+any downstream consumers in the event that they need that date pushed
+back. We ask that any downstream consumers who are particularly
+sensitive to changes start testing the port when it is formally
+announced and report back any issues they have. I will do my best to
+ensure that this message is communicated to all those who it may
+concern. However, I can’t ensure that everyone reads these lists. That
+is the responsibility of -CURRENT users.
+
+-M
+</pre><hr><p></p><ul><li>Previous message (by thread): <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072426.html">possible POLA violation for NFS server to make it Linux compatible</a></li><li>Next message (by thread): <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/072423.html">The future of ZFS in FreeBSD</a></li><li><b>Messages sorted by:</b> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/date.html#72422">[ date ]</a> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/thread.html#72422">[ thread ]</a> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/subject.html#72422">[ subject ]</a> <a href="https://lists.freebsd.org/pipermail/freebsd-current/2018-December/author.html#72422">[ author ]</a></li></ul><hr><a href="https://lists.freebsd.org/mailman/listinfo/freebsd-current">More information about the freebsd-current mailing list</a><br></body></html>
