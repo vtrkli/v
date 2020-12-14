@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="connect-src 'none';"><meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' data:;"><meta http-equiv="Content-type" content="text/html;charset=UTF-8"><title>#tor-meeting log</title><style type="text/css">pre{white-space:pre-wrap}body{background:#f0f0f0}body .tm{color:#007020}body .nk{color:#062873;font-weight:700}body .nka{color:#007020;font-weight:700}body .ac{color:#00a000}body .hi{color:#4070a0}body .topic{color:#007020;font-weight:700}body .topicline{color:navy;font-weight:700}body .cmd{color:#007020;font-weight:700}body .cmdline{font-weight:700}</style><meta property="wayback:source:url" content="http://meetbot.debian.net/tor-meeting/2020/tor-meeting.2020-11-12-15.59.log.html"></head><body><pre><a name="l-1"></a><span class="tm">15:59:27</span><span class="nk"> <cohosh></cohosh></span> <span class="cmd">#startmeeting </span><span class="cmdline">anti-censorship meeting</span>
+<a name="l-2"></a><span class="tm">15:59:27</span><span class="nk"> <meetbot></meetbot></span> Meeting started Thu Nov 12 15:59:27 2020 UTC.  The chair is cohosh. Information about MeetBot at http://wiki.debian.org/MeetBot.
+<a name="l-3"></a><span class="tm">15:59:27</span><span class="nk"> <meetbot></meetbot></span> Useful Commands: #action #agreed #help #info #idea #link #topic.
+<a name="l-4"></a><span class="tm">15:59:32</span><span class="nk"> <cohosh></cohosh></span> hey everyone
+<a name="l-5"></a><span class="tm">15:59:44</span><span class="nk"> <dcf1></dcf1></span> hi
+<a name="l-6"></a><span class="tm">15:59:45</span><span class="nk"> <agix></agix></span> hi
+<a name="l-7"></a><span class="tm">16:00:02</span><span class="nk"> <cohosh></cohosh></span> here is our meeting pad: https://pad.riseup.net/p/tor-anti-censorship-keep
+<a name="l-8"></a><span class="tm">16:00:44</span><span class="nk"> <cohosh></cohosh></span> <span class="hi">phw:</span> you around?
+<a name="l-9"></a><span class="tm">16:02:08</span><span class="nk"> <cohosh></cohosh></span> i wonder if we should move the meeting later now with the time change
+<a name="l-10"></a><span class="tm">16:02:36</span><span class="nk"> <agix></agix></span> might be a good idea
+<a name="l-11"></a><span class="tm">16:03:37</span><span class="nk"> <phw></phw></span> ugh, i forgot about the different time.. again
+<a name="l-12"></a><span class="tm">16:04:53</span><span class="nk"> <cohosh></cohosh></span> heh covid time + daylight savings time is a rough combo
+<a name="l-13"></a><span class="tm">16:06:05</span><span class="nk"> <cohosh></cohosh></span> we can give a few mins for updating the pad in case you want to add something to the agenda
+<a name="l-14"></a><span class="tm">16:06:28</span><span class="nk"> <cohosh></cohosh></span> there are again not very many items but we have a reading group discussion today \o/
+<a name="l-15"></a><span class="tm">16:08:06</span><span class="nk"> <phw></phw></span> brief announcement/discussion item: i'm planning on setting up rdsys/bridgestrap on polyanthum soon, but only for the sake of bridge testing
+<a name="l-16"></a><span class="tm">16:08:29</span><span class="nk"> <phw></phw></span> the idea is to test our bridges and expose a status page that operators can take a look at. no distributors for now
+<a name="l-17"></a><span class="tm">16:08:50</span><span class="nk"> <phw></phw></span> the status page tells you if your bridge is 1) untested, 2) tested + works, 3) tested + does not work
+<a name="l-18"></a><span class="tm">16:09:31</span><span class="nk"> <cohosh></cohosh></span> cool!
+<a name="l-19"></a><span class="tm">16:10:27</span><span class="nk"> <agix></agix></span> sorry for asking but polyanthum is the bridges.torproject.org host, right?
+<a name="l-20"></a><span class="tm">16:10:52</span><span class="nk"> <phw></phw></span> <span class="hi">agix:</span> yes, exactly
+<a name="l-21"></a><span class="tm">16:11:24</span><span class="nk"> <phw></phw></span> i believe our hostnames are named after flowers and onions
+<a name="l-22"></a><span class="tm">16:11:59</span><span class="nk"> <agix></agix></span> I see :D
+<a name="l-23"></a><span class="tm">16:14:02</span><span class="nk"> <cohosh></cohosh></span> any other discussion items?
+<a name="l-24"></a><span class="tm">16:14:08</span><span class="nk"> <cohosh></cohosh></span> i see we have a new default bridge
+<a name="l-25"></a><span class="tm">16:14:22</span><span class="nk"> <cohosh></cohosh></span> tor-browser#40212
+<a name="l-26"></a><span class="tm">16:14:42</span><span class="nk"> <phw></phw></span> nothing from my side
+<a name="l-27"></a><span class="tm">16:14:52</span><span class="nk"> <cohosh></cohosh></span> okay, any needs help with?
+<a name="l-28"></a><span class="tm">16:15:01</span><span class="nk"> <cohosh></cohosh></span> it looks like someone caught the bridge outage on the bug reporting pad
+<a name="l-29"></a><span class="tm">16:15:10</span><span class="nk"> <cohosh></cohosh></span> https://pad.riseup.net/p/tor-anti-censorship-bugs-keep
+<a name="l-30"></a><span class="tm">16:15:21</span><span class="nk"> <cohosh></cohosh></span> but then commented later that it started working again
+<a name="l-31"></a><span class="tm">16:15:29</span><span class="nk"> <dcf1></dcf1></span> yeah I'm going to copy to a comment
+<a name="l-32"></a><span class="tm">16:15:33</span><span class="nk"> <phw></phw></span> i'm blocking on other teams for now
+<a name="l-33"></a><span class="tm">16:15:37</span><span class="nk"> <cohosh></cohosh></span> thanks dcf1
+<a name="l-34"></a><span class="tm">16:17:32</span><span class="nk"> <phw></phw></span> <span class="hi">cohosh:</span> fwiw, i spent quite some time looking into i18n and prometheus-based metrics in go, just in case that may come in handy in snowflake or other projects
+<a name="l-35"></a><span class="tm">16:17:46</span><span class="nk"> <phw></phw></span> i'll sum up all i learned in the respective issues
+<a name="l-36"></a><span class="tm">16:17:59</span><span class="nk"> <cohosh></cohosh></span> cool :) most of the nsowflake pieces that need i18n are not in Go
+<a name="l-37"></a><span class="tm">16:18:23</span><span class="nk"> <cohosh></cohosh></span> but that sounds useful for GetTor and just to have in case that changes
+<a name="l-38"></a><span class="tm">16:19:28</span><span class="nk"> <cohosh></cohosh></span> GetTor for sure
+<a name="l-39"></a><span class="tm">16:20:16</span><span class="nk"> <cohosh></cohosh></span> anything else before we move on to reading group?
+<a name="l-40"></a><span class="tm">16:20:44</span><span class="nk"> <phw></phw></span> not from me
+<a name="l-41"></a><span class="tm">16:21:04</span><span class="nk"> <cohosh></cohosh></span> yey, reading group time
+<a name="l-42"></a><span class="tm">16:21:19</span><span class="nk"> <cohosh></cohosh></span> anyone have a summary ready? i can do a quick one if no
+<a name="l-43"></a><span class="tm">16:21:26</span><span class="nk"> <agix></agix></span> i prepared one
+<a name="l-44"></a><span class="tm">16:21:31</span><span class="nk"> <cohosh></cohosh></span> <span class="hi">agix:</span> oh yay!
+<a name="l-45"></a><span class="tm">16:21:50</span><span class="nk"> <agix></agix></span> <summary>
+<a name="l-46"></a><span class="tm">16:21:56</span><span class="nk"> <agix></agix></span> The paper analyzes real-world TLS traffic from over 11.8 billion TLS connections in order to identify which wide range of TLS client implementations are actually used on the Internet. The data included counts and time-stamps of unique Client Hello messages, a sample of SNI and metadata for each Client Hello and Server Hello responses.
+<a name="l-47"></a><span class="tm">16:22:05</span><span class="nk"> <agix></agix></span> For each connection a fingerprint was generated by calculating the SHA1 hash over several specific extensions including the TLS record version, handshake version, cipher suite list, compression method list, elliptic curve list, EC point format list, extension list, signature algorithm list and ALPN list.
+<a name="l-48"></a><span class="tm">16:22:19</span><span class="nk"> <agix></agix></span> The collected fingerprints are then used to analyze how distinguishable certain censorship circumvention tools are from real-world traffic.
+<a name="l-49"></a><span class="tm">16:22:19</span><span class="nk"> <agix></agix></span> In total, 230000 unique fingerprints were collected.
+<a name="l-50"></a><span class="tm">16:22:24</span><span class="nk"> <agix></agix></span> Some of the key findings:
+<a name="l-51"></a><span class="tm">16:22:33</span><span class="nk"> <agix></agix></span> Some TLS implementations generate several fingerprints, like Google Chrome, which generate at least 4 fingerprints even from the same device, due to sending different combinations of extension depending on the context and size of TLS requests.
+<a name="l-52"></a><span class="tm">16:22:47</span><span class="nk"> <agix></agix></span> To measure how quickly fingerprints change and how this might impact a censor using a whitelist approach, a list of new fingerprints (1 week old) was compiled and compared to the collected amount in the following weeks, showing a steady and but small increase of 0,33%. However, TLS updates in Chrome or iOS would cause a whitelist approach to block half of all connections after 6 months.
+<a name="l-53"></a><span class="tm">16:23:00</span><span class="nk"> <agix></agix></span> As of August 2018 Psiphon was able to mimic Chrome 58-64 making it less likely to be blocked, followed by Outline (which uses a randomized protocol to look like nothing), meek, Snowflake, Lantern, Tapdance and Signal.
+<a name="l-54"></a><span class="tm">16:23:18</span><span class="nk"> <agix></agix></span> In order to assist censorship circumvention tools, a TLS library named uTLS (fork of Golangs TLS library) was created, which allows developers to mimic arbitrary Client Hello messages. As of August 2018 the library has been adopted by Psiphon, Lantern and TapDance.
+<a name="l-55"></a><span class="tm">16:23:24</span><span class="nk"> <agix></agix></span> </summary>
+<a name="l-56"></a><span class="tm">16:26:10</span><span class="nk"> <cohosh></cohosh></span> one of the things that really stands out in this paper to me is the amount of real world data used
+<a name="l-57"></a><span class="tm">16:27:03</span><span class="nk"> <dcf1></dcf1></span> They've used their CU Boulder network tap in other research as well
+<a name="l-58"></a><span class="tm">16:27:13</span><span class="nk"> <cohosh></cohosh></span> 9 months of collecting TLS fingerprint data is impressive
+<a name="l-59"></a><span class="tm">16:27:34</span><span class="nk"> <dcf1></dcf1></span> Like "Detecting Probe-resistant Proxies" which we've discussed
+<a name="l-60"></a><span class="tm">16:28:51</span><span class="nk"> <cohosh></cohosh></span> i'd be interested in a study that compares differences in the fingerprints from CU Boulder to another location
+<a name="l-61"></a><span class="tm">16:29:08</span><span class="nk"> <cohosh></cohosh></span> obviously this type of data collection is difficult
+<a name="l-62"></a><span class="tm">16:29:37</span><span class="nk"> <dcf1></dcf1></span> Yeah there's a big opportunity there.
+<a name="l-63"></a><span class="tm">16:30:02</span><span class="nk"> <agix></agix></span> I wonder how difficult the talks might have been with the university staff to permit the experiment
+<a name="l-64"></a><span class="tm">16:30:28</span><span class="nk"> <cohosh></cohosh></span> heh
+<a name="l-65"></a><span class="tm">16:30:36</span><span class="nk"> <dcf1></dcf1></span> One of the strengths of "Seeing Through Network-Protocol Obfuscation" (https://censorbib.nymity.ch/#Wang2015a) is that they used some real-world traces evaluate false classification rates.
+<a name="l-66"></a><span class="tm">16:30:40</span><span class="nk"> <cohosh></cohosh></span> is sergey here this time?
+<a name="l-67"></a><span class="tm">16:33:59</span><span class="nk"> <cohosh></cohosh></span> this paper is also interesting because it carves out an edge case in the parrot is dead rule
+<a name="l-68"></a><span class="tm">16:34:24</span><span class="nk"> <cohosh></cohosh></span> uTLS hides TLS traffic by mimicking the fingerprints of other tools
+<a name="l-69"></a><span class="tm">16:34:50</span><span class="nk"> <dcf1></dcf1></span> IMO it's not really an edge case; parrot is dead was always somewhat overstated
+<a name="l-70"></a><span class="tm">16:34:56</span><span class="nk"> <cohosh></cohosh></span> the way i explain why this works better than the other types of mimicry called out in that paper (like skype) is because TLS is relatively simple
+<a name="l-71"></a><span class="tm">16:35:18</span><span class="nk"> <cohosh></cohosh></span> <span class="hi">dcf1:</span> that's fair, it was a theoretical result, not censorship seen in the wild
+<a name="l-72"></a><span class="tm">16:35:50</span><span class="nk"> <dcf1></dcf1></span> But yeah, uTLS dmeonstrably works at what it is trying to do
+<a name="l-73"></a><span class="tm">16:36:10</span><span class="nk"> <dcf1></dcf1></span> meek (obfs4proxy meek_lite) in Tor Browser uses uTLS since Ocotober 2019
+<a name="l-74"></a><span class="tm">16:36:20</span><span class="nk"> <agix></agix></span> Could anyone give me a short overview on how complex it is to adjust the fingerprint of transports like meek or Snowflake?
+<a name="l-75"></a><span class="tm">16:37:02</span><span class="nk"> <cohosh></cohosh></span> meek uses uTLS, which makes it a lot simpler from the perspective of someone using the uTLS library
+<a name="l-76"></a><span class="tm">16:37:27</span><span class="nk"> <cohosh></cohosh></span> i wonder how much maintenance work is put into keeping uTLS up to date with current fingerprints
+<a name="l-77"></a><span class="tm">16:37:37</span><span class="nk"> <dcf1></dcf1></span> <span class="hi">agix:</span> you can choose from one of the premade fingerprints with something like `utls=hellorandomized`, `utls=hellofirefox_65`, `utls=helloios_auto` in the bridge line
+<a name="l-78"></a><span class="tm">16:37:43</span><span class="nk"> <cohosh></cohosh></span> the paper gave some measurements on how fingerprints change over the timeline of the data collection
+<a name="l-79"></a><span class="tm">16:38:45</span><span class="nk"> <dcf1></dcf1></span> Currently it's obfs4proxy lagging behind, as its built-in list of fingerprints isn't up to date with what uTLS offers now
+<a name="l-80"></a><span class="tm">16:39:16</span><span class="nk"> <dcf1></dcf1></span> Though the "auto" fingerprints will still use the most recent, as I understand it, even if obfs4proxy's built-in list doesn't know about all the ones available
+<a name="l-81"></a><span class="tm">16:39:29</span><span class="nk"> <phw></phw></span> that sounds like a good 'first contribution' ticket
+<a name="l-82"></a><span class="tm">16:39:57</span><span class="nk"> <dcf1></dcf1></span> Well, except obfs4proxy isn't maintained by us or at gitlab.torproject.org, really
+<a name="l-83"></a><span class="tm">16:40:03</span><span class="nk"> <agix></agix></span> <span class="hi">dcf1:</span> is hellofirefox_65 still commonly used?
+<a name="l-84"></a><span class="tm">16:40:05</span><span class="nk"> <cohosh></cohosh></span> that requires pulling the latest versions of uTLS right?
+<a name="l-85"></a><span class="tm">16:40:14</span><span class="nk"> <dcf1></dcf1></span> yeah
+<a name="l-86"></a><span class="tm">16:40:17</span><span class="nk"> <phw></phw></span> i don't see the problem. ask yawning to merge and if that doesn't work out, we can fork
+<a name="l-87"></a><span class="tm">16:40:18</span><span class="nk"> <cohosh></cohosh></span> we need to do that manually for tor browser builds
+<a name="l-88"></a><span class="tm">16:40:30</span><span class="nk"> <cohosh></cohosh></span> so that is something we can do
+<a name="l-89"></a><span class="tm">16:40:41</span><span class="nk"> <dcf1></dcf1></span> But it's true it's a concern with keeping uTLS up to date. The last commit is from August.
+<a name="l-90"></a><span class="tm">16:40:50 </span><span class="nka">* cohosh</span> <span class="ac">nods</span>
+<a name="l-91"></a><span class="tm">16:41:19</span><span class="nk"> <dcf1></dcf1></span> There's some good community involvement, for example from Psiphon contributing code https://github.com/refraction-networking/utls/issues?q=is%3Aissue+author%3Arod-hynes
+<a name="l-92"></a><span class="tm">16:41:51</span><span class="nk"> <agix></agix></span> when did meek start to use uTLS?
+<a name="l-93"></a><span class="tm">16:42:38</span><span class="nk"> <dcf1></dcf1></span> It was work too, to check the fingerprint with each new ESR release, and sometimes it required configuration changes for the headless browser, like re-enabling TLS session tickets https://trac.torproject.org/projects/tor/ticket/26241
+<a name="l-94"></a><span class="tm">16:43:11</span><span class="nk"> <sysrqb></sysrqb></span> <span class="hi">cohosh:</span> dcf1: phw: we can discuss that process after your meeting (whether relying on new obfs4proxy versions or updating it in tor-browser-build)
+<a name="l-95"></a><span class="tm">16:43:26</span><span class="nk"> <dcf1></dcf1></span> <span class="hi">agix:</span> https://blog.torproject.org/new-release-tor-browser-90 https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/29430
+<a name="l-96"></a><span class="tm">16:43:40</span><span class="nk"> <agix></agix></span> <span class="hi">dcf1:</span> nice thanks!
+<a name="l-97"></a><span class="tm">16:44:09</span><span class="nk"> <dcf1></dcf1></span> Both the mainline meek code and uTLS have support for uTLS. At the same time, Tor Browser switched from the mainline to obfs4proxy.
+<a name="l-98"></a><span class="tm">16:44:55</span><span class="nk"> <dcf1></dcf1></span> obfs4proxy's internal transport name is meek_lite, because it originally did not support TLS camouflage, even though it was compatible with the protocol otherwise. Now that there's uTLS support, meek_lite is effectively the same as meek.
+<a name="l-99"></a><span class="tm">16:45:35</span><span class="nk"> <cohosh></cohosh></span> i've been meaning to ask what the story behind meek_lite is
+<a name="l-100"></a><span class="tm">16:45:47</span><span class="nk"> <cohosh></cohosh></span> maybe this is a digression
+<a name="l-101"></a><span class="tm">16:46:36</span><span class="nk"> <dcf1></dcf1></span> That's the story, Yawning implemented the meek protocol in obfs4proxy but without browser camouflage, and gave it an incompatible transport name so people wouldn't be fooled into thinking it had all the same blocking resistance.
+<a name="l-102"></a><span class="tm">16:47:19</span><span class="nk"> <dcf1></dcf1></span> Then with uTLS, Tor Browser's started using obfs4proxy because it permitted getting rid of some project dependencies.
+<a name="l-103"></a><span class="tm">16:48:52</span><span class="nk"> <dcf1></dcf1></span> <span class="hi">phw:</span> Oh, one other complication, obfs4proxy doesn't actually use the mainline uTLS, but a fork (with an incompatible license) also made by Yawning. https://gitlab.com/yawning/utls
+<a name="l-104"></a><span class="tm">16:49:10</span><span class="nk"> <cohosh></cohosh></span> lol gdi that license thing
+<a name="l-105"></a><span class="tm">16:49:59</span><span class="nk"> <phw></phw></span> that's a great readme in yawning's fork
+<a name="l-106"></a><span class="tm">16:50:01</span><span class="nk"> <phw></phw></span> "Your tears are delicious, and your code will burn."
+<a name="l-107"></a><span class="tm">16:51:23</span><span class="nk"> <dcf1></dcf1></span> The fork is also unchanged for half a year
+<a name="l-108"></a><span class="tm">16:51:52</span><span class="nk"> <dcf1></dcf1></span> So yeah, we may be approaching a situation meek as in before, where it accurately imitated the fingerprint it intended to imitate, but that fingerprint was out of date and no longer common
+<a name="l-109"></a><span class="tm">16:52:56</span><span class="nk"> <cohosh></cohosh></span> that's frustrating, it's not that uTLS is out of date
+<a name="l-110"></a><span class="tm">16:53:03</span><span class="nk"> <cohosh></cohosh></span> right?
+<a name="l-111"></a><span class="tm">16:53:26</span><span class="nk"> <cohosh></cohosh></span> just that licenses, and project maintainership are making it difficult to easily update
+<a name="l-112"></a><span class="tm">16:54:32</span><span class="nk"> <dcf1></dcf1></span> Well both forks have unsurprisingly diverged
+<a name="l-113"></a><span class="tm">16:54:45</span><span class="nk"> <dcf1></dcf1></span> Each has some fixes that the other does not, I believe
+<a name="l-114"></a><span class="tm">16:55:47</span><span class="nk"> <cohosh></cohosh></span> so where are the biggest pain points in keeping uTLS up to date?
+<a name="l-115"></a><span class="tm">16:56:03</span><span class="nk"> <cohosh></cohosh></span> you mentioned finding new fingerprints for new versions of browsers is a lot of work
+<a name="l-116"></a><span class="tm">16:56:11</span><span class="nk"> <dcf1></dcf1></span> I don't know. I've asked sergey but I don't remember anything specific.
+<a name="l-117"></a><span class="tm">16:56:18</span><span class="nk"> <dcf1></dcf1></span> <span class="hi">cohosh:</span> no, that's not what I meant
+<a name="l-118"></a><span class="tm">16:56:23</span><span class="nk"> <cohosh></cohosh></span> i thought the discussions of GREASE in the paper are interesting
+<a name="l-119"></a><span class="tm">16:56:25</span><span class="nk"> <cohosh></cohosh></span> ah
+<a name="l-120"></a><span class="tm">16:57:07</span><span class="nk"> <dcf1></dcf1></span> I haven't done it, but there is apparently code in uTLS where you can give it a pcap and it will generate code to give you that fingerprint
+<a name="l-121"></a><span class="tm">16:57:22</span><span class="nk"> <cohosh></cohosh></span> aha wow!
+<a name="l-122"></a><span class="tm">16:57:31</span><span class="nk"> <dcf1></dcf1></span> but it's not always that easy, as I understand it uTLS required a lot of refactoring to support the changes in crypto/tls for TLS 1.3
+<a name="l-123"></a><span class="tm">16:57:34</span><span class="nk"> <agix></agix></span> https://tlsfingerprint.io/pcap
+<a name="l-124"></a><span class="tm">16:58:36</span><span class="nk"> <dcf1></dcf1></span> It looks like both versions have the same fingerprint list, last added Chrome 83 in June 2020. https://github.com/refraction-networking/utls/commits/master/u_parrots.go https://gitlab.com/yawning/utls/-/commits/obfs4proxy-dev/u_parrots.go
+<a name="l-125"></a><span class="tm">16:58:58</span><span class="nk"> <dcf1></dcf1></span> But they have different fixes beyond that, "Fix GREASE repeating values"; " Yawning Angel's avatar
+<a name="l-126"></a><span class="tm">16:59:16</span><span class="nk"> <dcf1></dcf1></span> Support more than one KeyShare extension correctly", "Add support for TLS Certificate Compression" in the other
+<a name="l-127"></a><span class="tm">16:59:35</span><span class="nk"> <dcf1></dcf1></span> It's a bummer how it worked out
+<a name="l-128"></a><span class="tm">17:00:49</span><span class="nk"> <cohosh></cohosh></span> yeah
+<a name="l-129"></a><span class="tm">17:01:43</span><span class="nk"> <cohosh></cohosh></span> as far as snowflake, it looks like they were using the old chrome-based version
+<a name="l-130"></a><span class="tm">17:02:12</span><span class="nk"> <dcf1></dcf1></span> That shouldn't matter for TLS purposes, for domain fronting, then and now, Snowflake uses crypto/tls
+<a name="l-131"></a><span class="tm">17:02:27</span><span class="nk"> <cohosh></cohosh></span> oh this was for the communication with the broker
+<a name="l-132"></a><span class="tm">17:02:33</span><span class="nk"> <cohosh></cohosh></span> ?
+<a name="l-133"></a><span class="tm">17:02:45</span><span class="nk"> <dcf1></dcf1></span> Yes, nothing to do with WebRTC in this paper
+<a name="l-134"></a><span class="tm">17:03:06</span><span class="nk"> <cohosh></cohosh></span> hmm so we might want to consider moving to uTLS for snowflake
+<a name="l-135"></a><span class="tm">17:03:09</span><span class="nk"> <dcf1></dcf1></span> We need to add uTLS (or equivalent) to Snowflake at some point
+<a name="l-136"></a><span class="tm">17:03:22</span><span class="nk"> <cohosh></cohosh></span> cool
+<a name="l-137"></a><span class="tm">17:03:52</span><span class="nk"> <dcf1></dcf1></span> It is not that hard, but unfortunately using uTLS with HTTP/2 is the most complicated use case and requires some tricks that are not entirely satisfying
+<a name="l-138"></a><span class="tm">17:03:52</span><span class="nk"> <cohosh></cohosh></span> i was wondering, since we're using pion/webrtc if a uTLS-like equivalent for DTLS would be useful later on
+<a name="l-139"></a><span class="tm">17:04:07</span><span class="nk"> <cohosh></cohosh></span> (for the webrtc part of the connection)
+<a name="l-140"></a><span class="tm">17:04:54</span><span class="nk"> <dcf1></dcf1></span> It was actually Yawning that figred out a decent way to do it https://lists.torproject.org/pipermail/tor-dev/2019-January/013633.html
+<a name="l-141"></a><span class="tm">17:04:59</span><span class="nk"> <cohosh></cohosh></span> <span class="hi">dcf1:</span> is it because of APLN? I don't see immediately why HTTP/2 would be difficult
+<a name="l-142"></a><span class="tm">17:05:13</span><span class="nk"> <cohosh></cohosh></span> *ALPN
+<a name="l-143"></a><span class="tm">17:05:35</span><span class="nk"> <dcf1></dcf1></span> This is what the meek implementation looks like, there are many comments here: https://gitweb.torproject.org/pluggable-transports/meek.git/commit/?id=b8fb876145cda3c14d335a3fc88b5e422a926150
+<a name="l-144"></a><span class="tm">17:06:35</span><span class="nk"> <cohosh></cohosh></span> lol now that i look at it i think i reviewed this commit awhile ago
+<a name="l-145"></a><span class="tm">17:06:55</span><span class="nk"> <dcf1></dcf1></span> I believe that even this scheme can fail if an HTTPS server switches from HTTP/1 to HTTP/2 in between requests (which could conceivably happen with a load balancer or something, though it's unlikely with the kinds of CDNs we are interested in)
+<a name="l-146"></a><span class="tm">17:07:58</span><span class="nk"> <dcf1></dcf1></span> But at any rate, it's more complicated than https://github.com/refraction-networking/utls#migrating-from-cryptotls
+<a name="l-147"></a><span class="tm">17:10:27</span><span class="nk"> <dcf1></dcf1></span> Oh yeah you did https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/meek/-/issues/29077#note_2602629
+<a name="l-148"></a><span class="tm">17:10:35</span><span class="nk"> <cohosh></cohosh></span> :)
+<a name="l-149"></a><span class="tm">17:16:46</span><span class="nk"> <cohosh></cohosh></span> seems like discussion is winding down
+<a name="l-150"></a><span class="tm">17:17:17</span><span class="nk"> <cohosh></cohosh></span> anything else before we end the meeting?
+<a name="l-151"></a><span class="tm">17:18:12</span><span class="nk"> <cohosh></cohosh></span> okay let's end it here
+<a name="l-152"></a><span class="tm">17:18:21</span><span class="nk"> <cohosh></cohosh></span> thanks agix for the summary and for choosing this reading!
+<a name="l-153"></a><span class="tm">17:18:46</span><span class="nk"> <cohosh></cohosh></span> <span class="cmd">#endmeeting</span><span class="cmdline"></span></pre></body></html>
