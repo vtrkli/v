@@ -1,0 +1,88 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="connect-src 'none';"><meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' data:;"><title>make_tapi_happy.h</title><style type="text/css">.enscript-comment{font-style:italic;color:#b22222}.enscript-function-name{font-weight:700;color:#00f}.enscript-variable-name{font-weight:700;color:#b8860b}.enscript-keyword{font-weight:700;color:#a020f0}.enscript-reference{font-weight:700;color:#5f9ea0}.enscript-string{font-weight:700;color:#bc8f8f}.enscript-builtin{font-weight:700;color:orchid}.enscript-type{font-weight:700;color:#228b22}.enscript-highlight{text-decoration:underline;color:0}</style><meta property="wayback:source:url" content="https://opensource.apple.com/source/libmalloc/libmalloc-317.40.8/private/make_tapi_happy.h.auto.html"></head><body id="top"><h1 style="margin:8px" id="f1">make_tapi_happy.h&nbsp;&nbsp;&nbsp;<span style="font-weight:400;font-size:.5em">[<a href="https://opensource.apple.com/source/libmalloc/libmalloc-317.40.8/private/make_tapi_happy.h">plain text</a>]</span></h1><hr><div></div><pre><span class="enscript-comment">/*
+ * Copyright (c) 2018 Apple Inc. All rights reserved.
+ *
+ * @APPLE_LICENSE_HEADER_START@
+ *
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. Please obtain a copy of the License at
+ * <a href="http://www.opensource.apple.com/apsl/">http://www.opensource.apple.com/apsl/</a> and read it before using this
+ * file.
+ *
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * @APPLE_LICENSE_HEADER_END@
+ */</span>
+
+<span class="enscript-comment">/* Make TAPI happy by declaring things that other projects forward-declare. */</span>
+<span class="enscript-comment">/* This header is not installed anywhere. */</span>
+
+<span class="enscript-comment">/* For Libsystem */</span>
+<span class="enscript-type">void</span> <span class="enscript-function-name">_malloc_fork_child</span>(<span class="enscript-type">void</span>);
+<span class="enscript-type">void</span> <span class="enscript-function-name">_malloc_fork_parent</span>(<span class="enscript-type">void</span>);
+<span class="enscript-type">void</span> <span class="enscript-function-name">_malloc_fork_prepare</span>(<span class="enscript-type">void</span>);
+
+<span class="enscript-comment">/* For various debugging tools? */</span>
+
+<span class="enscript-type">void</span> <span class="enscript-function-name">scalable_zone_info</span>(malloc_zone_t *zone, <span class="enscript-type">unsigned</span> *info_to_fill, <span class="enscript-type">unsigned</span> count);
+<span class="enscript-function-name">void</span> (*malloc_error(<span class="enscript-type">void</span> (*func)(<span class="enscript-type">int</span>)))(<span class="enscript-type">int</span>);
+<span class="enscript-type">extern</span> uint64_t __mach_stack_logging_shared_memory_address;
+
+<span class="enscript-comment">/* At least for malloc_replay.cpp */</span>
+<span class="enscript-type">void</span> <span class="enscript-function-name">mag_set_thread_index</span>(<span class="enscript-type">unsigned</span> <span class="enscript-type">int</span> index);
+
+<span class="enscript-comment">/* Externally visible from magazine_malloc.h. Not worth pulling the whole header into tapi just for this one. */</span>
+
+boolean_t <span class="enscript-function-name">scalable_zone_statistics</span>(malloc_zone_t *zone, malloc_statistics_t *stats, <span class="enscript-type">unsigned</span> subzone);
+
+<span class="enscript-comment">/* Globals for performance tools, replicated here from the top of malloc.c */</span>
+
+<span class="enscript-type">typedef</span> <span class="enscript-function-name">void</span>(malloc_logger_t)(uint32_t type,
+		uintptr_t arg1,
+		uintptr_t arg2,
+		uintptr_t arg3,
+		uintptr_t result,
+		uint32_t num_hot_frames_to_skip);
+<span class="enscript-type">extern</span> int32_t malloc_num_zones;
+<span class="enscript-type">extern</span> int32_t malloc_num_zones_allocated;
+<span class="enscript-type">extern</span> malloc_zone_t **malloc_zones;
+<span class="enscript-type">extern</span> malloc_logger_t *malloc_logger;
+<span class="enscript-type">extern</span> <span class="enscript-type">unsigned</span> malloc_check_start;
+<span class="enscript-type">extern</span> <span class="enscript-type">unsigned</span> malloc_check_counter;
+<span class="enscript-type">extern</span> <span class="enscript-type">unsigned</span> malloc_check_each;
+<span class="enscript-type">extern</span> <span class="enscript-type">int</span> _malloc_no_asl_log;
+<span class="enscript-type">extern</span> <span class="enscript-type">int</span> _os_cpu_number_override;
+
+<span class="enscript-comment">/* Globally visible for manual debugging? */</span>
+
+<span class="enscript-type">extern</span> <span class="enscript-type">unsigned</span> szone_check_counter;
+<span class="enscript-type">extern</span> <span class="enscript-type">unsigned</span> szone_check_start;
+<span class="enscript-type">extern</span> <span class="enscript-type">unsigned</span> szone_check_modulo;
+
+<span class="enscript-comment">/* CoreServices checkfixes */</span>
+<span class="enscript-type">void</span> <span class="enscript-function-name">malloc_create_legacy_default_zone</span>(<span class="enscript-type">void</span>);
+<span class="enscript-type">void</span> <span class="enscript-function-name">zeroify_scalable_zone</span>(malloc_zone_t *zone);
+
+<span class="enscript-comment">/* This is extern-declared by some projects, like racoon (ipsec) */</span>
+<span class="enscript-comment">/* Maybe we can change it to a symbol-alias of free? */</span>
+<span class="enscript-type">void</span> <span class="enscript-function-name">vfree</span>(<span class="enscript-type">void</span> *ptr);
+
+<span class="enscript-comment">/* Obsolete entry points. They don't work, don't use them. */</span>
+<span class="enscript-type">void</span> <span class="enscript-function-name">set_malloc_singlethreaded</span>(boolean_t);
+<span class="enscript-type">void</span> <span class="enscript-function-name">malloc_singlethreaded</span>(<span class="enscript-type">void</span>);
+<span class="enscript-type">int</span> <span class="enscript-function-name">malloc_debug</span>(<span class="enscript-type">int</span>);
+
+<span class="enscript-comment">/* WeChat references this, only god knows why.  This symbol does nothing. */</span>
+<span class="enscript-type">extern</span> <span class="enscript-type">int</span> stack_logging_enable_logging;
+
+<span class="enscript-comment">/* For debugging */</span>
+<span class="enscript-type">void</span> <span class="enscript-function-name">tiny_print_region_free_list</span>(<span class="enscript-type">void</span> *ptr, <span class="enscript-type">unsigned</span> <span class="enscript-type">int</span> slot);
+
+</pre><hr></body></html>
