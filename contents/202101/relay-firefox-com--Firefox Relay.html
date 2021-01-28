@@ -1,0 +1,955 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="connect-src 'none';"><meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline' data:;"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Firefox Relay makes it easy to create email aliases, aliases that forward to your real inbox. Use it to protect your online accounts from hackers and unwanted messages."><title>Firefox Relay</title><style type="text/css">:root{--blue3:#0060df;--blue4:#0250bb;--blue5:#073072;--blue7:#003eaa;--blue8:#002275;--buttonFocus:0 0 0 1px #0a84ff,0 0 0 1px #0a84ff,0 0 0 4px rgba(10, 132, 255, 0.3);--darkBlueGradient:linear-gradient(60deg, #2d264e, #26294e);--dropShadowLight:0 0 10px -3px #3d3f4740;--dropShadowDark:0 12px 18px 2px rgba(34, 0, 51, 0.09),0 6px 22px 4px rgba(4, 25, 59, 0.87),0 6px 10px -4px rgba(14, 13, 26, 0.12);--grey10:hsl(240, 9%, 98%);--grey20:#f1f1f3;--grey30:#d7d7db;--grey40:#b1b1b3;--grey50:#737373;--grey60:#4a4a4f;--grey70:#38383d;--grey80:#2a2a2e;--grey90:#0c0c0d;--inkLight:#2b1e44;--ink:#20123a;--inkDark:#1d1133;--textDark:var(--grey70);--lightestGray:rgba(123, 127, 141, 0.071);--maxContentWidth:1350px;--metropolis:"Metropolis",Arial,Helvetica,sans-serif;--fxGradient:linear-gradient(-90deg, #ff9100 0%, #f10366 50%, #6173ff 100%);--h1Gradient:linear-gradient(-90deg, #83a0f7, #b66dff);--rowFullWidthHPadding:2.25em;--rowFullWidthVPadding:1.25em;--violet3:#9059ff;--violet4:#7542e5;--warningRed:#d70022;--white:#fff}*{box-sizing:border-box}html{font-size:100%}body{font-family:"Inter UI",Helvetica Neue,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;min-height:100vh;background-image:var(--darkBlueGradient);display:flex;flex-direction:column;margin:0;padding:83px 0 0 0;font-size:16px;overscroll-behavior:contain}.loading{background-image:url(/static/images/loader.svg);background-position:center center;background-repeat:no-repeat}.text-light{color:var(--white)}.text-link{border-radius:2px;color:inherit;text-decoration:underline;transition:all .2s ease}.text-link:hover{opacity:.8;transition:all .2s ease}.blue-btn-states:focus,.text-link:focus{box-shadow:var(--buttonFocus);outline:0}.text-light-grey{color:var(--grey20)}.bg-light{background:var(--grey10)}.drop-shadow-light{box-shadow:var(--dropShadowLight)}.row-full-width{padding:var(--rowFullWidthVPadding) var(--rowFullWidthHPadding)}.full-width{padding:.75em var(--rowFullWidthHPadding)}.button,.ff-Met,h1,h2{font-family:var(--metropolis)}.section-headline{font-weight:600;color:var(--grey90);margin:0}a{text-decoration:none}.header-nav{margin:auto 0 auto auto}.header-link{border-radius:4px;padding:4px 6px;color:#fff!important;margin-left:1em}.header-link::after{width:100%;height:2px;display:block;content:"";background:var(--fxGradient);opacity:0;margin-bottom:-6px;margin-top:4px}.active-header-link::after{opacity:1}.home-hero-headline{font-size:3.2em;margin:28px auto 20px auto;line-height:1;background:var(--h1Gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}.sub-head{font-size:1.15em;line-height:1.4}.button,button{text-decoration:none;border-style:solid;font-size:1.1em}.button,.button:active,.button:hover,button,button:active,button:hover{transition:all .1s ease}.blue-button{position:relative;color:#fff;border:none;outline:0;background-color:var(--blue3);background-position:center center;border-radius:2px;min-height:32px;padding:8px 16px;display:flex;align-items:center;justify-content:center;font-family:var(--metropolis)}.blue-btn-states:hover,.blue-button:hover{background-color:var(--blue7)}.blue-btn-states:focus,.blue-button:focus,.forwarding-toggle:focus,.sign-in:focus{box-shadow:var(--buttonFocus);outline:0}.blue-btn-states:active,.blue-button:active,.forwarding-toggle:active{background-color:var(--blue8);box-shadow:0 0 0 1px rgba(10,132,255,0) inset,0 0 0 1px rgba(10,132,255,0),0 0 0 4px rgba(10,132,255,0)}.blue-button.loading{color:rgba(255,255,255,.2);background-color:var(--blue4);transition:all .3s ease}.puffy{min-height:48px;border-radius:4px;min-width:200px}::-moz-focus-inner{border:0}.home-hero{margin:0 auto 6em auto;position:relative}.how-it-works-content,.how-it-works-steps{width:100%}.how-it-works-header{font-size:2em;margin:0 auto 20px auto}.how-it-works-steps{justify-content:space-between;max-width:var(--maxContentWidth);padding:4em 0;margin-bottom:4em}.step-illustration{background-position:center;background-repeat:no-repeat;background-size:cover;min-height:300px;min-width:300px;max-width:300px;border-radius:12px;border:1px solid #ab71ff;margin:0 auto 2em auto}.step-1.step-illustration{background-image:url(/static/images/how-it-works/how-it-works-1.svg)}.step-2.step-illustration{background-image:url(/static/images/how-it-works/how-it-works-2.svg)}.step-3.step-illustration{background-image:url(/static/images/how-it-works/how-it-works-3.svg)}.step{flex-direction:column;flex:0 1 31.333%}.step-text{display:flex;justify-content:center;flex-direction:column;max-width:300px}.step-headline{font-size:1.25em;line-height:1.3;margin:0 auto 1em 0}.step-body{margin:0 auto auto auto;color:rgba(255,255,255,.9);font-size:1em;line-height:1.7em;letter-spacing:.009em;font-weight:100}.bold{font-weight:700}.demi{font-weight:500}.flx{display:flex}.flx-row{flex-direction:row}.flx-end{justify-content:flex-end}.flx-col{flex-direction:column}.spc-btwn{justify-content:space-between}.jst-cntr{justify-content:center}.al-cntr{align-items:center}.inset{padding-left:6px;padding-right:6px}.margin-auto{margin:auto}.container{padding-bottom:8em;padding-left:2.25em;padding-right:2.25em;margin-left:auto;margin-right:auto;width:100%}.txt-white{color:#fff}.text-center{text-align:center}.btn-transparent{border-width:2px;border-radius:8px;border-color:#fff;color:inherit}.btn-disabled{opacity:.9}.sign-in{padding:.75em 1.25em;font-weight:400;display:flex;margin:auto;white-space:nowrap}.sign-in:active,.sign-in:hover{color:#cfcfd8;border-color:#cfcfd8}.sign-in:active{box-shadow:0 2px 8px 0 rgba(14,13,26,.12),0 3px 1px -2px rgba(7,48,114,.12),0 2px 4px 0 rgba(34,0,51,.04),0 0 0 1px rgba(32,18,58,.04)}.fx-private-relay-logomark{background-image:url(/static/images/placeholder-logo.svg);background-repeat:no-repeat;background-position:left center;background-size:contain;height:100%;min-width:42px;display:inline-block;margin-right:12px}.fx-private-relay-logotype{background-image:url(/static/images/fx-private-relay-logotype-light.svg);background-position:center 63%;background-repeat:no-repeat;background-size:contain;min-width:180px}header{color:var(--white);border-bottom:1px solid var(--inkDark);background:var(--darkBlueGradient);box-shadow:0 0 3px 0 var(--inkDark);z-index:2;position:fixed;top:0;left:0;right:0;transition:all .3s ease}.fix-header{box-shadow:0 0 5px 3px var(--inkDark);transition:all .5s ease}.recruitment-banner{text-align:center;position:relative;padding:1em}#recruitment-banner{color:#fff;text-decoration:none;font-family:var(--metropolis);display:inline-block}#recruitment-banner:hover{text-decoration:underline}.recruitment-banner::after{height:1px;background:var(--fxGradient);content:"";display:block;position:absolute;bottom:0;left:0;right:0;opacity:.3}.header-top{z-index:2}.main-list{min-height:50vh;max-width:900px;margin:auto;justify-content:flex-start}footer{position:relative;margin:auto 0 0 0}.footer-link.moz-logo-link{min-width:7em;margin:auto 0}.GitHub-logo{min-width:24px;max-width:28px}ul{list-style-type:none}.footer-link{padding:4px;border-radius:4px;text-decoration:none;color:var(--white);font-family:var(--metropolis);margin:auto 2em auto auto}.footer-link:focus,.footer-link:hover,.header-link:focus,.header-link:hover{opacity:.9;background-color:rgba(0,0,0,.2)}.footer-link:active,.header-link:active{background-color:rgba(0,0,0,.25);opacity:.8}.dashboard-container{min-height:81vh;height:100%}.env-bg{background-image:url(/static/images/email-tout-bg.svg);background-position:center center;background-size:cover;background-repeat:no-repeat}.dashboard-header{justify-content:space-between;align-items:center;padding-bottom:.5em;margin-top:3em;margin-bottom:1em;border-bottom:2px solid var(--grey30)}.dashboard-headline{font-size:1.5em;margin:auto auto 0 0}main,table{width:100%}.relay-email-card{--hPadding:2.5em;margin-bottom:2em;background-color:#fff;border-radius:4px;position:relative;transition:all .2s ease}.relay-email-column{max-width:100%}.center-value{flex-direction:column;justify-content:center;align-items:center;display:flex;margin-left:3em}.relay-address{background:0 0;text-align:left;border:none;margin-right:.75em;margin-bottom:8px;font-weight:600;cursor:default;height:100%;display:block;position:relative;max-width:100%;text-overflow:ellipsis;overflow:hidden;border-radius:0;padding:2px 70px 2px 0;color:var(--grey80);white-space:nowrap}.relay-address:focus,.relay-address:hover{opacity:.75;text-decoration:underline}.relay-address:active{opacity:.6}.relay-address.alias-copied{opacity:1!important;text-decoration:none!important}.alias-copied-icon{width:18px;height:18px;background-image:url(/static/images/copy-to-clipboard.svg);background-repeat:no-repeat;background-size:contain;top:0;right:48px;bottom:3px;margin:auto}.alias-copied-icon,.alias-copied-message{display:inline-block;position:absolute;top:0;pointer-events:none}.alias-copied .alias-copied-icon{display:none}.alias-copied .alias-copied-icon,.alias-copied-message{visibility:hidden}.alias-copied-message{font-family:"Inter UI",Arial,Helvetica,sans-serif;background-color:var(--violet3);padding:2px 4px;border-radius:4px;color:var(--white);font-size:14px;right:0}.alias-copied .alias-copied-message{visibility:visible}.delete-relay-email-button{outline:0!important;border:1px solid transparent;background-color:#fff;border-radius:4px;height:36px;padding-right:16px;padding-left:16px;display:flex;align-items:center}.delete-relay-email-button:hover{background-color:var(--grey10)}.delete-relay-email-button:focus{border:1px solid var(--grey30);outline:0}.delete-relay-email-button:active{background-color:var(--grey30)}.column-delete{position:relative;margin:auto 0 auto auto}.relay-email-row{justify-content:space-between;align-items:center}.alias-stats-wrapper{margin:auto 0 auto auto}.relay-stat{flex-direction:column-reverse}.relay-stat-value{font-size:24px;line-height:1;margin-bottom:6px;font-weight:700;font-family:var(--metropolis)}.forwarding-toggle{height:1.15em;width:2em;position:relative;overflow:hidden;border:none;border-radius:1.5em;outline:0;background-color:var(--blue3);background-size:20px;margin:auto 0}.forwarding-toggle:hover{background-color:var(--blue7)}.forwarding-toggle:active{background-color:var(--blue8)}.forwarding-toggle::after{content:"";height:.75em;width:.75em;position:absolute;border-radius:50%;background-color:#fff;top:0;bottom:0;margin:auto;right:4px;transition:all .2s ease}.forwarding-disabled::after{left:4px;right:18px;transition:all .2s ease}.forwarding-disabled:focus,.forwarding-disabled:hover{background-color:var(--grey40)}.forwarding-disabled:active{background-color:var(--grey50)}.forwarding-disabled{background-color:var(--grey30)}.remaining-aliases{font-family:var(--metropolis);font-size:1em;font-weight:300}.num-remaining-aliases{font-weight:600}.dash-create-new-relay{border-radius:4px;padding:0 .75em 0 .25em;margin-left:1em;overflow:hidden;background-color:var(--blue3);color:#fff;border:1px solid transparent;font-family:var(--metropolis)}.generate-new-relay-icon{background-image:url(/static/images/plus-sign-white.svg);background-position:center center;background-repeat:no-repeat;width:1.5em;height:2em}.dash-create-new-relay.btn-disabled{background-color:var(--grey30)}.x-close-icon{pointer-events:none;height:24px;width:24px}.hidden{display:none!important}.invisible{visibility:hidden!important}.hero-content{margin:5em auto auto auto;width:100%;max-width:var(--maxContentWidth)}.hero-left,.hero-right{flex:1 1 44%;margin-left:auto;margin-right:auto;align-items:center;justify-content:center}.hero-right{border-radius:12px;background-image:linear-gradient(230deg,rgba(144,89,255,.07),#0250bb08);box-shadow:var(--dropShadowDark);margin:auto;min-height:460px;position:relative}.hero-slide{position:absolute;top:0;bottom:0;right:0;left:0;opacity:0;background-position:center center;background-repeat:no-repeat;background-size:contain;transition:opacity .3s ease}.active-slide{opacity:1;transition:opacity .3s ease}.hero-1{background-image:url(/static/images/hero-slides/hero-1.png)}.hero-2{background-image:url(/static/images/hero-slides/hero-2.png)}.hero-3{background-image:url(/static/images/hero-slides/hero-3.png)}.hero-4{background-image:url(/static/images/hero-slides/hero-4.png)}.hero-5{background-image:url(/static/images/hero-slides/hero-5.png)}.hero-left{margin:auto;padding:2em 2em 2em 0;border-radius:24px;text-align:left;align-items:flex-start}.hero-sub-head{margin:auto auto 32px 0;max-width:550px;color:var(--grey10)}.card-small-text{color:var(--grey50);font-family:var(--metropolis);font-size:15px}.text-dark{color:var(--textDark)}.relay-email-address-label{color:var(--grey50);display:flex;font-weight:500;align-items:center;background:0 0;border:1px solid transparent;font-size:1em;border-radius:4px;padding:6px 24px 6px 6px;width:188px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;transition:all .2s ease}.additional-notes{display:flex;flex-direction:row;position:relative;visibility:hidden;pointer-events:none;margin:auto auto 0 0}.legacy-addon-show-label{visibility:visible}.legacy-addon-show-label::after{display:none!important}.relay-email-address-note{visibility:hidden;position:absolute}.legacy-addon-show-label .relay-email-address-label{width:200px}.relay-email-address-label:placeholder-shown,input::placeholder{color:var(--grey50);opacity:1}input:focus::placeholder{opacity:0}.show-label.additional-notes{visibility:visible;pointer-events:all}.additional-notes::after{content:"";min-width:16px;min-height:16px;margin-left:-24px;display:inline-block;background:url(/static/images/edit.svg);background-repeat:no-repeat;background-position:center center;pointer-events:none;background-size:contain;opacity:.6}.user-created-label::after{opacity:0}.user-created-label:hover::after{opacity:.6}.relay-email-address-label:hover{background:var(--grey20);width:192px;transition:all .1s ease-in-out}.relay-email-address-label:focus{box-shadow:var(--buttonFocus);transition:all .2s ease-in-out;outline:0}.relay-email-address-label:focus,input.input-has-error{width:200px!important}.saved-confirmation{content:"Saved!";background-color:green;border-radius:4px;padding:4px;display:inline-block}.input-error,.input-error::after{background:var(--warningRed)}.saved-confirmation,.saved-confirmation::after{background:#3fc290}.input-error,.saved-confirmation{border-radius:4px;padding:4px;color:#fff;font-size:12px;top:40px;z-index:2;position:absolute;visibility:hidden;opacity:0;transition:all .3s ease}.input-error::after,.saved-confirmation::after{height:8px;width:8px;transform:rotate(45deg);content:"";position:absolute;top:-4px;left:12px;display:block}.show-input-error .input-error,.show-saved-confirmation .saved-confirmation{visibility:visible;opacity:1;transition:all .3s ease}.primary-email-address{font-weight:600}.x-close-icon path{fill:#fff}.dashboard-greeting{text-align:center;padding:2em 0;font-size:1em;font-family:var(--metropolis)}.alias-list{width:100%}.appear-smoothly{animation:appearSmoothly .2s ease}.relay-email{--emailCardPadding:16px;margin-top:48px}.card-top-row{padding-bottom:calc(var(--emailCardPadding) - 8px)}.card-row{padding:var(--emailCardPadding)}.card-middle-row{background-color:#fff;border-radius:4px;z-index:1;display:flex;flex-wrap:wrap}.toggle-details-visibility{background:0 0;height:16px;position:relative;outline:0;border:none;padding:0;margin:auto auto 0 0;min-width:120px}.toggle-details-visibility:focus .detail-label,.toggle-details-visibility:hover .detail-label{text-decoration:underline}.detail-label{position:absolute;top:0;bottom:0;left:0;min-width:116px;align-items:center}.detail-label-icon{height:14px;width:14px;background-image:url(/static/images/arrowhead.svg);background-size:contain;display:inline-block;transform-origin:center;margin-left:6px;position:absolute;right:0;top:1px;transition:all .2s ease-in-out}.details-wrapper,.hide-details-label,.show-card-details .show-details-label{visibility:hidden}.show-card-details .hide-details-label{visibility:visible}.details-wrapper{position:absolute;background-color:var(--grey20);border-bottom-left-radius:4px;border-bottom-right-radius:4px;right:0;left:0;bottom:0;z-index:0;justify-content:flex-start;transition:all .2s ease}.details-column{margin-right:4em}.show-card-details .details-wrapper{visibility:visible;transition:all .2s ease}.show-card-details .detail-label-icon{transform:rotate(180deg);transition:all .2s ease-in-out}.created-label,.email-forwarding-label{margin-bottom:4px;margin-right:6px}.details-row{display:flex;flex-direction:row;width:100%}.forwarding-label-wrapper{margin-right:6px;margin-top:4px}.checkbox-label{font-size:14px;margin:6px auto auto 0;color:var(--grey60)}.checkbox-wrapper{position:relative;width:100%;margin-top:24px}.checkbox{position:absolute;opacity:0;top:0;left:-4px;height:24px;width:100%}.checkbox:hover+.checkbox-ui{background-color:rgba(12,12,13,.2);transition:all .2s ease}.checkbox:active+.checkbox-ui{background-color:rgba(12,12,13,.3);transition:all .2s ease}.checkbox+.checkbox-ui{border:1px solid rgba(12,12,13,.1);border-radius:2px;height:20px;min-height:20px;max-height:20px;width:20px;min-width:20px;max-width:20px;margin-right:10px;margin-top:4px;display:inline-block;background-color:rgba(12,12,13,.081);transition:all .2s ease}.checkbox:checked+.checkbox-ui{background-color:#0060df;background-image:url(/static/images/check.svg);background-position:center center;background-repeat:no-repeat;background-size:contain;transition:all .2s ease}.checkbox:checked:hover+.checkbox-ui{background-color:#003eaa}.checkbox:checked:active+.checkbox-ui{background-color:#002275}.checkbox:focus+.checkbox-ui{border:1px solid transparent;box-shadow:var(--buttonFocus)}.modal-bg{position:fixed;display:none;background:rgba(0,0,0,.4);top:0;bottom:0;left:0;right:0;z-index:10;justify-content:center;flex-direction:column}.show-modal{display:flex}.modal-content{background:#fff;max-width:520px;border-radius:8px;position:absolute;left:2em;right:2em;margin:auto;padding:3em 4em}.modal-message{font-size:14px;line-height:1.5;color:var(--grey60);margin:0 auto 12px auto}.modal-headline{font-weight:300;font-size:22px;margin:0 auto 24px auto;color:var(--grey90)}.warning-text{color:var(--warningRed)}.alias-to-delete{display:inline;word-break:break-all}.alias-to-delete.demi{display:block;margin:0 auto 16px 0;color:var(--grey80);max-width:300px;text-overflow:ellipsis;overflow:hidden;word-wrap:unset}.confirm-delete-actions{justify-content:flex-end;display:flex;margin-top:12px;padding-top:16px;border-top:1px solid rgba(0,0,0,.05)}.confirm-delete-action{outline:0;font-size:1em;border-radius:4px;padding:12px 24px;min-width:120px;border:1px solid transparent}.cancel-delete{background-color:var(--grey20);color:var(--grey70)}.cancel-delete:hover{background-color:var(--grey30)}.cancel-delete:focus,.confirm-delete:focus{box-shadow:var(--buttonFocus)}.cancel-delete:active{background-color:var(--grey40)}.confirm-delete:hover{background-color:#bb031f}.confirm-delete:active{background-color:#a7051e}.confirm-delete[disabled]{opacity:.7;pointer-events:none}.confirm-delete{background-color:var(--warningRed);color:#fff;margin-left:.5em}.show-750,.show-mobile{display:none!important}.card-enabled .column-forwarded,.card-enabled .num-forwarded,.column-blocked,.num-blocked{opacity:1;transition:all .2s ease}.card-enabled .column-blocked,.card-enabled .column-forwarded .card-small-text,.num-forwarded{opacity:1;transition:all .2s ease}.card-enabled .num-blocked,.num-forwarded{opacity:.3;transition:all .2s ease}.card-enabled .column-blocked .card-small-text,.column-forwarded .card-small-text{opacity:.5}.num-remaining-aliases{margin-right:4px}.mobile-menu{position:relative;z-index:1;overflow:hidden;min-height:0;background:#2f2f54;transition:all .4s ease}.menu-open{transition:all .4s ease}.mobile-menu-toggle{border:none;outline:0;background:#2f2f54;z-index:1}.mobile-menu-label{position:relative;display:inline-block}.mobile-menu-label::after{content:"";width:18px;height:18px;position:absolute;display:flex;background-image:url(/static/images/arrowhead-white.svg);background-repeat:no-repeat;background-position:center;top:0;bottom:0;margin:auto auto 1px auto;right:-26px;background-size:contain;opacity:.9;transition:all .4s ease}.menu-open .mobile-menu-label::after{transform:rotate(180deg);opacity:.5;transition:all .4s ease}.mobile-menu-link,.mobile-menu-toggle{color:#fff;width:100%}.mobile-menu-link{text-align:right;padding:.75em var(--rowFullWidthHPadding)}.mobile-home-link{border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:flex-end;align-items:center}.menu-open .mobile-menu-links{visibility:visible;pointer-events:all;transition:all .3s ease}.mobile-menu-links{visibility:hidden;position:absolute;top:0;left:0;right:0;pointer-events:none;background:#2f2f54;box-shadow:inset 1px 3px 3px #20123a30;transition:all .3s ease}.mobile-menu-link:hover{background:rgba(0,0,0,.05)}.mobile-menu-link:focus{box-shadow:var(--buttonFocus)}.mobile-menu-link:active{background:rgba(0,0,0,.1)}.faqs-wrapper{max-width:1100px}.faqs{flex-wrap:wrap}.faq{margin-bottom:3em}.faq-col{flex:0 1 46%;margin:0}.faqs-headline{margin:3em 0 2em;font-size:2em}.faq-headline,.faqs-headline{color:#fff}.faq-headline{font-size:1.25em;line-height:1.3;margin-top:0;margin-bottom:.5em}.faq-answer{color:var(--grey30);font-size:1em;line-height:1.7em;margin-top:0}.dashboard-banners.invisible{transition:all .2s ease;opacity:0;padding:0;min-height:0}.dashboard-banners.drop-shadow{box-shadow:0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12)}.banner-content.invisible{max-height:0}.dashboard-banners{width:100%;opacity:1;padding:1em 0;transition:all .3s ease}.banner-hl{font-size:18px;font-weight:700;color:var(--ink)}.banner-hl,.banner-sub{margin:0 auto 10px 0}.banner-sub{color:#20123abd;font-size:15px;line-height:1.4}.banner-gradient-bg{background:var(--fxGradient);margin:0 auto;border-radius:9px;padding:2px;width:100%;max-width:700px;position:relative;min-height:0}.banner-content{opacity:1;background:var(--grey10);border-radius:7px;padding:2em 1em;width:100%}.banner-copy{padding:0 1em}.banner-link{color:var(--blue3);margin:0 auto 0 -2px;padding:2px;border-radius:2px}.banner-link:hover{color:var(--blue4)}.banner-link:focus{box-shadow:var(--buttonFocus);outline:0}.banner-link:active{color:var(--blue5)}.banner-logo{background-position:center center;background-size:contain;height:72px;width:72px;background-repeat:no-repeat;margin:0 .25em auto 1em}.banner-relay-logo{background-image:url(/static/images/banner-addon.svg)}.banner-fx-logo{background-image:url(/static/images/logos/fx-logo.svg)}.dashboard-onboarding-header{margin:3em auto 2rem auto;font-size:20px;text-align:center;color:var(--ink)}.dashboard-onboarding-list{margin:auto;max-width:500px;padding:0}.dashboard-onboarding-list-item{margin-bottom:3em;color:var(--grey60);font-size:15px;line-height:1.5}.dashboard-onboarding-list-item.tip-1{position:relative}.img-arrow-up{position:absolute;right:-138px;max-width:218px;top:-88px}.img-context-menu,.img-input-icon{max-width:300px;margin:2em auto}.onboarding-num{background:var(--ink);color:#fff;height:32px;width:32px;min-width:32px;display:flex;justify-content:center;align-items:center;border-radius:50%;margin:.25em 1em auto 0}.relay-stat{position:relative}.nested-grid{cursor:default}.stat-description{position:absolute;visibility:hidden;transform:translateY(O);bottom:-70px;right:19px;font-size:13px;line-height:1.25;background-color:var(--grey10);border:1px solid var(--grey30);box-shadow:var(--dropShadowLight);padding:8px 16px;border-radius:4px;z-index:2;opacity:0;transition:all .2s ease!important}.stat-description.show-message{transform:translateY(3px);visibility:visible;opacity:1;transition:all .3s ease}.stat-description.blocked-description{right:10px;width:260px}.stat-description::before{transform:rotate(45deg);display:block;content:"";height:12px;width:12px;border-radius:2px;background-color:var(--grey10);border-top:1px solid var(--grey30);border-left:1px solid var(--grey30);position:absolute;top:-7px;right:14px;z-index:-1}.forwarding-description{top:50px;width:346px;bottom:auto}.fwd-note{display:inline-block;padding-top:.25em}@media screen and (max-width:1050px){.home-hero{align-items:flex-start;margin-bottom:4em}.hero-content{max-width:800px;margin-top:3em;flex-direction:column}.hero-left{padding:2em;margin-bottom:2em;justify-content:center;align-items:center;text-align:center}.hero-right{width:100%;min-height:500px}.hero-sign-up,.sign-in-btn{min-width:320px;justify-content:center}.how-it-works-steps{flex-direction:column}.step{flex-direction:row;align-items:center;margin-bottom:2em}.step-illustration{min-width:240px;min-height:240px;margin-bottom:auto}.step-text{max-width:100%;padding:0 2em}.step-body{line-height:1.5;font-size:.9em}.step-headline{margin-bottom:.75em}}@media screen and (max-width:1050px) and (min-height:1000px){.hero-content{flex-direction:column-reverse}}@media screen and (max-width:1100px){.hero-sub-head{max-width:650px;font-size:1.1em}.home-hero-headline{max-width:800px;margin-bottom:16px;font-size:2.5em}.home-hero{min-height:50vh}}@media screen and (max-width:940px){.img-arrow-up{display:none}}@media screen and (max-width:800px){.relay-stat{margin-left:2em}}@media screen and (max-width:750px){.wrap-col-600{justify-content:space-between}.fx-private-relay-logotype{min-width:150px}.sign-in{padding-left:1em;padding-right:1em}.nested-grid{flex-direction:column}.relay-stat{width:100%;justify-content:space-between}.relay-stat-value{margin-left:1em}.center-value{margin-left:0;flex-direction:row}.how-it-works-steps{margin-bottom:0}.step{flex-direction:column;margin-bottom:4em}.step-illustration{margin-bottom:2em;width:260px;height:260px}.step-headline{margin-left:auto;margin-right:auto;text-align:center}.step-body{text-align:center}.grid{flex-wrap:wrap}.hide-750{display:none}.show-750{display:flex!important}.remaining-aliases{margin:auto 8px}.faqs-wrapper{max-width:600px}.faqs{flex-direction:column}.faq-col{flex:1 1 100%}.stat-description,.stat-description.blocked-description{right:-12px;top:30px}.footer-link{margin:auto 1em auto auto}}@media screen and (max-width:600px){body{--rowFullWidthHPadding:1.5em}footer,footer nav{flex-direction:column!important;width:100%}.footer-link.moz-logo-link{margin:auto auto 1em auto;max-width:140px}.footer-link{text-align:center;margin:auto;width:100%;padding-top:1em;padding-bottom:1em}.relay-email{--hPadding:1.5em}.container{padding-left:1.5em;padding-right:1.5em}.home-hero-headline{max-width:440px;font-size:2em}.hero-sign-up,.sign-in-btn{min-width:auto}.hero-left{padding:0;margin:2em auto 5em auto}.fx-private-relay-logotype{background-position:center 68%}.hero-sub-head{max-width:400px;font-size:1em}.hero-right{display:none}header{border-bottom:none}.modal-content{left:1em;right:1em;padding:3em 2em}.relay-address{margin-right:0}}@media screen and (max-width:550px){.wrap-col-600{flex-direction:column-reverse}.dash-create,.dashboard-headline,.remaining-aliases{margin-left:auto;margin-right:auto}.remaining-aliases{margin-top:.5em}.relay-email-card{overflow:hidden}.nested-grid,.relay-email-column{width:100%}.relay-stat{margin-bottom:8px}.details-row,.relay-stat{min-height:30px}.relay-stat-value{margin-bottom:0}.card-middle-row,.details-row{flex-direction:column}.details-wrapper{width:100%;flex-direction:column}.details-column{margin:auto 0 10px 0;flex-direction:row;justify-content:space-between}.column-delete{margin-top:8px;justify-content:flex-end}.email-forwarding{justify-content:flex-end}.show-mobile{display:flex!important}.active-header-link::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--fxGradient);margin-right:8px;vertical-align:middle;background-size:400%;background-position:bottom right}.hide-mobile{display:none!important}.created-label{margin-bottom:0}header{position:fixed;top:0;left:0;right:0;background:#27294e}.fix-header{animation:none!important}body{padding-top:124px}.stat-description{display:none}}@media screen and (max-width:450px){.step-body,.step-headline{margin-left:0;text-align:left}.step-text{padding-left:.5em}.card-top-row{flex-wrap:wrap}.delete-email-form,.delete-relay-email-button{width:100%;justify-content:center}.confirm-delete-actions{flex-direction:column}.cancel-delete{margin-bottom:12px}.confirm-delete-action{margin-left:0;margin-right:0;min-height:48px}.modal-content{font-size:14px}}@media screen and (max-width:400px){body{--rowFullWidthHPadding:1em}.container{padding-left:1em;padding-right:1em}.home-hero-headline{font-size:1.75em}.hero-content{margin-top:2em}.fx-private-relay-logomark{min-width:30px;margin-right:8px}firefox-apps{margin:auto 12px!important}}@keyframes appearSmoothly{0%{opacity:0}100%{opacity:1}}</style><style type="text/css">@font-face{font-family:'Inter UI';font-style:normal;font-weight:400;src:local("arial"),local("Inter UI"),url(/static/fonts/Inter/Inter-UI-Regular.woff2) format("woff2");font-display:swap}@font-face{font-family:'Inter UI';font-style:normal;font-weight:700;src:local("arial"),local("Inter UI"),url(/static/fonts/Inter/Inter-UI-Bold.woff2) format("woff2");font-display:swap}</style><style type="text/css">@font-face{font-family:Metropolis;font-style:normal;font-weight:700;src:local('Metropolis-Bold'),url(/static/fonts/Metropolis/Metropolis-Bold.woff2) format("woff2");font-display:swap}@font-face{font-family:Metropolis;font-style:normal;font-weight:600;src:local('Metropolis-SemiBold'),url(/static/fonts/Metropolis/Metropolis-SemiBold.woff2) format("woff2");font-display:swap}@font-face{font-family:Metropolis;font-style:normal;font-weight:500;src:local('Metropolis-Medium'),url(/static/fonts/Metropolis/Metropolis-Medium.woff2) format("woff2");font-display:swap}@font-face{font-family:Metropolis;font-style:normal;font-weight:300;src:local('Metropolis-Light'),url(/static/fonts/Metropolis/Metropolis-Light.woff2) format("woff2");font-display:swap}</style><style type="text/css">firefox-apps{--backgroundColor:rgb(249, 249, 250);--bentoHoverBgColor:rgb(97, 90, 115);--bentoClickBgColor:rgb(142, 137, 154);--bentoButtonHeight:25px;--zIndex:10000;--appIconHeight:16px;--textColor:rgb(32, 18, 58);--bentoPadding:24px;display:flex;margin:auto 32px;position:relative;text-align:center;z-index:var(--zIndex);font-size:12px;width:var(--bentoButtonHeight);min-height:var(--bentoButtonHeight);color:var(--textColor);background:url(/static/images/fx-bento-sprites.png);background-position-x:-215.5px;background-position-x:-224px;background-size:auto var(--bentoButtonHeight);border-radius:2px;box-shadow:0 0 0 4px rgba(255,255,255,0)}firefox-apps.fx-bento-open,firefox-apps:hover{box-shadow:0 0 0 4px var(--bentoHoverBgColor);background-color:var(--bentoHoverBgColor)}firefox-apps:focus,firefox-apps:focus-within{box-shadow:0 0 0 4px var(--bentoHoverBgColor);background-color:var(--bentoHoverBgColor)}firefox-apps:active{box-shadow:0 0 0 4px var(--bentoClickBgColor);background-color:var(--bentoClickBgColor)}.fx-bento-hide-overflow{position:relative;overflow:hidden;border-radius:8px}.fx-bento-content-wrapper{position:absolute;top:calc(var(--bentoButtonHeight) + 10px);min-width:260px;z-index:calc(var(--zIndex) + 1);box-shadow:0 7px 12px -3px rgba(28,28,29,.502);right:-18px;background:var(--backgroundColor);border-radius:8px;transform:translateY(0);display:none;border:1px solid transparent}.fx-bento-content{display:flex;flex-direction:column;padding:var(--bentoPadding) 0 0 0}.fx-bento-enable-scrolling{overflow-y:scroll}.active .fx-bento-content-wrapper{display:block;height:auto;transform:translateY(12px);animation:fxBentoAppear ease .3s;-webkit-animation:fxBentoAppear ease .3s;-moz-animation:fxBentoAppear ease .3s}.active .fx-bento-content-wrapper::after{display:block;content:"";height:12px;width:12px;position:absolute;top:-7px;right:23px;margin:auto;transform:rotate(45deg);border-top-left-radius:1px;background-color:#f9f9fa;border-top:1px solid transparent;border-left:1px solid transparent;z-index:-1}.fx-bento-logo{background:url(/static/images/fx-bento-sprites.png);background-repeat:no-repeat;background-size:cover;height:40px;width:40px;margin:auto auto 8px auto;background-position-x:-90px}.fx-bento-headline{font-size:16px;font-family:Metropolis,sans-serif;line-height:20px;font-weight:600;margin-right:auto;margin-left:auto;max-width:270px;display:block;padding-left:20px;padding-right:20px}.fx-bento-bottom-link{color:#0060df;text-decoration:underline;padding:10px var(--bentoPadding);margin:14px auto;width:100%}a.fx-bento-app-link{background-color:rgba(255,255,255,0);text-align:left}.fx-bento-app-link-span{display:block;padding:10px var(--appIconHeight) 10px calc(var(--appIconHeight) + 32px);color:var(--textColor);position:relative;margin-right:auto;margin-left:auto;max-width:410px;pointer-events:none}.fx-bento-app-link-span::before{display:block;position:absolute;left:var(--bentoPadding);top:0;bottom:0;margin:auto;height:var(--appIconHeight);min-height:var(--appIconHeight);width:var(--appIconHeight);background:url(/static/images/fx-bento-sprites.png);background-size:auto var(--appIconHeight);content:""}.fx-bento-app-link-span.pocket::before{background-position-x:-18px}.fx-bento-app-link-span.fx-monitor::before{background-position-x:-88px}.fx-bento-app-link-span.fx-mobile::before{background-position-x:-104px}.fx-bento-link:focus,.fx-bento-link:hover{background-color:#e6e6e6;opacity:1!important}.fx-bento-button{width:100%;border:1px solid transparent;pointer-events:all;background:0 0}.fx-bento-button:active,.fx-bento-button:focus,.fx-bento-button:hover{outline:0;box-shadow:none;border:1px solid transparent}.fx-bento-button:focus::-moz-focus-inner,.fx-bento-button:hover::-moz-focus-inner{border:0;outline:0}button.fx-bento-mobile-close{display:none;position:absolute;right:var(--appIconHeight);top:var(--appIconHeight);height:var(--bentoPadding);min-height:var(--bentoPadding);width:var(--bentoPadding);max-width:var(--bentoPadding);min-width:var(--bentoPadding);background-color:#37366f;background-image:url(/static/images/fx-bento-sprites.png);background-size:auto 20px;background-repeat:no-repeat;background-position-x:-150.5px;padding:0!important;border:none!important;border-radius:50%;background-position-y:2px}.fx-bento-app-link:first-of-type{margin-top:var(--appIconHeight)}.fx-bento-fade-out{opacity:0;transform:translateY(0)!important;pointer-events:none!important}.fx-bento-button,.fx-bento-button:focus,.fx-bento-button:hover,.fx-bento-fade-out,a.fx-bento-link,a.fx-bento-link:focus,a.fx-bento-link:hover,firefox-apps,firefox-apps:focus-within,firefox-apps:hover{transition:.2s ease-in-out}body.hide-bento firefox-apps{background:0 0!important;visibility:hidden!important;width:0}body.hide-bento firefox-apps>button{visibility:hidden!important}@media screen and (max-width:900px){firefox-apps{margin:0 var(--bentoPadding)}.fx-bento-button{transform:scale(.9)}}@media screen and (max-width:500px){firefox-apps{--appIconHeight:var(--bentoPadding);--mobileClickableCloseArea:12vh;position:inherit;margin:0 var(--appIconHeight)}button.fx-bento-mobile-close{display:block}.fx-bento-hide-overflow{position:absolute;top:0;left:0;right:0;bottom:0;max-height:100vh;overflow-y:scroll;overflow-x:scroll}.fx-bento-mobile-close::after{content:"";display:block;position:fixed;right:0;top:0;left:0;height:var(--mobileClickableCloseArea)}.fx-bento-content-wrapper{top:0;right:0;left:0;width:100%;min-height:100vh;border-radius:0;transform:translateY(0)!important}.fx-bento-logo{height:48px;width:48px;min-height:48px;margin-top:var(--mobileClickableCloseArea);background-position-x:-108px}.fx-bento-headline{font-size:20px;line-height:var(--bentoPadding);padding-left:0;padding-right:0}.fx-bento-bottom-link{margin-bottom:auto;margin-top:var(--bentoPadding)}.fx-bento-app-link,.fx-bento-bottom-link{font-size:16px}.active .fx-bento-content-wrapper{transform:translateY(0)!important;animation:none!important;-webkit-animation:none!important}.active .fx-bento-content-wrapper::after{display:none}a.fx-bento-app-link{line-height:23px}.fx-bento-app-link-span{max-width:342px;padding-left:calc(var(--appIconHeight) + 40px);padding-left:calc(var(--appIconHeight) + 40px)}.fx-bento-app-link-span.pocket::before{background-position-x:-26px}.fx-bento-app-link-span.fx-monitor::before{background-position-x:-132px}.fx-bento-app-link-span.fx-mobile::before{background-position-x:-157px;margin-left:1px}}@keyframes fxBentoAppear{0%{opacity:0;transform:translateY(0)}100%{opacity:1;transform:translateY(12px)}}</style><style type="text/css">glocal-menu{--firefoxGradient:linear-gradient(-90deg, #ff9100 0%, #f10366 50%, #6173ff 100%);--glocalBackground:rgb(249, 249, 250);--glocalIconMargin:auto 12px auto auto;--glocalLargeAvatarDimensions:42px;--glocalPaddingUnit:24px;--glocalSectionPadding:var(--glocalPaddingUnit) calc(var(--glocalPaddingUnit) + 12px) var(--glocalPaddingUnit) var(--glocalPaddingUnit);--glocalSmallAvatarDimensions:28px;--glocalOptionHoverColor:rgb(230, 230, 230);--ink:#20123a;color:var(--ink)}.glocal-menu-wrapper{background-image:var(--firefoxGradient);position:absolute;visibility:hidden;color:#000;right:28px;border-radius:8px;box-shadow:0 7px 12px -3px rgba(28,28,29,.502)}.glocal-menu-wrapper.fx-bento-fade-out{z-index:100}.glocal-menu-header{background-color:var(--glocalBackground);display:flex;flex-direction:row;padding:var(--glocalSectionPadding);border-radius:8px 8px 0 0}.avatar-wrapper{border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff,0 0 0 5px rgba(255,255,255,0);padding:0;border:none;transition:all .2s ease}.avatar-wrapper:hover{box-shadow:0 0 0 2px #fff,0 0 0 5px rgba(255,255,255,.3);transition:all .2s ease}.avatar-wrapper:focus{outline:0}.avatar,.avatar-wrapper{height:var(--glocalLargeAvatarDimensions);width:var(--glocalLargeAvatarDimensions)}.glocal-small-avatar{height:var(--glocalSmallAvatarDimensions);width:var(--glocalSmallAvatarDimensions);border-radius:50%;margin:var(--glocalIconMargin)}.avatar{pointer-events:none}.glocal-menu-open{visibility:visible;transform:translateY(17px);animation:glocalMenuAppear ease .3s;z-index:100;-webkit-animation:glocalMenuAppear ease .3s;-moz-animation:glocalMenuAppear ease .3s}.glocal-account-info{display:flex;flex-direction:column}.glocal-fxa-email{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:2px}.glocal-fxa-settings-link{font-size:14px;color:var(--grey50);display:flex;align-items:center}.glocal-fxa-settings-link:focus,.glocal-fxa-settings-link:hover{text-decoration:underline}.glocal-fxa-settings-link:active{color:var(--grey60)}.glocal-fxa-settings-link::after{content:"";background-image:url(/static/images/open-new.svg);background-size:contain;width:12px;height:12px;display:inline-block;margin-left:4px}.glocal-site-options{background-color:var(--glocalBackground);margin-top:1px;padding:var(--glocalPaddingUnit) 0;border-radius:0 0 8px 8px}.glocal-site-option{border-radius:0;padding:2px var(--glocalPaddingUnit);width:100%;background-color:rgba(255,255,255,0);transition:.2s ease-in-out}.glocal-site-option:hover{background-color:var(--glocalOptionHoverColor);transition:.2s ease-in-out}.glocal-sign-out{background:0 0;outline:0;border:none;font-size:14px;display:flex;align-items:center;color:var(--ink);font-family:"Inter UI",-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif}.glocal-sign-out::before{content:"";display:inline-block;height:var(--glocalSmallAvatarDimensions);width:var(--glocalSmallAvatarDimensions);margin-right:12px;background-image:url(/static/images/glocal-sign-out.svg);background-size:16px;background-repeat:no-repeat;background-position:center center;opacity:.9}.glocal-menu-wrapper::after{display:block;content:"";height:12px;width:12px;position:absolute;top:-6px;right:23px;margin:auto;transform:rotate(45deg);border-top-left-radius:1px;background-color:#f9f9fa;border-top:1px solid transparent;border-left:1px solid transparent;z-index:-1}@keyframes glocalMenuAppear{0%{opacity:0;transform:translateY(0)}100%{opacity:1;transform:translateY(17px)}}</style><link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////APj39wqsm6F1US476FEuO+ism6F1+Pf3Cv///wD///8A////AP///wD///8A////AP///wD///8A+vn5Ca+fpXBQLTnnOhIg/zoSIP86EiD/OhIg/1AtOeevn6Vw+vn5Cf///wD///8A////AP///wD7+/sHtKWqa1MwPOM6EiD/OhIg/zoSIP9UHTX/bCdJ/zoSIP86EiD/OhIg/1MwPOO0papr+/v7B////wDFub1VVTI+4DoSIP86EiD/OhIg/zoSIP86EiD/mDls/89Qnf86EiD/OhIg/zoSIP86EiD/OhIg/1UyPuDDt7tVQBon+DoSIP86EiD/OhIg/zoSIP86EiD/OhIg/5g5bP/PUJ3/OhIg/zoSIP86EiD/OhIg/zoSIP86EiD/QBon+DoSIP86EiD/Wh0z/+xUjP9lIjz/OhIg/zoSIP+YOWz/z1Cd/zoSIP86EiD/RRcr/9tcxv+FNW//OhIg/zoSIP86EiD/OhIg/zoSIP9tJT//ayVB/+dVmv+DL1b/mDls/89Qnf9fIkH/2Fi0/5Q6d/92Ll7/QBUn/zoSIP86EiD/OhIg/zoSIP86EiD/OhIg/zsSIP97K07/hC9X/8NKjf/tXbb/bCdN/5E4cf9CFij/OhIg/zoSIP86EiD/OhIg/zoSIP86EiD/OhIg/zoSIP86EiD/ayVD/3cqTf/JTZL/8F65/20oTf+CMmP/PRMj/zoSIP86EiD/OhIg/zoSIP86EiD/OhIg/zoSIP9dHzX/YyI8//Raov+PNF//mDls/89Qnf9qJ0v/5l7B/403cP9kJUv/PBMi/zoSIP86EiD/OhIg/zoSIP9aHTP/9liT/2okPv88EyH/OhIg/5g5bP/PUJ3/OhIg/zsSIf9EFiv/6WPU/445ef86EiD/OhIg/0AaJ/o6EiD/OhIg/z4TIv86EiD/OhIg/zoSIP+YOWz/z1Cd/zoSIP86EiD/OhIg/z0TI/87EiH/OhIg/0AaJ/q/srZdUC055zoSIP86EiD/OhIg/zoSIP86EiD/mDls/89Qnf86EiD/OhIg/zoSIP86EiD/OhIg/1AtOee/srZd////APr5+Qqsm6F1Tis36ToSIP86EiD/OhIg/1wgO/93K1P/OhIg/zoSIP86EiD/Tis36ayboXL6+fkK////AP///wD///8A////APj39wypl515Syc07ToSIP86EiD/OhIg/zoSIP9LJzTrqZedePj39wz///8A////AP///wD///8A////AP///wD///8A////APf19g+kkph+Syc07ksnNO6mlJp+9/X2Dv///wD///8A////AP///wD///8A/n8AAPgfAADgBwAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAOAHAAD4HwAA/n8AAA=="><link rel="”apple-touch-icon”" href="https://relay.firefox.com/static/images/logos/relay-logo-dark-200.png"><meta property="wayback:source:url" content="https://relay.firefox.com/"></head><body data-fxa-settings-url="https://accounts.firefox.com/settings" data-site-origin="https://relay.firefox.com" data-google-analytics-id="UA-77033033-33"><firefox-private-relay-addon data-addon-installed="false"></firefox-private-relay-addon><div class="modal modal-bg fade-in"><div class="modal modal-content drop-shadow-light"><h2 class="modal-headline">Permanently delete this alias?</h2><span class="alias-to-delete demi"></span><p class="modal-message">Once you delete this alias, it cannot be recovered. Firefox Relay will no longer forward messages sent to <span class="alias-to-delete"></span>, including messages that allow you to reset lost passwords.</p><p class="warning-text delete-tip modal-message">If you use this alias to log in to sites you care about, you should update your login with a different email address before you delete this one.</p><div class="flx flx-row checkbox-wrapper"><input type="checkbox" class="checkbox delete-modal"> <span class="checkbox-ui"></span> <label class="checkbox-label">Yes, I want to delete this alias</label></div><div class="fx flx-row confirm-delete-actions"><button class="cancel-delete confirm-delete-action delete-modal">Cancel</button> <button class="confirm-delete confirm-delete-action delete-modal" disabled="true">Delete</button></div></div></div><header class="flx flx-col spc-btwn"><div class="flx flx-row spc-btwn row-full-width header-top"><a href="https://relay.firefox.com/" class="flx flx-row logo-wrapper" aria-label="Firefox Relay"><div class="fx-private-relay-logomark"></div><div class="fx-private-relay-logotype"></div></a><nav class="flx flx-row ff-Met al-cntr header-nav hide-mobile"><a class="active-header-link header-link" href="https://relay.firefox.com/">Home</a> <a class="header-link" href="https://relay.firefox.com/faq">FAQ</a></nav><div class="user-area flx flx-row al-cntr"><firefox-apps></firefox-apps><a data-entrypoint="relay-sign-in-header" data-form_type="button" data-ga="send-ga-funnel-pings" data-event-category="Sign In Buttons" data-event-label="sign-in-btn-header" class="sign-in button btn-transparent" href="https://relay.firefox.com/accounts/fxa/login/?process=login">Sign In</a></div></div><nav class="flx flx-col ff-Met al-cntr mobile-menu show-mobile"><button class="mobile-menu-toggle full-width ff-Met" aria-label="Open mobile menu"><span class="mobile-menu-label">Menu</span></button><div class="mobile-menu-links flx flx-col"><a class="active-header-link mobile-menu-link mobile-home-link" href="https://relay.firefox.com/">Home</a> <a class="mobile-menu-link" href="https://relay.firefox.com/faq">FAQ</a></div></nav></header><main data-landing-page="" class="flx row-full-width home-hero"><div class="flx flx-row hero-content"><div class="hero-left flx flx-col"><h1 class="home-hero-headline">Hide your real email address to help protect your identity</h1><span class="sub-head hero-sub-head">Firefox Relay makes it easy to create aliases, randomly generated email addresses that forward to your real inbox. Use it to protect your online accounts - and your identity - from hackers. Sign in with your Firefox account to get started.</span><div class="hero-sign-up-bg bg-fx-gradient fx-gradient-btn"><a data-ga="send-ga-funnel-pings" data-event-category="Sign In" data-event-label="sign-up-btn-landing-hero" class="hero-sign-up blue-button puffy" href="https://relay.firefox.com/accounts/fxa/login/?process=login">Sign In</a></div></div><div class="hero-right flx flx-col"><div class="hero-1 hero-slide"></div><div class="hero-2 hero-slide"></div><div class="hero-3 hero-slide"></div><div class="hero-4 hero-slide"></div><div class="hero-5 hero-slide"></div></div></div></main><div class="container flx al-cntr flx-col"><div class="how-it-works-content txt-white flx flx-col al-cntr"><h2 class="how-it-works-header text-center">How It Works</h2><span class="text-center">Protect your personal identity everywhere you use the Firefox browser.</span><div class="how-it-works-steps flx flx-row"><section class="step step-1 flx flx-col al-cntr"><div class="step-illustration step-1"></div><div class="step-text step-1"><h3 class="step-headline ff-Met">Install the extension</h3><p class="step-body"><a href="https://addons.mozilla.org/firefox/addon/private-relay/" target="_blank" rel="noopener" class="text-link">Download the Relay extension for Firefox</a>. Select the icon that appears on your Firefox toolbar to access the sign in page. Sign in with your Firefox account to get started.</p></div></section><section class="step step-2 flx flx-col al-cntr"><div class="step-illustration step-2"></div><div class="step-text step-2"><h3 class="step-headline ff-Met">Create a new alias</h3><p class="step-body">As you browse, the Relay icon will appear in form fields where sites ask for your email address. Select it to generate a new, random address that ends in @relay.firefox.com. Relay will forward messages to the primary email address associated with your account.</p></div></section><section class="step step-3 flx flx-col al-cntr"><div class="step-illustration step-3"></div><div class="step-text step-3"><h3 class="step-headline ff-Met">Manage your account</h3><p class="step-body">Sign in to the Relay website to keep track of the aliases you’ve created. If you find that one receives spam or unwanted messages, you can block all messages or even delete the alias, right from the management page.</p></div></section></div><div class="hero-sign-up-bg bg-fx-gradient fx-gradient-btn"><a data-ga="send-ga-funnel-pings" data-event-category="Sign In" data-event-label="sign-up-btn-landing-bottom" class="hero-sign-up blue-button puffy" href="https://relay.firefox.com/accounts/fxa/login/?process=login">Sign In</a></div></div></div><footer class="flx flx-row spc-btwn row-full-width txt-white"><a class="footer-link moz-logo-link" href="https://www.mozilla.org/" aria-label="Mozilla.com" target="_blank" rel="noopener"><img alt="Mozilla" class="block w-24" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAwIDU3MS45Ij48cGF0aCBkPSJNMTkxMC4yIDQxMC41Yy0zLjkgMS4xLTcuMiAxLjctMTAuNSAxLjctMTEuNyAwLTE3LjItNS0xNy4yLTE5LjRWMjg0LjFjMC01Ny4xLTQ1LjUtODQuOS05OS4zLTg0LjktNDEuMSAwLTYzLjIgNS0xMDcuMSAyMi43bC05LjggNTcuNiA1Ny4xIDYuMSA4LjEtMjguMmMxMS43LTYuMSAyMy4zLTcuMiAzOC4zLTcuMiA0MC41IDAgNDEuMSAzMC41IDQxLjEgNTZ2OC4zYy0xMi44LTEuNy0yNy4yLTIuMi00MS4xLTIuMi01Ny4xIDAtMTE2LjUgMTQuNC0xMTYuNSA3NiAwIDUyLjEgNDEgNzEuNiA3Ny4xIDcxLjYgNDAuNSAwIDY2LTI0LjQgODAuNC00OS45IDMuMyAzMC41IDIxLjYgNDkuOSA1NC45IDQ5LjkgMTUuNSAwIDMxLjYtNC40IDQ0LjktMTEuN2wtLjQtMzcuN3ptLTE1My42LTEuNmMtMjEuNiAwLTI5LjQtMTIuOC0yOS40LTI4LjkgMC0yNy4yIDIyLjItMzQuNCA0Ny43LTM0LjQgMTEuNiAwIDI0LjQgMS43IDM2LjEgMy4zLTEuNyA0MS43LTI4LjkgNjAtNTQuNCA2MHptLTk2LjEtMzM2LjJsLTEwOC4yIDM4MS43aC03MC41TDE1OTAgNzIuN2g3MC41em0tMTQ1LjMgMEwxNDA3IDQ1NC40aC03MC40bDEwOC4yLTM4MS43aDcwLjR6bS0zMDAuNCAxMzEuNWg3NC45VjI5NGgtNzQuOXYtODkuOHptMCAxNjAuM2g3NC45djg5LjloLTc0Ljl2LTg5Ljl6bS0xMDktMy4zbDU2LjYgNS41LTE1LjUgODcuN0g5MjguM2wtNy4yLTM3LjcgMTM3LjYtMTU4LjFoLTc4LjJsLTExLjEgMzguOC01MS42LTUuNiA4LjktODcuN2gyMTkuN2w1LjYgMzcuN0wxMDEzLjIgNDAwaDgxbDExLjYtMzguOHptLTM1OC41LTE2MmMtODkuOSAwLTEzNC4zIDYwLjUtMTM0LjMgMTMzLjcgMCA3OS45IDUzLjMgMTI3IDEzMC40IDEyNyA3OS45IDAgMTM3LjYtNTAuNSAxMzcuNi0xMzAuNCAwLTY5LjktNDMuOS0xMzAuMy0xMzMuNy0xMzAuM3pNNzQ1LjYgNDA1Yy0zOC44IDAtNTguOC0zMy4zLTU4LjgtNzYuNiAwLTQ3LjIgMjIuNy03NC4zIDU5LjQtNzQuMyAzMy44IDAgNjEgMjIuNyA2MSA3My4yIDAgNDcuNy0yNC40IDc3LjctNjEuNiA3Ny43em0tMTk3LTVoMzMuM3Y1NC40SDQ3N1YzMTMuNWMwLTQzLjMtMTQuNC01OS45LTQyLjctNTkuOS0zNC40IDAtNDguMyAyNC40LTQ4LjMgNTkuNHY4N2gzMy4zdjU0LjRIMzE0LjVWMzEzLjVjMC00My4zLTE0LjQtNTkuOS00Mi43LTU5LjktMzQuNCAwLTQ4LjMgMjQuNC00OC4zIDU5LjR2ODdoNDcuN3Y1NC40SDExOC43VjQwMEgxNTJWMjU4LjVoLTMzLjN2LTU0LjRoMTA0Ljh2MzcuN2MxNS0yNi42IDQxLjEtNDIuNyA3Ni00Mi43IDM2LjEgMCA2OS4zIDE3LjIgODEuNiA1My44IDEzLjktMzMuMyA0Mi4yLTUzLjggODEuNi01My44IDQ0LjkgMCA4NiAyNy4yIDg2IDg2LjVWNDAwaC0uMXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4="></a><nav class="flx flx-wrap al-cntr"><a class="footer-link" href="https://www.mozilla.org/privacy/firefox-relay/" target="_blank" rel="noopener noreferrer">Privacy</a> <a class="footer-link" href="https://www.mozilla.org/about/legal/terms/firefox-relay/" target="_blank" rel="noopener noreferrer">Relay Terms</a> <a class="footer-link" href="https://www.mozilla.org/about/legal/" target="_blank" rel="noopener noreferrer">Legal</a> <a class="footer-link" href="https://github.com/mozilla/fx-private-relay" rel="noopener noreferrer" target="_blank" aria-label="Link to the Firefox Relay GitHub repository."><img class="GitHub-logo" alt="GitHub logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOC45NiAzOCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE5LjQ4IDBhMTkuNDkgMTkuNDkgMCAwMC02LjE2IDM4YzEgLjE4IDEuMzMtLjQzIDEuMzMtLjk0di0zLjMyYy01LjQ0IDEuMTUtNi41OS0yLjY0LTYuNTktMi42NGE1LjE0IDUuMTQgMCAwMC0yLjE2LTIuODVjLTEuNzctMS4yMS4xMy0xLjE4LjEzLTEuMThhNC4xIDQuMSAwIDAxMyAyIDQuMTYgNC4xNiAwIDAwNS42NyAxLjYyIDQuMTggNC4xOCAwIDAxMS4yMy0yLjYxYy00LjMyLS40OS04Ljg3LTIuMTYtOC44Ny05LjYzYTcuNTEgNy41MSAwIDAxMi01LjIyIDcgNyAwIDAxLjE5LTUuMTZzMS42My0uNTIgNS4zNSAyYTE4LjM3IDE4LjM3IDAgMDE5Ljc2IDBjMy43Mi0yLjUyIDUuMzUtMiA1LjM1LTJhNyA3IDAgMDEuMTkgNS4xNiA3LjUxIDcuNTEgMCAwMTIgNS4yMmMwIDcuNDktNC41NiA5LjEzLTguOSA5LjYyYTQuNjQgNC42NCAwIDAxMS4zMiAzLjZ2NS4zNWMwIC42NC4zNSAxLjEyIDEuMzQuOTNBMTkuNDggMTkuNDggMCAwMDE5LjQ4IDB6Ii8+PC9zdmc+"></a></nav></footer><script type="text/javascript" charset="utf-8">!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.ClipboardJS=e():t.ClipboardJS=e()}(this,function(){return o={},r.m=n=[function(t,e){t.exports=function(t){var e,n="SELECT"===t.nodeName?(t.focus(),t.value):"INPUT"===t.nodeName||"TEXTAREA"===t.nodeName?((e=t.hasAttribute("readonly"))||t.setAttribute("readonly",""),t.select(),t.setSelectionRange(0,t.value.length),e||t.removeAttribute("readonly"),t.value):(t.hasAttribute("contenteditable")&&t.focus(),n=window.getSelection(),(e=document.createRange()).selectNodeContents(t),n.removeAllRanges(),n.addRange(e),n.toString());return n}},function(t,e){function n(){}n.prototype={on:function(t,e,n){var o=this.e||(this.e={});return(o[t]||(o[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){var o=this;function r(){o.off(t,r),e.apply(n,arguments)}return r._=e,this.on(t,r,n)},emit:function(t){for(var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),o=0,r=n.length;o<r;o++)n[o].fn.apply(n[o].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),o=n[t],r=[];if(o&&e)for(var i=0,a=o.length;i<a;i++)o[i].fn!==e&&o[i].fn._!==e&&r.push(o[i]);return r.length?n[t]=r:delete n[t],this}},t.exports=n,t.exports.TinyEmitter=n},function(t,e,n){var u=n(3),s=n(4);t.exports=function(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!u.string(e))throw new TypeError("Second argument must be a String");if(!u.fn(n))throw new TypeError("Third argument must be a Function");if(u.node(t))return c=e,l=n,(a=t).addEventListener(c,l),{destroy:function(){a.removeEventListener(c,l)}};if(u.nodeList(t))return o=t,r=e,i=n,Array.prototype.forEach.call(o,function(t){t.addEventListener(r,i)}),{destroy:function(){Array.prototype.forEach.call(o,function(t){t.removeEventListener(r,i)})}};if(u.string(t))return s(document.body,t,e,n);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList");var o,r,i,a,c,l}},function(t,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.fn=function(t){return"[object Function]"===Object.prototype.toString.call(t)}},function(t,e,n){var a=n(5);function i(t,e,n,o,r){var i=function(e,n,t,o){return function(t){t.delegateTarget=a(t.target,n),t.delegateTarget&&o.call(e,t)}}.apply(this,arguments);return t.addEventListener(n,i,r),{destroy:function(){t.removeEventListener(n,i,r)}}}t.exports=function(t,e,n,o,r){return"function"==typeof t.addEventListener?i.apply(null,arguments):"function"==typeof n?i.bind(null,document).apply(null,arguments):("string"==typeof t&&(t=document.querySelectorAll(t)),Array.prototype.map.call(t,function(t){return i(t,e,n,o,r)}))}},function(t,e){var n;"undefined"==typeof Element||Element.prototype.matches||((n=Element.prototype).matches=n.matchesSelector||n.mozMatchesSelector||n.msMatchesSelector||n.oMatchesSelector||n.webkitMatchesSelector),t.exports=function(t,e){for(;t&&9!==t.nodeType;){if("function"==typeof t.matches&&t.matches(e))return t;t=t.parentNode}}},function(t,e,n){"use strict";n.r(e);var o=n(0),r=n.n(o),i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};function a(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}function c(t){!function(t){if(!(t instanceof c))throw new TypeError("Cannot call a class as a function")}(this),this.resolveOptions(t),this.initSelection()}var l=(a(c.prototype,[{key:"resolveOptions",value:function(t){t=0<arguments.length&&void 0!==t?t:{};this.action=t.action,this.container=t.container,this.emitter=t.emitter,this.target=t.target,this.text=t.text,this.trigger=t.trigger,this.selectedText=""}},{key:"initSelection",value:function(){this.text?this.selectFake():this.target&&this.selectTarget()}},{key:"selectFake",value:function(){var t=this,e="rtl"==document.documentElement.getAttribute("dir");this.removeFake(),this.fakeHandlerCallback=function(){return t.removeFake()},this.fakeHandler=this.container.addEventListener("click",this.fakeHandlerCallback)||!0,this.fakeElem=document.createElement("textarea"),this.fakeElem.style.fontSize="12pt",this.fakeElem.style.border="0",this.fakeElem.style.padding="0",this.fakeElem.style.margin="0",this.fakeElem.style.position="absolute",this.fakeElem.style[e?"right":"left"]="-9999px";e=window.pageYOffset||document.documentElement.scrollTop;this.fakeElem.style.top=e+"px",this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,this.container.appendChild(this.fakeElem),this.selectedText=r()(this.fakeElem),this.copyText()}},{key:"removeFake",value:function(){this.fakeHandler&&(this.container.removeEventListener("click",this.fakeHandlerCallback),this.fakeHandler=null,this.fakeHandlerCallback=null),this.fakeElem&&(this.container.removeChild(this.fakeElem),this.fakeElem=null)}},{key:"selectTarget",value:function(){this.selectedText=r()(this.target),this.copyText()}},{key:"copyText",value:function(){var e=void 0;try{e=document.execCommand(this.action)}catch(t){e=!1}this.handleResult(e)}},{key:"handleResult",value:function(t){this.emitter.emit(t?"success":"error",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})}},{key:"clearSelection",value:function(){this.trigger&&this.trigger.focus(),document.activeElement.blur(),window.getSelection().removeAllRanges()}},{key:"destroy",value:function(){this.removeFake()}},{key:"action",set:function(t){t=0<arguments.length&&void 0!==t?t:"copy";if(this._action=t,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function(){return this._action}},{key:"target",set:function(t){if(void 0!==t){if(!t||"object"!==(void 0===t?"undefined":i(t))||1!==t.nodeType)throw new Error('Invalid "target" value, use a valid Element');if("copy"===this.action&&t.hasAttribute("disabled"))throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');if("cut"===this.action&&(t.hasAttribute("readonly")||t.hasAttribute("disabled")))throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');this._target=t}},get:function(){return this._target}}]),c),u=n(1),o=n.n(u),u=n(2),s=n.n(u),f="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t};function d(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}var h,p,y,o=(function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}(m,o.a),h=m,y=[{key:"isSupported",value:function(t){var t=0<arguments.length&&void 0!==t?t:["copy","cut"],t="string"==typeof t?[t]:t,e=!!document.queryCommandSupported;return t.forEach(function(t){e=e&&!!document.queryCommandSupported(t)}),e}}],(p=[{key:"resolveOptions",value:function(t){t=0<arguments.length&&void 0!==t?t:{};this.action="function"==typeof t.action?t.action:this.defaultAction,this.target="function"==typeof t.target?t.target:this.defaultTarget,this.text="function"==typeof t.text?t.text:this.defaultText,this.container="object"===f(t.container)?t.container:document.body}},{key:"listenClick",value:function(t){var e=this;this.listener=s()(t,"click",function(t){return e.onClick(t)})}},{key:"onClick",value:function(t){t=t.delegateTarget||t.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new l({action:this.action(t),target:this.target(t),text:this.text(t),container:this.container,trigger:t,emitter:this})}},{key:"defaultAction",value:function(t){return b("action",t)}},{key:"defaultTarget",value:function(t){t=b("target",t);if(t)return document.querySelector(t)}},{key:"defaultText",value:function(t){return b("text",t)}},{key:"destroy",value:function(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)}}])&&d(h.prototype,p),y&&d(h,y),m);function m(t,e){!function(t){if(!(t instanceof m))throw new TypeError("Cannot call a class as a function")}(this);var n=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}(this,(m.__proto__||Object.getPrototypeOf(m)).call(this));return n.resolveOptions(e),n.listenClick(t),n}function b(t,e){t="data-clipboard-"+t;if(e.hasAttribute(t))return e.getAttribute(t)}e.default=o}],r.c=o,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=6).default;function r(t){if(o[t])return o[t].exports;var e=o[t]={i:t,l:!1,exports:{}};return n[t].call(e.exports,e,e.exports,r),e.l=!0,e.exports}var n,o})</script><script>"use strict";
+
+function getFxAppLinkInfo(localizedBentoStrings, referringSiteURL) {
+  return [
+    [localizedBentoStrings.fxMonitor, "https://monitor.firefox.com/", "fx-monitor"],
+    [localizedBentoStrings.pocket, "https://app.adjust.com/hr2n0yz?engagement_type=fallback_click&fallback=https%3A%2F%2Fgetpocket.com%2Ffirefox_learnmore%3Fsrc%3Dff_bento&fallback_lp=https%3A%2F%2Fapps.apple.com%2Fapp%2Fpocket-save-read-grow%2Fid309601447", "pocket"],
+    [localizedBentoStrings.fxDesktop, `https://www.mozilla.org/firefox/new/?utm_source=${referringSiteURL}&utm_medium=referral&utm_campaign=bento&utm_content=desktop`, "fx-desktop"],
+    [localizedBentoStrings.fxMobile, `http://mozilla.org/firefox/mobile?utm_source=${referringSiteURL}&utm_medium=referral&utm_campaign=bento&utm_content=desktop`, "fx-mobile"],
+  ];
+}
+
+function createAndAppendEl(wrapper, tagName, className = null) {
+  const newEl = document.createElement(tagName);
+  if (className) {
+    newEl.setAttribute("class", className);
+  }
+  wrapper.appendChild(newEl);
+  return newEl;
+}
+
+async function getlocalizedBentoStrings() {
+
+  const localizedBentoStrings = {
+    "bentoButtonTitle":"Firefox apps and services","bentoHeadline":"Firefox is tech that fights for your online privacy.","bentoBottomLink":"Made by Mozilla","fxDesktop":"Firefox Browser for Desktop","fxLockwise":"Firefox Lockwise","fxMobile":"Firefox Browser for Mobile","fxMonitor":"Firefox Monitor","pocket":"Pocket","fxSend":"Firefox Send","mobileCloseBentoButtonTitle":"Close menu",
+  };
+  return localizedBentoStrings;
+}
+
+class FirefoxApps extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  async connectedCallback() {
+    this._currentSite = document.body.dataset.bentoAppId;
+    this._localizedBentoStrings = await getlocalizedBentoStrings();
+
+    this._active = false; // Becomes true when the bento is opened.
+
+    this._frag = document.createDocumentFragment(); // Wrapping fragment for bento button and bento content.
+
+    this._bentoButton = createAndAppendEl(this._frag, "button", "fx-bento-button toggle-bento"); // Button toggles dropdown.
+    this.addTitleAndAriaLabel(this._bentoButton, this._localizedBentoStrings.bentoButtonTitle);
+
+    this._bentoWrapper = document.createElement("div");
+    this._bentoWrapper.classList = "fx-bento-content-wrapper";
+    this._bentoHideOverflow = createAndAppendEl(this._bentoWrapper, "div", "fx-bento-hide-overflow");
+    this._bentoContent = createAndAppendEl(this._bentoHideOverflow, "div", "fx-bento-content");
+
+    this._mobileCloseBentoButton = createAndAppendEl(this._bentoContent, "button", "fx-bento-mobile-close toggle-bento");
+    this.addTitleAndAriaLabel(this._mobileCloseBentoButton, this._localizedBentoStrings.mobileCloseBentoButtonTitle);
+
+    [this._bentoButton, this._mobileCloseBentoButton].forEach(btn => {
+      btn.addEventListener("click", this);
+    });
+
+    this._logoHeadlineWrapper = createAndAppendEl(this._bentoContent, "div", "fx-bento-headline-logo-wrapper");
+    this._firefoxLogo = createAndAppendEl( this._logoHeadlineWrapper, "div", "fx-bento-logo");
+    this._messageTop = createAndAppendEl( this._logoHeadlineWrapper, "span", "fx-bento-headline");
+    this._messageTop.textContent = this._localizedBentoStrings.bentoHeadline;
+
+    this._appList = this.makeAppList();
+
+    this._messageBottomLink = createAndAppendEl(this._bentoContent, "a", "fx-bento-bottom-link fx-bento-link");
+    this._messageBottomLink.textContent = this._localizedBentoStrings.bentoBottomLink;
+    this._messageBottomLink.href = "https://www.mozilla.org/";
+
+    this._bentoContent.querySelectorAll("a").forEach( (anchorEl, idx) => {
+      anchorEl.dataset.bentoLinkOrder = idx;
+      anchorEl.addEventListener("click", this);
+      anchorEl.tabIndex = "-1";
+    });
+
+    this._frag.appendChild(this._bentoWrapper);
+    this.appendChild(this._frag);
+    this.addEventListener("close-bento-menu", this);
+
+    this.handleKeyDownEvents = () => {
+      const moveFocusWithArrows = (whichDirection) => {
+        const activeEl = document.activeElement;
+        const bentoLinks = this._bentoContent.querySelectorAll("a");
+        if (!activeEl.dataset.bentoLinkOrder) { // check if link in Bento has focus
+          bentoLinks[0].focus(); // focus first link in bento
+          return;
+        }
+        const activeLinkNum = parseInt(activeEl.dataset.bentoLinkOrder);
+        const newActiveLink = parseInt(activeLinkNum + whichDirection);
+        if (bentoLinks[newActiveLink]) {
+          bentoLinks[newActiveLink].focus();
+        }
+        return;
+      };
+      switch(event.keyCode) {
+        case 27: // escape
+          // this._active = !this._active;
+          this._closeBento();
+          return;
+        case 40 : // down arrow || up arrow
+          moveFocusWithArrows(1);
+          break;
+        case 38: // arrow up
+          moveFocusWithArrows(-1);
+          break;
+      }
+      return;
+    };
+
+    this._closeBento = (event) => {
+      this._active = false;
+      this.handleBentoFocusTrap();
+      window.removeEventListener("resize", this.handleBentoHeight);
+      window.removeEventListener("click", this);
+      document.removeEventListener("keydown", this);
+      this.metricsSendEvent("bento-closed", this._currentSite);
+      this.classList.remove("fx-bento-open");
+      this._bentoWrapper.classList.add("fx-bento-fade-out");
+      setTimeout(() => {
+        this._bentoWrapper.classList.remove("fx-bento-fade-out");
+        this._bentoButton.blur();
+        this.classList = [];
+      }, 500);
+      return;
+    };
+  }
+
+  addTitleAndAriaLabel(el, localizedCopy) {
+    ["title", "aria-label"].forEach(attrName => {
+      el.setAttribute(attrName, localizedCopy);
+    });
+  }
+
+  metricsSendEvent(eventAction, eventLabel) {
+    if (typeof(ga) !== "undefined") {
+      return ga("send", "event", "bento", eventAction, eventLabel);
+    }
+  }
+
+  handleEvent(event) {
+    const keydownEvent = (event.type === "keydown");
+    const eventTarget = event.target;
+    if (
+      // ignore mouse clicks inside the bento
+      (!keydownEvent && ["fx-bento-content active", "fx-bento-headline", "fx-bento-logo", "fx-bento-headline-logo-wrapper"].includes(eventTarget.className)) ||
+      // ignore and don't prevent default behavior on key clicks other than Escape, Down Arrow, and Up Arrow
+      (keydownEvent && ![27, 40, 38].includes(event.keyCode))
+      ) {
+      return;
+    }
+
+    const hasParent = (el, selector) => {
+      while (el.parentElement) {
+        el = el.parentElement;
+        if (el.tagName === selector)
+          return el;
+      }
+      return null;
+    };
+    // close Bento on mouse clicks outside the Bento menu
+    if (hasParent(event.target, "FIREFOX-APPS") === null) {
+      return this._closeBento();
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (keydownEvent) {
+      return this.handleKeyDownEvents(event);
+    }
+    this._active = !this._active;
+    const eventTargetClassList = event.target.classList;
+    const MozLinkClick = (eventTargetClassList.contains("fx-bento-bottom-link"));
+
+    if (eventTargetClassList.contains("fx-bento-app-link") || MozLinkClick) {
+      const url = new URL(eventTarget.href);  // add any additional UTM params - or whatever
+      url.searchParams.append("utm_source", this._currentSite);
+      url.searchParams.append("utm_medium", "referral");
+      url.searchParams.append("utm_campaign", "bento");
+      if (MozLinkClick) {
+        this.metricsSendEvent("bento-app-link-click", "Mozilla");
+        window.open(url, "_blank", "noopener");
+        return this._closeBento();
+      }
+      const appToOpenId = eventTarget.dataset.bentoAppLinkId;
+      this.metricsSendEvent("bento-app-link-click", appToOpenId);
+      if (eventTargetClassList.contains("fx-bento-current-site")) { // open index page in existing window
+        window.location = url;
+        return this._closeBento();
+      }
+      window.open(url, "_blank", "noopener");
+      return this._closeBento();
+    }
+
+    if (
+        !this._active && event.target.classList.contains("fx-bento-button") ||
+        !this._active && event.target.classList.contains("fx-bento-mobile-close")
+    ) {
+      return this._closeBento();
+    }
+
+    this._active = true;
+
+    const sendEventOnBentoOpen = new Event("bento-was-opened");
+    document.dispatchEvent(sendEventOnBentoOpen);
+
+    this.metricsSendEvent("bento-opened", this._currentSite);
+    this.handleBentoHeight();
+    document.addEventListener("keydown", this);
+    window.addEventListener("resize", this.handleBentoHeight);
+    window.addEventListener("click", this);
+
+    this.classList = ["active fx-bento-open"];
+    this._bentoButton.focus();
+    return this.handleBentoFocusTrap();
+  }
+
+  handleBentoHeight() { // resize bento max-height if necessary
+    const bento = document.querySelector(".fx-bento-content");
+    const winHeight = window.innerHeight;
+    const newBentoHeight = winHeight - bento.offsetTop - 100;
+    const setMaxHeight = (winHeight < 500 && window.innerWidth > 500);
+    if (setMaxHeight) {
+      bento.style.maxHeight = `${newBentoHeight}px`;
+    } else {
+      bento.style.maxHeight = "1000px";
+    }
+    bento.classList.toggle("fx-bento-enable-scrolling", setMaxHeight);
+   }
+
+  handleBentoFocusTrap() {
+    const nonBentoPageElements = document.querySelectorAll(
+      "a:not(.fx-bento-app-link):not(.fx-bento-bottom-link), button:not(.toggle-bento ), input, select, option, [tabindex]"
+      );
+    const bentoLinks = this._bentoContent.querySelectorAll(".fx-bento-app-link, .fx-bento-bottom-link");
+    if (this._active) {
+      nonBentoPageElements.forEach(el => {
+        if (el.tabIndex > -1) {
+          el.dataset.oldTabIndex = el.tabIndex;
+        }
+        el.tabIndex = -1;
+      });
+      bentoLinks.forEach(el => {
+        el.tabIndex = 0;
+      });
+      return;
+    }
+    nonBentoPageElements.forEach(el => {
+      if (el.dataset.oldTabIndex) {
+        el.tabIndex = el.dataset.oldTabIndex;
+        delete el.dataset.oldTabIndex;
+        return;
+      }
+      el.tabIndex = 0;
+    });
+    bentoLinks.forEach(el => {
+      el.tabIndex = -1;
+    });
+  }
+
+  makeAppList() {
+    const appLinks = getFxAppLinkInfo(this._localizedBentoStrings, this._currentSite);
+    appLinks.forEach(app => {
+      const newLink = document.createElement("a");
+      const newLinkSpan = createAndAppendEl(newLink, "span", `fx-bento-app-link-span ${app[2]}`);
+      newLink.setAttribute("class", `fx-bento-app-link fx-bento-link ${app[2]}`);
+      newLinkSpan["textContent"] = app[0];
+      ["href", "data-bento-app-link-id"].forEach((attributeName, index) => {
+        newLink.setAttribute(attributeName, app[index + 1]);
+      });
+      if (newLink.dataset.bentoAppLinkId === this._currentSite) {
+        newLink.classList.add("fx-bento-current-site");
+      }
+      this._bentoContent.appendChild(newLink);
+    });
+  }
+}
+
+if (typeof(customElements) !== "undefined") {
+  customElements.define("firefox-apps", FirefoxApps);
+} else { // Hide on unsupportive browsers
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("hide-bento");
+  });
+}</script><script>function dismissNotification() {
+	const notification = document.querySelector(".js-notification");
+	notification.classList.toggle("hidden");
+}
+
+
+function iterateHeroSlides() {
+  let activeSlideNum = 0;
+  const heroSlides = document.querySelectorAll(".hero-slide");
+
+  heroSlides[activeSlideNum].classList.add("active-slide");
+  const iterateSlides = () => {
+    heroSlides[activeSlideNum].classList.remove("active-slide");
+    if (activeSlideNum === 4) {
+      activeSlideNum = 0;
+    } else {
+      activeSlideNum++;
+    }
+    heroSlides[activeSlideNum].classList.add("active-slide");
+  };
+
+  window.setInterval(()=> {
+    iterateSlides();
+  }, 3500);
+}
+
+
+if (typeof(sendGaPing) === "undefined") {
+  sendGaPing = () => {};
+}
+
+async function updateEmailForwardingPrefs(submitEvent) {
+  submitEvent.preventDefault();
+
+  const forwardingPrefForm = submitEvent.target;
+  const prefToggle = forwardingPrefForm.querySelector("button");
+  const toggleLabel = forwardingPrefForm.querySelector(".forwarding-label-wrapper");
+  const addressId = forwardingPrefForm.querySelector("[name='relay_address_id']");
+  const wrappingEmailCard = document.querySelector(`[data-relay-address-id='${addressId.value}']`);
+
+  const analyticsLabel = (prefToggle.value === "Disable") ? "User disabled forwarding" : "User enabled forwarding";
+  sendGaPing("Dashboard Alias Settings", "Toggle Forwarding", analyticsLabel);
+
+  const formData = {};
+  Array.from(forwardingPrefForm.elements).forEach(elem => {
+    formData[elem.name] = elem.value;
+  });
+
+  try {
+    const response = await sendForm(forwardingPrefForm.action, formData);
+    if (response && response.status === 200) {
+      prefToggle.classList.toggle("forwarding-disabled");
+      if (prefToggle.value === "Enable") {
+        prefToggle.title = "Disable email forwarding for this alias";
+        toggleLabel.textContent = "forwarding";
+        wrappingEmailCard.classList.add("card-enabled");
+        return prefToggle.value = "Disable";
+      } else if (prefToggle.value === "Disable") {
+        prefToggle.title="Enable email forwarding to this alias";
+        toggleLabel.textContent = "blocking";
+        wrappingEmailCard.classList.remove("card-enabled");
+        return prefToggle.value = "Enable";
+      }
+    }
+  } catch(e) {
+    const siteOrigin = document.body.dataset.siteOrigin;
+    const signInUrl = new URL("/accounts/fxa/login/?process=login", siteOrigin);
+    return window.location = signInUrl.href;
+  }
+}
+
+async function sendForm(formAction, formData) {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return fetch(formAction, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": formData.csrfmiddlewaretoken,
+      },
+      credentials: "include",
+      mode: "same-origin",
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
+  } catch(e) {
+    throw e;
+	}
+}
+
+function copyToClipboardAndShowMessage(triggeringEl) {
+  const aliasCopyBtn = triggeringEl;
+  const previouslyCopiedAlias = document.querySelector(".alias-copied");
+  if (previouslyCopiedAlias) {
+    previouslyCopiedAlias.classList.remove("alias-copied");
+    previouslyCopiedAlias.title = "Copy alias to clipboard";
+  }
+  aliasCopyBtn.classList.add("alias-copied");
+  aliasCopyBtn.title="Alias copied to clipboard";
+  return;
+}
+
+
+function trapFocusInModal(modalElemClass, restrictFocusToModal=true) {
+  if (!restrictFocusToModal) {
+    return document.querySelectorAll("[tabindex='-1']").forEach(elem => {
+      elem.tabIndex = "0";
+    });
+  }
+  document.querySelectorAll("input, a, button, [tabindex]").forEach(elem => {
+    if (!elem.classList.contains(modalElemClass)) {
+      elem.tabIndex = "-1";
+    }
+  });
+}
+
+function deleteAliasConfirmation(submitEvent) {
+	submitEvent.preventDefault();
+	const deleteAliasForm = submitEvent.target;
+  const aliasToDelete = deleteAliasForm.dataset.deleteRelay;
+  const confirmDeleteModal = document.querySelector(".modal-bg");
+  const aliasToDeleteEls = confirmDeleteModal.querySelectorAll(".alias-to-delete");
+  aliasToDeleteEls.forEach(addressEl => {
+    addressEl.textContent = aliasToDelete;
+  });
+
+  confirmDeleteModal.classList.add("show-modal");
+  trapFocusInModal("delete-modal", true);
+  sendGaPing("Dashboard Alias Settings", "Delete Alias", "Delete Alias");
+  const checkbox = confirmDeleteModal.querySelector(".checkbox");
+  checkbox.focus();
+
+  const closeModal = () => {
+    checkbox.checked = false;
+    confirmDeleteModal.classList.remove("show-modal");
+    trapFocusInModal("delete-modal", false);
+  };
+
+  // Close modal if the user clicks the Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key && e.key === "Escape") {
+      closeModal();
+    }
+  });
+
+  // Close the modal if the user clicks outside the modal
+  confirmDeleteModal.addEventListener("click", (e) => {
+    if (e.target.classList && e.target.classList.contains("show-modal")) {
+      closeModal();
+    }
+  });
+
+  // Enable "Delete Anyway" button once the checkbox has been clicked.
+  const confirmDeleteModalActions = confirmDeleteModal.querySelectorAll("button");
+  const deleteAnywayBtn = confirmDeleteModalActions[1];
+  checkbox.addEventListener("change", (e) => {
+    if (checkbox.checked) {
+      deleteAnywayBtn.disabled = false;
+      return;
+    }
+    deleteAnywayBtn.disabled = true;
+  });
+
+	confirmDeleteModalActions.forEach(btn => {
+		if (btn.classList.contains("cancel-delete")) {
+			btn.addEventListener("click", () => {
+        sendGaPing("Dashboard Alias Settings", "Delete Alias", "Cancel Delete");
+        closeModal();
+			});
+		}
+		if (btn.classList.contains("confirm-delete")) {
+			btn.addEventListener("click", () => {
+				sendGaPing("Dashboard Alias Settings", "Delete Alias", "Confirm Delete");
+				deleteAliasForm.submit();
+			});
+		}
+	});
+}
+
+// Checks for changes made to <firefox-private-relay-addon></firefox-private-relay-add-on> by the addon.
+function isRelayAddonInstalled() {
+  const installationIndicator = document.querySelector("firefox-private-relay-addon");
+	return (installationIndicator.dataset.addonInstalled === "true" || isAddonInstallInLocalStorage());
+}
+
+
+// Looks for previously saved installation note in localStorage
+function isAddonInstallInLocalStorage() {
+	return (localStorage && localStorage.getItem("fxRelayAddonInstalled"));
+}
+
+function toggleAliasCardDetailsVisibility(aliasCard) {
+  const detailsWrapper = aliasCard.querySelector(".details-wrapper");
+  aliasCard.classList.toggle("show-card-details");
+
+  const resizeAliasDetails = () => {
+    if (aliasCard.classList.contains("show-card-details")) {
+      aliasCard.style.paddingBottom = `${detailsWrapper.clientHeight}px`;
+    }
+  };
+
+  if (aliasCard.classList.contains("show-card-details")) {
+    resizeAliasDetails();
+    window.addEventListener("resize", resizeAliasDetails);
+    return;
+  }
+  aliasCard.style.paddingBottom = "0";
+  window.removeEventListener("resize", resizeAliasDetails);
+}
+
+function resetBodyPadding() {
+  const header = document.querySelector("header");
+  const headerHeight = header.clientHeight;
+  document.body.style.paddingTop = headerHeight + "px";
+  return;
+}
+
+function recruitmentLogic() {
+  const recruitmentBannerLink = document.querySelector('#recruitment-banner');
+  if (!recruitmentBannerLink) {
+    return;
+  }
+
+  const recruited = document.cookie.split('; ').some((item) => item.trim().startsWith('recruited='));
+  if (recruited) {
+    recruitmentBannerLink.parentElement.remove();
+    return;
+  }
+
+  // Reset document.body padding to accomodate height of recruitment banner
+  resetBodyPadding()
+
+  // Reset document.body padding when window is resized and the 
+  // submenu becomes visible/hidden
+  window.addEventListener("resize", resetBodyPadding);
+
+  recruitmentBannerLink.addEventListener("click", () => {
+    const date = new Date();
+    date.setTime(date.getTime() + 30*24*60*60*1000)
+    document.cookie = "recruited=true; expires=" + date.toUTCString();
+  });
+}
+
+function addEventListeners() {
+  document.querySelectorAll(".relay-email-card").forEach(aliasCard => {
+    const toggleDetailsBtn = aliasCard.querySelector(".toggle-details-visibility");
+    toggleDetailsBtn.addEventListener("click", () => {
+      toggleAliasCardDetailsVisibility(aliasCard);
+    });
+    const deleteAliasForm = aliasCard.querySelector(".delete-email-form");
+    deleteAliasForm.addEventListener("submit", deleteAliasConfirmation);
+
+    if (window.outerWidth > 550) {
+      aliasCard.querySelectorAll(".relay-stat").forEach(statCol => {
+        const stat = statCol.querySelector(".relay-stat-value");
+        const statDescription = statCol.querySelector(".stat-description");
+        const statLabel = statCol.querySelector(".card-small-text");
+  
+        [stat, statLabel, statDescription].forEach(el => {
+          el.addEventListener("mouseenter", (e) => {
+            statDescription.classList.toggle("show-message", !statDescription.classList.contains("show-message"));
+          });
+        });
+        statCol.addEventListener("mouseout", () => {
+          statDescription.classList.remove("show-message");
+        });
+      });
+    }
+  });
+
+  // Email forwarding toggles
+	document.querySelectorAll(".email-forwarding-form").forEach(forwardEmailsToggleForm => {
+		forwardEmailsToggleForm.addEventListener("submit", updateEmailForwardingPrefs);
+  });
+
+  const generateAliasForm = document.querySelector(".dash-create");
+  if (generateAliasForm) {
+    generateAliasForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const submitBtn = generateAliasForm.querySelector("button[type='submit']");
+      if (submitBtn.classList.contains("btn-disabled")) {
+        sendGaPing("Generate New Alias", "Engage", "btn-disabled");
+        return;
+      }
+
+      sendGaPing("Generate New Alias", "Engage", "btn-enabled");
+      e.target.submit();
+    });
+  }
+
+
+  const mobileMenuWrapper = document.querySelector(".mobile-menu");
+  if (mobileMenuWrapper) {
+    const mobileMenuButton = document.querySelector(".mobile-menu-toggle");
+    const mobileMenuLinks = document.querySelector(".mobile-menu-links");
+    mobileMenuButton.addEventListener("click", () => {
+      mobileMenuWrapper.classList.toggle("menu-open");
+      if (mobileMenuWrapper.classList.contains("menu-open")) {
+        mobileMenuLinks.style.top = mobileMenuWrapper.clientHeight + "px";
+       return mobileMenuWrapper.style.minHeight = mobileMenuLinks.clientHeight + mobileMenuWrapper.clientHeight + "px";
+      }
+      mobileMenuLinks.style.top = "0";
+      return mobileMenuWrapper.style.minHeight = "0";
+    });
+  }
+
+  document.querySelectorAll(".js-dismiss").forEach(btn => {
+		btn.addEventListener("click", dismissNotification, false);
+  });
+
+  // If on main landing page
+  if (document.querySelector("[data-landing-page]")) {
+    iterateHeroSlides();
+  }
+}
+
+function hasParent(el, selector) {
+  while (el.parentElement) {
+    el = el.parentElement;
+    if (el.classList.contains(selector)) {
+      return el;
+    }
+  }
+  return null;
+}
+
+function handleLegacyAddonLabels(legacyNoteElem) {
+  const legacyNote = legacyNoteElem.textContent;
+  const parentRelayAddressEl = hasParent(legacyNoteElem, "relay-email");
+  const labelWrapper = parentRelayAddressEl.querySelector(".additional-notes");
+  labelWrapper.classList.add("legacy-addon-show-label");
+
+  const labelInput = labelWrapper.querySelector(".relay-email-address-label");
+  labelInput.value = legacyNote;
+  labelInput.setAttribute("aria-label", `This Relay alias was created at ${legacyNote}`);
+  labelInput.setAttribute("readonly", "readonly");
+  return;
+}
+
+// Watch for the addon to update the dataset of <firefox-private-relay-addon></firefox-private-relay-addon>
+// and watch for older versions of the addon populating alias labels into .relay-email-address note els
+function watchForInstalledAddon() {
+  const watchedEls = document.querySelectorAll("firefox-private-relay-addon, .relay-email-address-note");
+  const observerConfig = {
+    attributes: true,
+    childList: true, // catches legacy addons modifying .relay-email-address-note els
+	};
+
+  const patrollerDuties = (mutations, mutationPatroller) => {
+    for (const mutation of mutations) {
+      // handle legacy addon labeling
+      if (mutation.type === "childList" && mutation.target.classList.contains("relay-email-address-note")) {
+        handleLegacyAddonLabels(mutation.target);
+      }
+    }
+	};
+
+  const mutationPatroller = new MutationObserver(patrollerDuties);
+  watchedEls.forEach(watchedEl => {
+    mutationPatroller.observe(watchedEl, observerConfig);
+  });
+}
+
+
+function showBannersIfNecessary() {
+  if (window.clientWidth < 750) {
+    return;
+  }
+
+  const browserIsFirefox = /firefox|FxiOS/i.test(navigator.userAgent);
+  if (browserIsFirefox && isRelayAddonInstalled()) {
+    return;
+  }
+
+  const dashboardBanners = document.querySelector(".dashboard-banners");
+  if (!dashboardBanners) {
+    return;
+  }
+
+  const bg = dashboardBanners.querySelector(".banner-gradient-bg");
+  const showBanner = (bannerEl) => {
+    setTimeout(()=> {
+      if (!isRelayAddonInstalled()) {
+        bg.style.minHeight = "101px";
+        bannerEl.classList.remove("hidden");
+        dashboardBanners.classList.remove("invisible");
+      }
+    }, 500);
+    return;
+  };
+
+  if (!browserIsFirefox) {
+    const firefoxBanner = dashboardBanners.querySelector(".download-fx-banner");
+    showBanner(firefoxBanner);
+    return;
+  }
+  const relayAddonBanner = dashboardBanners.querySelector(".install-addon-banner");
+  return showBanner(relayAddonBanner);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  watchForInstalledAddon();
+  addEventListeners();
+
+  const win = window;
+  const header = document.querySelector("header");
+
+  const setHeader = (yOffset) => {
+    if (yOffset > 300) {
+      header.classList.add("fix-header");
+      return;
+    }
+    header.classList.remove("fix-header");
+  };
+
+  setHeader(win.pageYOffset);
+  win.onscroll = () => {
+    if (win.pageYOffset > 400) {
+      return;
+    }
+    setHeader(win.pageYOffset);
+  };
+  showBannersIfNecessary();
+
+  recruitmentLogic();
+});
+
+class GlocalMenu extends HTMLElement {
+	constructor() {
+		super();
+	}
+
+	async connectedCallback() {
+		this._avatar = this.querySelector(".avatar-wrapper");
+		this._avatar.addEventListener("click", this);
+		this._active = false;
+		this._menu = this.querySelector(".glocal-menu-wrapper");
+
+		document.addEventListener("bento-was-opened", this);
+		const fxBento = document.querySelector("firefox-apps");
+
+		this.closeBentoIfOpen = () => {
+			if (fxBento._active) {
+				const closeBentoEvent = new Event("close-bento-menu");
+				fxBento.dispatchEvent(closeBentoEvent);
+			}
+		};
+
+		this.closeGlocalMenu = () => {
+			this._active = false;
+			this._menu.classList.remove("glocal-menu-open");
+			this._menu.classList.add("fx-bento-fade-out");
+			window.removeEventListener("click", this.closeGlocalMenu);
+			setTimeout(() => {
+				this._menu.classList.remove("fx-bento-fade-out");
+			}, 500);
+			return;
+		};
+
+		this.openGlocalMenu = (evt) => {
+			this._active = true;
+			this.closeBentoIfOpen();
+			evt.stopImmediatePropagation();
+			this._menu.classList.add("glocal-menu-open");
+			window.addEventListener("click", this.closeGlocalMenu);
+
+      return;
+		};
+	}
+
+	handleEvent(event) {
+		const bentoIsOpening = event.type === "bento-was-opened";
+		// Close the Glocal Menu if the Bento Menu is opening
+		if (bentoIsOpening && this._active) {
+			return this.closeGlocalMenu();
+		}
+		if (bentoIsOpening) {
+			return;
+		}
+
+		if (this._active) {
+			return this.closeGlocalMenu(event);
+		}
+		this.openGlocalMenu(event);
+	}
+}
+
+customElements.define("glocal-menu", GlocalMenu);
+const copyAliasBtn = new ClipboardJS(".relay-address");
+
+
+copyAliasBtn.on("success", (e) => {
+  copyToClipboardAndShowMessage(e.trigger);
+});</script><script>/* exported sendGaPing */
+
+/**
+ * Returns true or false based on whether doNotTack is enabled. It also takes into account the
+ * anomalies, such as !bugzilla 887703, which effect versions of Fx 31 and lower. It also handles
+ * IE versions on Windows 7, 8 and 8.1, where the DNT implementation does not honor the spec.
+ * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1217896 for more details
+ * @params {string} [dnt] - An optional mock doNotTrack string to ease unit testing.
+ * @params {string} [userAgent] - An optional mock userAgent string to ease unit testing.
+ * @returns {boolean} true if enabled else false
+ */
+
+function _dntEnabled(dnt, userAgent) {
+
+  // for old version of IE we need to use the msDoNotTrack property of navigator
+  // on newer versions, and newer platforms, this is doNotTrack but, on the window object
+  // Safari also exposes the property on the window object.
+  var dntStatus = dnt || navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+  var ua = userAgent || navigator.userAgent;
+
+  // List of Windows versions known to not implement DNT according to the standard.
+  var anomalousWinVersions = ["Windows NT 6.1", "Windows NT 6.2", "Windows NT 6.3"];
+
+  var fxMatch = ua.match(/Firefox\/(\d+)/);
+  var ieRegEx = /MSIE|Trident/i;
+  var isIE = ieRegEx.test(ua);
+  // Matches from Windows up to the first occurance of ; un-greedily
+  // http://www.regexr.com/3c2el
+  var platform = ua.match(/Windows.+?(?=;)/g);
+
+  // With old versions of IE, DNT did not exist so we simply return false;
+  if (isIE && typeof Array.prototype.indexOf !== "function") {
+      return false;
+  } else if (fxMatch && parseInt(fxMatch[1], 10) < 32) {
+      // Can"t say for sure if it is 1 or 0, due to Fx bug 887703
+      dntStatus = "Unspecified";
+  } else if (isIE && platform && anomalousWinVersions.indexOf(platform.toString()) !== -1) {
+      // default is on, which does not honor the specification
+      dntStatus = "Unspecified";
+  } else {
+      // sets dntStatus to Disabled or Enabled based on the value returned by the browser.
+      // If dntStatus is undefined, it will be set to Unspecified
+      dntStatus = { "0": "Disabled", "1": "Enabled" }[dntStatus] || "Unspecified";
+  }
+
+  return dntStatus === "Enabled" ? true : false;
+}
+
+async function doFxaMetricsFlow(entrypointEl) {
+  const entrypointData = entrypointEl.dataset;
+  const fxaUrl = new URL("/metrics-flow?", document.body.dataset.fxaSettingsUrl);
+
+  try {
+    const response = await fetch(fxaUrl, {credentials: "omit"});
+    ["entrypoint", "form_type"].forEach(paramKey => {
+      fxaUrl.searchParams.append(paramKey, encodeURIComponent(entrypointData[paramKey]));
+    });
+    if (response && response.status === 200) {
+      const {flowId, flowBeginTime} = await response.json();
+      entrypointData.flowId = flowId;
+      entrypointData.flowBeginTime = flowBeginTime;
+    }
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+
+function isGoogleAnalyticsAvailable() {
+  return (typeof(ga) !== "undefined");
+}
+
+
+function handleIntersectingElem(entries, analyticsObserver) {
+	entries.forEach(entry => {
+		if (entry.target.classList.contains("hidden")) {
+			analyticsObserver.unobserve(entry.target);
+			return;
+		}
+		if (entry.intersectionRatio === 1) {
+      const elemDataset = entry.target.dataset;
+
+      // Get /metrics-flow values when fxa entrypoints scroll into view
+      if (elemDataset.entrypoint) {
+        doFxaMetricsFlow(entry.target);
+      }
+
+      // Send Google Analytics "View" pings when GA event triggers scroll into view
+      if (isGoogleAnalyticsAvailable() && (elemDataset["ga"] === "send-ga-funnel-pings")) {
+        ga("send", "event", elemDataset.eventCategory, "View",  elemDataset.eventLabel, { nonInteraction: true });
+      }
+      analyticsObserver.unobserve(entry.target);
+		}
+	});
+}
+
+// eslint-disable-next-line no-redeclare
+function sendGaPing(eventCategory, eventAction, eventLabel) {
+  if (isGoogleAnalyticsAvailable()) {
+    return ga("send", "event", eventCategory, eventAction, eventLabel);
+  }
+  return;
+}
+
+function openOauth(clickEvt, entrypointElem) {
+  clickEvt.preventDefault();
+
+  const elemData = entrypointElem.dataset;
+  const url = new URL(entrypointElem.href, document.body.dataset.siteOrigin);
+  let authParams = "";
+  ["flowId", "flowBeginTime", "entrypoint", "form_type"].forEach(dataKey => {
+    if (elemData[dataKey]) {
+      authParams += `&${dataKey}=${elemData[dataKey]}`;
+    }
+  });
+  url.searchParams.append("auth_params", authParams);
+  window.location.assign(url);
+}
+
+
+(()=> {
+// Check for DoNotTrack header before running GA script
+
+if (!_dntEnabled()) {
+  (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments);},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
+    })(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+    ga("create", document.body.dataset.googleAnalyticsId);
+    ga("set", "anonymizeIp", true);
+    ga("set", "transport", "beacon");
+    ga("send", "pageview");
+}
+
+  const analyticsEventTriggers = document.querySelectorAll("[data-ga='send-ga-funnel-pings']");
+
+  const intersectionObserverAvailable =  (
+    "IntersectionObserver" in window &&
+    "IntersectionObserverEntry" in window &&
+    "intersectionRatio" in window.IntersectionObserverEntry.prototype
+  );
+
+  const analyticsObserver = (intersectionObserverAvailable) ? new IntersectionObserver(handleIntersectingElem, {
+    threshold: 1,
+  }) : null;
+
+
+  analyticsEventTriggers.forEach(eventTriggeringElem => {
+    if (intersectionObserverAvailable) {
+      analyticsObserver.observe(eventTriggeringElem);
+    }
+    eventTriggeringElem.addEventListener("click", (evt) => {
+      const eventData = eventTriggeringElem.dataset;
+      if (eventData["entrypoint"]) {
+        openOauth(evt, eventTriggeringElem);
+      }
+      if (isGoogleAnalyticsAvailable()) {
+        ga("send", "event", eventData.eventCategory, "Engage",  eventData.eventLabel);
+      }
+    });
+  });
+
+  document.querySelectorAll(".banner-link").forEach(outboundLink => {
+    outboundLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      sendGaPing("Outbound Link", "Click", outboundLink.textContent);
+      window.open(outboundLink.href);
+    });
+  });
+
+  const glocalSignOutBtn = document.querySelector(".glocal-sign-out-form");
+  if (glocalSignOutBtn) {
+    glocalSignOutBtn.addEventListener("submit", (e) => {
+      e.preventDefault();
+      sendGaPing("Sign Out", "Click", "Website Sign Out");
+      e.target.submit();
+    });
+  }
+})();</script></body></html>
